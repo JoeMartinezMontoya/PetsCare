@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}PetsCare | Accueil{% endblock %}
+
+{% block body %}
+
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success">
+            {{ message }}
+        </div>
+    {% endfor %}
+
+    <div class="jumbotron">
+        <h1>Bonjour {% if app.user %} {{ app.user.username }} {% else %} PetsCarer ! {% endif %}</h1>
+    </div>
+{% endblock %}
