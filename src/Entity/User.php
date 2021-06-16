@@ -114,9 +114,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getSlug()
+    public function getSlug(): string
     {
-        return strtolower($this->username . '-' . $this->id);
+        return strtolower($this->username);
     }
 
     /**

@@ -45,7 +45,7 @@
 {#                        <a href="{{ path('admin') }}" class="dropdown-item">Panneau de contrôle</a>#}
                         <div class="dropdown-divider"></div>
                     {% endif %}
-{#                    <a href="{{ path('user_show', {id: app.user.id}) }}" class="dropdown-item">Mon profil</a>#}
+                    <a href="{{ path('user_profile', {slug: app.user.slug ,id: app.user.id}) }}" class="dropdown-item">Mon profil</a>
 {#                    <a href="{{ path('owner.animal.index') }}" class="dropdown-item">Mes animaux</a>#}
                     <div class="dropdown-divider"></div>
                     <a href="{{ path('logout') }}" class="dropdown-item">Se déconnecter</a>
