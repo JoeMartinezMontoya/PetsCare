@@ -3,7 +3,10 @@
 namespace App\Entity;
 
 use App\Repository\PetRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=PetRepository::class)
@@ -79,6 +82,28 @@ class Pet
      */
     private $gender;
 
+    /**
+     * @var Picture|null
+     */
+    private $picture;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Picture::class, mappedBy="pet", orphanRemoval=true, cascade={"persist"})
+     */
+    private $pictures;
+
+    public function __construct()
+    {
+        $this->pictures = new ArrayCollection();
+    }
+
+    /**
+     * @Assert\All(
+     *     @Assert\Image(mimeTypes="image/jpeg")
+     * )
+     */
+    private $pictureFiles;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -143,6 +168,11 @@ class Pet
         return $this->species;
     }
 
+    public function getSpeciesString(): ?string
+    {
+        return self::SPECIES[$this->species];
+    }
+
     public function setSpecies(int $species): self
     {
         $this->species = $species;
@@ -191,11 +221,100 @@ class Pet
         return $this->gender;
     }
 
+    public function getGenderIcon(): ?string
+    {
+        if ($this->gender === 0) {
+            $output = '<i class="fas fa-venus"></i>';
+        } elseif ($this->gender === 1) {
+            $output = '<i class="fas fa-mars"></i>';
+        } else {
+            $output = '<i class="fas fa-genderless"></i>';
+        }
+        return $output;
+    }
+
+    public function getGenderString(): ?string
+    {
+        return self::GENDER[$this->gender];
+    }
+
     public function setGender(int $gender): self
     {
         $this->gender = $gender;
 
         return $this;
     }
+
+    /**
+     * @return Collection|Picture[]
+     */
+    public function getPictures(): Collection
+    {
+        return $this->pictures;
+    }
+
+    public function addPicture(Picture $picture): self
+    {
+        if (!$this->pictures->contains($picture)) {
+            $this->pictures[] = $picture;
+            $picture->setPet($this);
+        }
+
+        return $this;
+    }
+
+    public function removePicture(Picture $picture): self
+    {
+        if ($this->pictures->removeElement($picture)) {
+            // set the owning side to null (unless already changed)
+            if ($picture->getPet() === $this) {
+                $picture->setPet(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Picture|null
+     */
+    public function getPicture(): ?Picture
+    {
+        return $this->picture;
+    }
+
+    /**
+     * @param Picture|null $picture
+     * @return Pet
+     */
+    public function setPicture(?Picture $picture): Pet
+    {
+        $this->picture = $picture;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPictureFiles()
+    {
+        return $this->pictureFiles;
+    }
+
+    /**
+     * @param mixed $pictureFiles
+     * @return Pet
+     */
+    public function setPictureFiles($pictureFiles): Pet
+    {
+        foreach ($pictureFiles as $pictureFile) {
+            $picture = new Picture();
+            $picture->setImageFile($pictureFile);
+            $this->addPicture($picture);
+        }
+        $this->pictureFiles = $pictureFiles;
+        return $this;
+    }
+
 
 }

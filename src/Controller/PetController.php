@@ -79,7 +79,10 @@ class PetController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('pet_index');
+            return $this->redirectToRoute('user_profile', [
+                'id' => $this->getUser()->getId(),
+                'slug' => $this->getUser()->getSlug()
+            ]);
         }
 
         return $this->render('pet/edit.html.twig', [

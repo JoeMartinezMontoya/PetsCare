@@ -2,24 +2,20 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="58145cfb-fb3b-4bfd-a7ab-6d34921fc2a8" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/migrations/Version20210616182938.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/migrations/Version20210617144224.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/migrations/Version20210617152339.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Controller/PetController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Entity/Pet.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Form/PetType.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Repository/PetRepository.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/pet/_delete_form.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/pet/_form.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/pet/edit.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/pet/index.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/pet/new.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/pet/show.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/ab0d5cae-f618-48c9-b7cc-58143b1bfcbc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/ab0d5cae-f618-48c9-b7cc-58143b1bfcbc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/PetsCare.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/PetsCare.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/bundles.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/bundles.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/PetController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/PetController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Pet.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Pet.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Form/PetType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/PetType.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/symfony.lock" beforeDir="false" afterPath="$PROJECT_DIR$/symfony.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/pet/_delete_form.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/pet/_delete_form.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/pet/_form.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/pet/_form.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/pet/edit.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/pet/edit.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/pet/show.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/pet/show.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/user/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/user/index.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -187,7 +183,8 @@
       <path value="$PROJECT_DIR$/vendor/doctrine/event-manager" />
       <path value="$PROJECT_DIR$/vendor/symfonycasts/verify-email-bundle" />
       <path value="$PROJECT_DIR$/vendor/symfony/google-mailer" />
-      <path value="$PROJECT_DIR$/vendor/symfony/webpack-encore-bundle" />
+      <path value="$PROJECT_DIR$/vendor/vich/uploader-bundle" />
+      <path value="$PROJECT_DIR$/vendor/jms/metadata" />
     </include_path>
   </component>
   <component name="ProjectId" id="1tzYHXkCsgAn0wVOwH9QE80stDO" />
@@ -235,7 +232,7 @@
       <workItem from="1623862433652" duration="2261000" />
       <workItem from="1623864808408" duration="2839000" />
       <workItem from="1623867690117" duration="175000" />
-      <workItem from="1623867914317" duration="13188000" />
+      <workItem from="1623867914317" duration="22162000" />
     </task>
     <servers />
   </component>

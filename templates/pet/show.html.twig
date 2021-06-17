@@ -1,28 +1,35 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Pet{% endblock %}
+{% block title %}PetsCare | {{ pet.name }}{% endblock %}
 
 {% block body %}
-    <h1>Pet</h1>
-
-    <table class="table">
-        <tbody>
-        <tr>
-            <th>Id</th>
-            <td>{{ pet.id }}</td>
-        </tr>
-        <tr>
-            <th>Name</th>
-            <td>{{ pet.name }}</td>
-        </tr>
-        <tr>
-            <th>Age</th>
-            <td>{{ pet.age }}</td>
-        </tr>
-        </tbody>
-    </table>
-
-    <a href="{{ path('pet_edit', {'id': pet.id}) }}">edit</a>
-
-    {{ include('pet/_delete_form.html.twig') }}
+    <div class="jumbotron">
+        <div class="row">
+            <div class="col-md-6">
+                {% for picture in pet.pictures %}
+                    <div class="col" style="width: auto; flex: none; margin: 5px">
+                        <img style="width: 100%; border-radius: 8px;"
+                             src="{{ asset('pictures/pets/' ~ picture.imageName) }}"
+                             alt="{{ pet.name }}">
+                        {# <a href="{{ path('admin.picture.delete', {id: picture.id}) }}" #}
+                        {# style="width: 100%" #}
+                        {# class="btn btn-danger" #}
+                        {# data-delete #}
+                        {# data-token="{{ csrf_token('delete' ~ picture.id) }}">Supprimer</a> #}
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="col-md-6" style="text-align: right">
+                <h1>{{ pet.name }}</h1>
+                <h2>{{ pet.speciesString }} // {{ pet.genderString }} - {{ pet.age }} {{ pet.age > 1 ? 'ans' : 'an' }}</h2>
+                <p>{{ pet.description }}</p>
+                {% if pet.owner %}
+                    <p>Elle vie avec {{ pet.owner.username }}</p>
+                {% endif %}
+                <p>Elle est inscrite depuis le {{ pet.createdAt | date('d/m/Y') }}</p>
+                <a href="{{ path('pet_edit', {'id': pet.id}) }}" class="btn btn-success">Modifier les informations</a>
+                {{ include('pet/_delete_form.html.twig') }}
+            </div>
+        </div>
+    </div>
 {% endblock %}

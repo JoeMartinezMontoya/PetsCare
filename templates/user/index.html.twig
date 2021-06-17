@@ -77,9 +77,7 @@
                 {% for pet in app.user.pets %}
                     <tr>
                         <td>
-                            {{ pet.gender is same as 1 ? '<i class="fas fa-mars"></i>' :
-                            pet.gender is same as 0 ? '<i class="fas fa-venus"></i>' :
-                            '<i class="fas fa-genderless"></i>' }}
+                            {{ pet.genderIcon | raw}}
                             <a href="{{ path('pet_show', {'id': pet.id}) }}">{{ pet.name }}</a>
                         </td>
                         <td>
