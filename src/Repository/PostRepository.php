@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Post;
+use App\Entity\PostSearch;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -28,5 +29,18 @@ class PostRepository extends ServiceEntityRepository
             ->setMaxResults(4)
             ->getQuery()
             ->getResult();
+    }
+
+    public function findAllVisible(PostSearch $search)
+    {
+        $query = $this->createQueryBuilder('p')
+            ->orderBy('p.created_at', 'DESC');
+
+        if (!is_null($search->getCategory())) {
+            $query->andWhere('p.category = :val')
+                ->setParameter('val', $search->getCategory());
+        }
+
+        return $query->getQuery()->getResult();
     }
 }

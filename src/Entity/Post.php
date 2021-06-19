@@ -11,7 +11,6 @@ use Doctrine\ORM\Mapping as ORM;
 class Post
 {
     public const CATEGORY = [
-        -1 => 'Tout voir',
         0 => 'Pet Sitting',
         1 => 'Disparition'
     ];

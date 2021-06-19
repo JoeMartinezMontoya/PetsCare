@@ -3,6 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\Post;
+use App\Entity\PostSearch;
+use App\Form\PostSearchType;
 use App\Form\PostType;
 use App\Repository\PostRepository;
 use DateTime;
@@ -22,14 +24,19 @@ class PostController extends AbstractController
      */
     public function index(PostRepository $postRepository, PaginatorInterface $paginator, Request $request): Response
     {
+        $search = new PostSearch();
+        $form = $this->createForm(PostSearchType::class, $search);
+        $form->handleRequest($request);
+
         $posts = $paginator->paginate(
-            $postRepository->findAll(),
+            $postRepository->findAllVisible($search),
             $request->query->getInt('page' , 1),
             12
         );
         return $this->render('post/index.html.twig', [
             'posts' => $posts,
-            'current_menu' => 'postList'
+            'current_menu' => 'postList',
+            'form' => $form->createView()
         ]);
     }
 

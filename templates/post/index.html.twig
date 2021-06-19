@@ -5,6 +5,16 @@
 {% block body %}
     <div class="jumbotron">
         <h1 class="text-center">Post index</h1>
+        {{ form_start(form) }}
+        <div class="form-row align-intems-end">
+            <div class="col">
+                {{ form_row(form.category) }}
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Rechercher</button>
+            </div>
+        </div>
+        {{ form_end(form) }}
     </div>
     <div class="container">
         <div class="row m-auto">
