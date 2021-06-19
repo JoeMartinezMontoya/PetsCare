@@ -2,21 +2,20 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="58145cfb-fb3b-4bfd-a7ab-6d34921fc2a8" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Listener/ImageUploadListener.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/PetsCare.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/PetsCare.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/ab0d5cae-f618-48c9-b7cc-58143b1bfcbc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/ab0d5cae-f618-48c9-b7cc-58143b1bfcbc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/pictures/ressources/lost.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/pictures/ressources/wewantyou.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/user/_form.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/user/edit.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/bundles.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/bundles.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config/packages/vich_uploader.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/vich_uploader.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/services.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/services.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/pictures/pets/arietty-60cb86f81a09b112129675.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Picture.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Picture.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/symfony.lock" beforeDir="false" afterPath="$PROJECT_DIR$/symfony.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/pet/show.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/pet/show.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/pictures/pets/60cdebfc92794092494615.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/pictures/pets/img-5151-60cda2d9eb21a935292639.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/pictures/pets/received-1487066738015268-60cbb12b3d8e9502157776.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/UserController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Post.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Post.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/User.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/informations/_card.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/informations/_card.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/user/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/user/index.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -249,7 +248,7 @@
       <workItem from="1623867914317" duration="24911000" />
       <workItem from="1624017335256" duration="2101000" />
       <workItem from="1624086392397" duration="13420000" />
-      <workItem from="1624102598975" duration="5070000" />
+      <workItem from="1624102598975" duration="12465000" />
     </task>
     <servers />
   </component>

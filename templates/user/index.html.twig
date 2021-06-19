@@ -40,7 +40,8 @@
                     <td colspan="2">
                         <div class="d-flex flex-row-reverse">
                             <a href="#" class="btn btn-danger m-1">Supprimer mon compte</a>
-                            <a href="#" class="btn btn-info m-1">Modifier mes informations</a>
+                            <a href="{{ path('user_edit', {id: app.user.id}) }}" class="btn btn-info m-1">Modifier mes
+                                informations</a>
                         </div>
                     </td>
                 </tr>
@@ -77,7 +78,7 @@
                 {% for pet in app.user.pets %}
                     <tr>
                         <td>
-                            {{ pet.genderIcon | raw}}
+                            {{ pet.genderIcon | raw }}
                             <a href="{{ path('pet_show', {'id': pet.id}) }}">{{ pet.name }}</a>
                         </td>
                         <td>

@@ -93,6 +93,16 @@ class Post
         return $this->category;
     }
 
+    public function getCategoryIcon(): ?string
+    {
+        if ($this->category === 0) {
+            $output = '<i class="far fa-building"></i>';
+        } else {
+            $output = '<i class="fas fa-search-location"></i>';
+        }
+        return $output;
+    }
+
     public function setCategory(int $category): self
     {
         $this->category = $category;
