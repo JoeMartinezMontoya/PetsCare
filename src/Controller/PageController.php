@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Repository\PostRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -11,9 +12,14 @@ class PageController extends AbstractController
     /**
      * @Route("/", name="home")
      */
-    public function home(): Response
+    public function home(PostRepository $posts): Response
     {
-        return $this->render('page/home.html.twig');
+        $missing = $posts->findLatestMissing();
+        $petSitting = $posts->findLatestPetSittingAnnouncement();
+        return $this->render('page/home.html.twig', [
+            'missing' => $missing,
+            'petSitting' => $petSitting
+        ]);
     }
 
     /**

@@ -13,4 +13,39 @@
     <div class="jumbotron">
         <h1>Bonjour {% if app.user %} {{ app.user.username }} {% else %} PetsCarer ! {% endif %}</h1>
     </div>
+    <div class="container">
+        <h2 class="text-center">Les dernières annonces</h2>
+        <h3>Les avez-vous vu ?</h3>
+        <div class="card-deck m-4">
+        {% for petMissing in missing %}
+                <div class="card">
+                    <img src="..." class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ petMissing.title }}</h5>
+                        <p class="card-text"> {{ petMissing.content }}</p>
+                    </div>
+                    <div class="card-footer">
+                        <small class="text-muted">Émis par {{ petMissing.author }} le {{ petMissing.createdAt | date('d/m/Y') }}</small>
+                    </div>
+                </div>
+        {% endfor %}
+        </div>
+
+
+        <h3 class="text-right">Annonces de Pet Sitting !</h3>
+        <div class="card-deck m-4">
+            {% for announce in petSitting %}
+                <div class="card">
+                    <img src="..." class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ announce.title }}</h5>
+                        <p class="card-text"> {{ announce.content }}</p>
+                    </div>
+                    <div class="card-footer">
+                        <small class="text-muted">Émis par {{ announce.author }} le {{ announce.createdAt | date('d/m/Y') }}</small>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
 {% endblock %}
