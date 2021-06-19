@@ -3,6 +3,6 @@ vich_uploader:
 
     mappings:
         pet_picture:
-            uri_prefix: /pictures/pet
+            uri_prefix: /pictures/pets
             upload_destination: '%kernel.project_dir%/public/pictures/pets'
-            namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
+            namer: Vich\UploaderBundle\Naming\UniqidNamer

@@ -8,8 +8,7 @@
             <div class="col-md-6">
                 {% for picture in pet.pictures %}
                     <div class="col" style="width: auto; flex: none; margin: 5px">
-                        <img style="width: 100%; border-radius: 8px;"
-                             src="{{ asset('pictures/pets/' ~ picture.imageName) }}"
+                        <img src="{{ vich_uploader_asset(picture, 'imageFile') | imagine_filter('medium') }}"
                              alt="{{ pet.name }}">
                         {# <a href="{{ path('admin.picture.delete', {id: picture.id}) }}" #}
                         {# style="width: 100%" #}

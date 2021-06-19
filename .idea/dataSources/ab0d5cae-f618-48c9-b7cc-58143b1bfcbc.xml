@@ -1120,12 +1120,12 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="318" parent="287" name="user_id">
+    <column id="318" parent="287" name="author_id">
       <Position>6</Position>
       <DataType>int(11)|0s</DataType>
     </column>
-    <index id="319" parent="287" name="IDX_5A8A6C8DA76ED395">
-      <ColNames>user_id</ColNames>
+    <index id="319" parent="287" name="IDX_5A8A6C8DF675F31B">
+      <ColNames>author_id</ColNames>
       <Type>btree</Type>
     </index>
     <key id="320" parent="287" name="PRIMARY">
@@ -1133,8 +1133,8 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="321" parent="287" name="FK_5A8A6C8DA76ED395">
-      <ColNames>user_id</ColNames>
+    <foreign-key id="321" parent="287" name="FK_5A8A6C8DF675F31B">
+      <ColNames>author_id</ColNames>
       <RefTableName>user</RefTableName>
       <RefColNames>id</RefColNames>
     </foreign-key>

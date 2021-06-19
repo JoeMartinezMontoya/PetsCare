@@ -6,6 +6,7 @@ use App\Repository\PictureRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\Validator\Constraints as Assert;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
@@ -23,6 +24,9 @@ class Picture
 
     /**
      * @Vich\UploadableField(mapping="pet_picture", fileNameProperty="imageName", size="imageSize")
+     * @Assert\Image(
+     *     mimeTypes="image/jpeg"
+     * )
      * @var File|null
      */
     private $imageFile;
