@@ -24,47 +24,47 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a class="nav-link {% if current_menu is defined and current_menu == 'about' %} active {% endif %}" href="{{ path('about') }}">A propos</a>
+                <a class="nav-link {% if current_menu is defined and current_menu == 'about' %} active {% endif %}"
+                   href="{{ path('about') }}">A propos</a>
             </li>
             {% if app.user %}
                 <li>
-                    <a class="nav-link {% if current_menu is defined and current_menu == 'editAnimals' %} active {% endif %}"
-                       href="#">Futur Lien</a>
+                    <a class="nav-link {% if current_menu is defined and current_menu == 'postList' %} active {% endif %}"
+                       href="{{ path('post_index') }}">Liste des annonces</a>
                 </li>
                 <li>
-                    <a class="nav-link {% if current_menu is defined and current_menu == 'editOptions' %} active {% endif %}"
-                       href="#">Futur lien</a>
+                    <a class="nav-link {% if current_menu is defined and current_menu == 'createPost' %} active {% endif %}"
+                       href="{{ path('post_new') }}">Publier une annonce</a>
                 </li>
             {% endif %}
         </ul>
         {% if app.user %}
-            <div class="btn-group dropleft">
-                <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown"
-                        aria-haspopup="true" aria-expanded="false">
-                    Menu
-                </button>
-                <div class="dropdown-menu">
-                    {% if is_granted('ROLE_ADMIN') %}
-{#                        <a href="{{ path('admin') }}" class="dropdown-item">Panneau de contrôle</a>#}
-                        <div class="dropdown-divider"></div>
-                    {% endif %}
-                    <a href="{{ path('user_profile', {slug: app.user.slug ,id: app.user.id}) }}" class="dropdown-item">Mon profil</a>
-{#                    <a href="{{ path('owner.animal.index') }}" class="dropdown-item">Mes animaux</a>#}
+        <div class="btn-group dropleft">
+            <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                Menu
+            </button>
+            <div class="dropdown-menu">
+                {% if is_granted('ROLE_ADMIN') %}
+                    {# <a href="{{ path('admin') }}" class="dropdown-item">Panneau de contrôle</a> #}
                     <div class="dropdown-divider"></div>
-                    <a href="{{ path('logout') }}" class="dropdown-item">Se déconnecter</a>
-                </div>
-{#            </div>#}
-        {% else %}
-            <ul class="navbar-nav">
-                <li class="nav-item mr-2">
-                    <a href="{{ path('login') }}" class="nav-link btn btn-info">Se connecter</a>
-                </li>
-                <li class="nav-item">
-                    <a href="{{ path('registration') }}" class="nav-link btn btn-secondary">S'inscrire</a>
-                </li>
-            </ul>
-        {% endif %}
-    </div>
+                {% endif %}
+                <a href="{{ path('user_profile', {slug: app.user.slug ,id: app.user.id}) }}" class="dropdown-item">Mon
+                    profil</a>
+                <div class="dropdown-divider"></div>
+                <a href="{{ path('logout') }}" class="dropdown-item">Se déconnecter</a>
+            </div>
+            {% else %}
+                <ul class="navbar-nav">
+                    <li class="nav-item mr-2">
+                        <a href="{{ path('login') }}" class="nav-link btn btn-info">Se connecter</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ path('registration') }}" class="nav-link btn btn-secondary">S'inscrire</a>
+                    </li>
+                </ul>
+            {% endif %}
+        </div>
 </nav>
 
 {% block body %}{% endblock %}

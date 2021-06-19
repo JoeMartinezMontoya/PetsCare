@@ -102,6 +102,9 @@ class PetController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('pet_index');
+        return $this->redirectToRoute('user_profile', [
+            'id' => $this->getUser()->getId(),
+            'slug' => $this->getUser()->getSlug()
+        ]);
     }
 }

@@ -32,13 +32,13 @@ class PetType extends AbstractType
                 ]
             ])
             ->add('gender', ChoiceType::class, [
-                'choices' => $this->getGender(),
+                'choices' => $this->getChoices(Pet::GENDER),
                 'label' => "Femelle ou Mâle ?",
                 'placeholder' => 'Ou Hermaphrodite..',
                 'required' => true
             ])
             ->add('species', ChoiceType::class, [
-                'choices' => $this->getSpecies(),
+                'choices' => $this->getChoices(Pet::SPECIES),
                 'label' => "C'est un quoi ?",
                 'placeholder' => 'Choisissez son espèce',
                 'required' => true
@@ -71,24 +71,9 @@ class PetType extends AbstractType
         ]);
     }
 
-    public function getSpecies(): array
+    public function getChoices($const): array
     {
-        $choices = Pet::SPECIES;
-        $output = [];
-        foreach ($choices as $k => $v) {
-            $output[$v] = $k;
-
-            // "Tout voir" option removal
-            if ((int)$output[$v] === -1) {
-                unset($output[$v]);
-            }
-        }
-        return $output;
-    }
-
-    public function getGender(): array
-    {
-        $choices = Pet::GENDER;
+        $choices = $const;
         $output = [];
         foreach ($choices as $k => $v) {
             $output[$v] = $k;

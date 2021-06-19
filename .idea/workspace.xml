@@ -2,15 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="58145cfb-fb3b-4bfd-a7ab-6d34921fc2a8" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/public/pictures/ressources/chameleon.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/pictures/ressources/index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/pictures/ressources/perroquet.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Controller/PageController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/page/about.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/ab0d5cae-f618-48c9-b7cc-58143b1bfcbc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/ab0d5cae-f618-48c9-b7cc-58143b1bfcbc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/HomeController.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/PetController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/PetController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/User.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Form/PetType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/PetType.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/home/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/page/home.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -231,7 +228,9 @@
       <workItem from="1623862433652" duration="2261000" />
       <workItem from="1623864808408" duration="2839000" />
       <workItem from="1623867690117" duration="175000" />
-      <workItem from="1623867914317" duration="24693000" />
+      <workItem from="1623867914317" duration="24911000" />
+      <workItem from="1624017335256" duration="2101000" />
+      <workItem from="1624086392397" duration="2944000" />
     </task>
     <servers />
   </component>
