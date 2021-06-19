@@ -1,0 +1,10 @@
+<div class="card">
+    <img src="..." class="card-img-top" alt="...">
+    <div class="card-body">
+        <h5 class="card-title">{{ subject.title }}</h5>
+        <p class="card-text"> {{ subject.content }}</p>
+    </div>
+    <div class="card-footer">
+        <small class="text-muted">Émis par {{ subject.author }} le {{ subject.createdAt | date('d/m/Y') }}</small>
+    </div>
+</div>

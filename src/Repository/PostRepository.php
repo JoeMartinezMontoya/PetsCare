@@ -19,54 +19,14 @@ class PostRepository extends ServiceEntityRepository
         parent::__construct($registry, Post::class);
     }
 
-    public function findLatestMissing()
+    public function findLatest($category)
     {
         return $this->createQueryBuilder('p')
             ->andWhere('p.category = :val')
-            ->setParameter('val', 1)
-            ->orderBy('p.created_at', 'ASC')
+            ->setParameter('val', $category)
+            ->orderBy('p.created_at', 'DESC')
             ->setMaxResults(4)
             ->getQuery()
             ->getResult();
     }
-
-    public function findLatestPetSittingAnnouncement()
-    {
-        return $this->createQueryBuilder('p')
-            ->andWhere('p.category = :val')
-            ->setParameter('val', 0)
-            ->orderBy('p.created_at', 'ASC')
-            ->setMaxResults(4)
-            ->getQuery()
-            ->getResult();
-    }
-
-    // /**
-    //  * @return Post[] Returns an array of Post objects
-    //  */
-    /*
-    public function findByExampleField($value)
-    {
-        return $this->createQueryBuilder('p')
-            ->andWhere('p.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('p.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
-
-    /*
-    public function findOneBySomeField($value): ?Post
-    {
-        return $this->createQueryBuilder('p')
-            ->andWhere('p.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
 }
