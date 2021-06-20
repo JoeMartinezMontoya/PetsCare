@@ -9,7 +9,7 @@
              alt="...">
     {% endif %}
     <div class="card-body">
-        <h5 class="card-title">{{ subject.categoryIcon | raw }} - {{ subject.title }}</h5>
+        <h5 class="card-title">{{ subject.categoryIcon | raw }} - <a href="{{ path('post_show' , {id: subject.id}) }}">{{ subject.title }}</a></h5>
         <p class="card-text">{{ subject.content }}</p>
     </div>
     <div class="card-footer">

@@ -22,8 +22,14 @@
             {% endfor %}
         </div>
 
+        <h3>Ils sont à adopter !</h3>
+        <div class="card-deck m-4">
+            {% for subject in petToAdopt %}
+                {% include 'informations/_card.html.twig' %}
+            {% endfor %}
+        </div>
 
-        <h3 class="text-right">Annonces de Pet Sitting !</h3>
+        <h3>Annonces de Pet Sitting !</h3>
         <div class="card-deck m-4">
             {% for subject in petSitting %}
                 {% include 'informations/_card.html.twig' %}

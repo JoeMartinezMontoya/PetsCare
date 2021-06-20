@@ -16,10 +16,12 @@ class PageController extends AbstractController
     {
         $petMissing = $posts->findLatest(1);
         $petSitting = $posts->findLatest(0);
+        $petToAdopt = $posts->findLatest(2);
         return $this->render('page/home.html.twig', [
             'current_menu' => 'home',
             'petMissing' => $petMissing,
-            'petSitting' => $petSitting
+            'petSitting' => $petSitting,
+            'petToAdopt' => $petToAdopt
         ]);
     }
 

@@ -2,24 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="58145cfb-fb3b-4bfd-a7ab-6d34921fc2a8" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/public/pictures/ressources/adoption.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Form/PostAdoptionType.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Form/PostMissingType.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/post/_form_adoption.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/post/_form_missing.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/post/selection.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/post/adoption.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/post/missing.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/PageController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/PageController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/PostController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/PostController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Pet.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Pet.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Entity/Post.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Post.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Form/PetType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/PetType.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Form/PostType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/PostJobType.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Form/PostMissingType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/PostMissingType.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/informations/_card.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/informations/_card.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/post/_form.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/post/_form_job.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/post/edit.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/post/edit.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/post/new.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/post/new.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/user/_form.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/user/_form.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/page/home.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/page/home.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/post/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/post/index.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/post/show.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/post/job.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -255,7 +248,7 @@
       <workItem from="1624086392397" duration="13420000" />
       <workItem from="1624102598975" duration="14730000" />
       <workItem from="1624176599598" duration="6522000" />
-      <workItem from="1624185158003" duration="12056000" />
+      <workItem from="1624185158003" duration="18953000" />
     </task>
     <servers />
   </component>

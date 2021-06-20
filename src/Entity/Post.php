@@ -190,6 +190,11 @@ class Post
         return $this->durationType;
     }
 
+    public function getDurationTypeString(): ?string
+    {
+        return self::DURATION[$this->durationType];
+    }
+
     public function setDurationType(int $durationType): self
     {
         $this->durationType = $durationType;

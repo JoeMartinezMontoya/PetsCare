@@ -15,6 +15,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Security;
 
 /**
  * @Route("/post")
@@ -82,16 +83,19 @@ class PostController extends AbstractController
                     $form = $this->createForm(PostJobType::class, $post);
                     $selectedForm = 'post/_form_job.html.twig';
                     $title = "Demande de PetSitting";
+                    $key = 'post_job';
                     break;
                 case 1:
                     $form = $this->createForm(PostMissingType::class, $post);
                     $selectedForm = 'post/_form_missing.html.twig';
                     $title = "Disparition";
+                    $key = 'post_missing';
                     break;
                 case 2:
                     $form = $this->createForm(PostAdoptionType::class, $post);
                     $selectedForm = 'post/_form_adoption.html.twig';
                     $title = "Adoption";
+                    $key = 'post_adoption';
                     break;
             }
         }
@@ -100,8 +104,19 @@ class PostController extends AbstractController
             $form->handleRequest($request);
             if ($form->isSubmitted() && $form->isValid()) {
 
-                $post->setTitle($request->request->get('post_job')['title'] ?? $title);
-                $post->setContent($request->request->get('post_job')['content'] ?? '');
+                // MISSING
+                if ($choice === 1) {
+                    // Looking for the corresponding entity
+                    $missingPetIndex = (int)$request->request->get($key)['missingPet'];
+                    $missingPet = $this->getUser()->getPets()[$missingPetIndex]->getId();
+
+                    $post->setMissingPet($missingPet);
+                }
+
+
+                // GLOBAL
+                $post->setTitle($request->request->get($key)['title'] ?? $title);
+                $post->setContent($request->request->get($key)['content'] ?? '');
                 $post->setCategory($choice);
                 $post->setCreatedAt(new DateTime());
                 $post->setAuthor($this->getUser());
@@ -126,10 +141,28 @@ class PostController extends AbstractController
     /**
      * @Route("/{id}", name="post_show", methods={"GET"})
      */
-    public function show(Post $post): Response
+    public function show(Post $post, Security $security): Response
     {
-        return $this->render('post/show.html.twig', [
+        $missingPet = [];
+        switch ($post->getCategory()) {
+            case 0:
+                $template = 'post/job.html.twig';
+                break;
+            case 1:
+                $template = 'post/missing.html.twig';
+                foreach ($security->getUser()->getPets() as $pet) {
+                    if ($pet->getId() === $post->getMissingPet()) {
+                        $missingPet = $pet;
+                    }
+                }
+                break;
+            case 2:
+                $template = 'post/adoption.html.twig';
+                break;
+        }
+        return $this->render($template, [
             'post' => $post,
+            'missingPet' => $missingPet
         ]);
     }
 

@@ -54,13 +54,11 @@ class PostMissingType extends AbstractType
         $list = [];
         $output = [];
         foreach ($user->getPets() as $pet) {
-            dump($pet->getName());
             $list[] = $pet->getName();
         }
         foreach ($list as $k => $v) {
             $output[$v] = $k;
         }
-        dump($output);
         return $output;
     }
 }
