@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Post;
+use App\Entity\Pet;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -10,31 +11,25 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class PostType extends AbstractType
+class PostAdoptionType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('title', TextType::class, [
-                'label' => "Titre de l'annonce",
+            ->add('location', TextType::class, [
+                'label' => "Où doit-on venir les chercher ?",
                 'required' => true,
-                'attr' => [
-                    'placeholder' => 'Le mieux, ce serait un titre accrocheur...'
-                ]
             ])
-            ->add('category', ChoiceType::class, [
-                'label' => "De quoi ca s'agit ?",
-                'required' => true,
-                'attr' => [
-                    'placeholder' => "Quel genre d'annonce ?"
-                ],
-                'choices' => $this->getChoices(Post::CATEGORY)
+            ->add('species', ChoiceType::class, [
+                'label' => "Qu'est ce que c'est ?",
+                'mapped' => false,
+                'choices' => $this->getChoices(Pet::SPECIES)
             ])
             ->add('content', TextareaType::class, [
-                'label' => "Contenu",
+                'label' => "Que pouvez vous nous dire à ce propos ?",
                 'required' => true,
                 'attr' => [
-                    'placeholder' => "Et d'être précis dans vos propos..."
+                    'placeholder' => "Des précisions ?"
                 ]
             ]);
     }
@@ -42,7 +37,7 @@ class PostType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Post::class,
+            'data_class' => Post::class
         ]);
     }
 
@@ -52,11 +47,6 @@ class PostType extends AbstractType
         $output = [];
         foreach ($choices as $k => $v) {
             $output[$v] = $k;
-
-            // "Tout voir" option removal
-            if ((int)$output[$v] === -1) {
-                unset($output[$v]);
-            }
         }
         return $output;
     }

@@ -12,7 +12,14 @@ class Post
 {
     public const CATEGORY = [
         0 => 'Pet Sitting',
-        1 => 'Disparition'
+        1 => 'Disparition',
+        2 => 'Adoption'
+    ];
+
+    public const DURATION = [
+        0 => 'Jour(s)',
+        1 => 'Semaine(s)',
+        2 => 'Mois'
     ];
 
     /**
@@ -46,6 +53,36 @@ class Post
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="posts")
      */
     private $author;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $location;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $duration;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $durationType;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $petSittingStart;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $lastSeen;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $missingPet;
 
     public function getId(): ?int
     {
@@ -97,8 +134,10 @@ class Post
     {
         if ($this->category === 0) {
             $output = '<i class="far fa-building"></i>';
-        } else {
+        } elseif ($this->category === 1) {
             $output = '<i class="fas fa-search-location"></i>';
+        } else {
+            $output = '<i class="fas fa-paw"></i>';
         }
         return $output;
     }
@@ -118,6 +157,78 @@ class Post
     public function setAuthor(?User $author): self
     {
         $this->author = $author;
+
+        return $this;
+    }
+
+    public function getLocation(): ?string
+    {
+        return $this->location;
+    }
+
+    public function setLocation(?string $location): self
+    {
+        $this->location = $location;
+
+        return $this;
+    }
+
+    public function getDuration(): ?int
+    {
+        return $this->duration;
+    }
+
+    public function setDuration(int $duration): self
+    {
+        $this->duration = $duration;
+
+        return $this;
+    }
+
+    public function getDurationType(): ?int
+    {
+        return $this->durationType;
+    }
+
+    public function setDurationType(int $durationType): self
+    {
+        $this->durationType = $durationType;
+
+        return $this;
+    }
+
+    public function getPetSittingStart(): ?\DateTimeInterface
+    {
+        return $this->petSittingStart;
+    }
+
+    public function setPetSittingStart(\DateTimeInterface $petSittingStart): self
+    {
+        $this->petSittingStart = $petSittingStart;
+
+        return $this;
+    }
+
+    public function getLastSeen(): ?\DateTimeInterface
+    {
+        return $this->lastSeen;
+    }
+
+    public function setLastSeen(?\DateTimeInterface $lastSeen): self
+    {
+        $this->lastSeen = $lastSeen;
+
+        return $this;
+    }
+
+    public function getMissingPet(): ?int
+    {
+        return $this->missingPet;
+    }
+
+    public function setMissingPet(?int $missingPet): self
+    {
+        $this->missingPet = $missingPet;
 
         return $this;
     }

@@ -1,8 +1,12 @@
 <div class="card">
     {% if subject.category is same as 0 %}
-        <img src="{{ asset('pictures/ressources/wewantyou.jpg') | imagine_filter('thumb') }}" class="card-img-top" alt="...">
+        <img src="{{ asset('pictures/ressources/wewantyou.jpg') | imagine_filter('thumb') }}" class="card-img-top"
+             alt="...">
     {% elseif subject.category is same as 1 %}
         <img src="{{ asset('pictures/ressources/lost.jpg') | imagine_filter('thumb') }}" class="card-img-top" alt="...">
+    {% elseif subject.category is same as  2 %}
+        <img src="{{ asset('pictures/ressources/adoption.jpg') | imagine_filter('thumb') }}" class="card-img-top"
+             alt="...">
     {% endif %}
     <div class="card-body">
         <h5 class="card-title">{{ subject.categoryIcon | raw }} - {{ subject.title }}</h5>

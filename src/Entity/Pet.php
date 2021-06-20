@@ -14,7 +14,6 @@ use Symfony\Component\Validator\Constraints as Assert;
 class Pet
 {
     public const SPECIES = [
-        -1 => 'Tout voir',
         0 => 'Chat',
         1 => 'Chien',
         2 => 'Rongeur',
@@ -23,7 +22,6 @@ class Pet
     ];
 
     public const GENDER = [
-        -1 => 'Tout voir',
         0 => 'Femelle',
         1 => 'Mâle',
         2 => 'Je ne sais pas',
@@ -52,7 +50,7 @@ class Pet
     private ?User $owner;
 
     /**
-     * Only used in the Pet creation form, if TRUE then then Pet->setOwner = $this->getUser()->getId();
+     * Only used in the Pet creation form, if TRUE then Pet->setOwner() = $this->getUser()->getId();
      * @var bool
      */
     private bool $owned;

@@ -77,11 +77,6 @@ class PetType extends AbstractType
         $output = [];
         foreach ($choices as $k => $v) {
             $output[$v] = $k;
-
-            // "Tout voir" option removal
-            if ((int)$output[$v] === -1) {
-                unset($output[$v]);
-            }
         }
         return $output;
     }
