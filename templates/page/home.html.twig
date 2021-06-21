@@ -11,7 +11,7 @@
     {% endfor %}
 
     <div class="jumbotron">
-        <h1>Bonjour {% if app.user %} {{ app.user.username }} {% else %} PetsCarer ! {% endif %}</h1>
+        <h1>Bonjour {% if app.user %} {{ app.user.username }} {% else %} PetsCarer !{% endif %}</h1>
     </div>
     <div class="container">
         <h2 class="text-center">Les dernières annonces</h2>
@@ -32,6 +32,13 @@
         <h3>Annonces de Pet Sitting !</h3>
         <div class="card-deck m-4">
             {% for subject in petSitting %}
+                {% include 'informations/_card.html.twig' %}
+            {% endfor %}
+        </div>
+
+        <h3>Ils ont été retrouvé !</h3>
+        <div class="card-deck m-4">
+            {% for subject in petFound %}
                 {% include 'informations/_card.html.twig' %}
             {% endfor %}
         </div>
