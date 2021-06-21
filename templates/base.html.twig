@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.12/css/select2.min.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css"
           integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ asset('build/css/app.css') }}">
     {% block stylesheets %}
     {% endblock %}
 </head>
@@ -69,6 +70,7 @@
                 </ul>
             {% endif %}
         </div>
+    </div>
 </nav>
 
 {% block body %}{% endblock %}
@@ -86,4 +88,8 @@
 {% block javascripts %}
 {% endblock %}
 </body>
+<footer>
+    <div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a
+                href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+</footer>
 </html>

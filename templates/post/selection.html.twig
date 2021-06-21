@@ -2,27 +2,37 @@
 
 {% block title %}PetsCare | Publication{% endblock %}
 {% block body %}
-    <div class="container bg-light p-4">
-        <h1>Dans quel catégorie se situe votre publication</h1>
+    <div class="jumbotron jumbotron-fluid">
+        <h1 class="text-center mb-4">Dans quel catégorie se situe votre publication</h1>
         <form name="selection" method="post">
-            <div class="row justify-content-around">
-                <div class="col-md-4 d-flex flex-column align-items-center">
+            <div class="row justify-content-around mt-4">
+                <div class="col d-flex flex-column align-items-center">
                     <button type="submit" name="choice" value="0" class="btn btn-primary">
-                        <i class="far fa-building"></i>
+                        <img src="{{ asset('pictures/ressources/icons/petsitting.svg') }}" alt="Pet Sitting"
+                             class="pcIcon">
                     </button>
                     <p class="align-self-center">Pet Sitting</p>
                 </div>
-                <div class="col-md-4 d-flex flex-column align-items-center">
+                <div class="col d-flex flex-column align-items-center">
+                    <button type="submit" name="choice" value="2" class="btn btn-primary">
+                        <img src="{{ asset('pictures/ressources/icons/adoption.svg') }}" alt="Adoption"
+                             class="pcIcon">
+                    </button>
+                    <p>Adoption</p>
+                </div>
+                <div class="col d-flex flex-column align-items-center">
                     <button type="submit" name="choice" value="1" class="btn btn-primary">
-                        <i class="fas fa-search-location"></i>
+                        <img src="{{ asset('pictures/ressources/icons/missing.svg') }}" alt="Disparition"
+                             class="pcIcon">
                     </button>
                     <p>Disparition</p>
                 </div>
-                <div class="col-md-4 d-flex flex-column align-items-center">
-                    <button type="submit" name="choice" value="2" class="btn btn-primary">
-                        <i class="fas fa-paw"></i>
+                <div class="col d-flex flex-column align-items-center">
+                    <button type="submit" name="choice" value="3" class="btn btn-primary">
+                        <img src="{{ asset('pictures/ressources/icons/found.svg') }}" alt="Apercu"
+                             class="pcIcon">
                     </button>
-                    <p>Adoption</p>
+                    <p>Apercu</p>
                 </div>
             </div>
         </form>

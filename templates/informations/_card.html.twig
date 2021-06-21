@@ -1,15 +1,11 @@
 <div class="card">
-    {% if subject.category is same as 0 %}
-        <img src="{{ asset('pictures/ressources/wewantyou.jpg') | imagine_filter('thumb') }}" class="card-img-top"
+        <img src="{{ asset(subject.getCategoryImage) | imagine_filter('thumb') }}" class="card-img-top"
              alt="...">
-    {% elseif subject.category is same as 1 %}
-        <img src="{{ asset('pictures/ressources/lost.jpg') | imagine_filter('thumb') }}" class="card-img-top" alt="...">
-    {% elseif subject.category is same as  2 %}
-        <img src="{{ asset('pictures/ressources/adoption.jpg') | imagine_filter('thumb') }}" class="card-img-top"
-             alt="...">
-    {% endif %}
     <div class="card-body">
-        <h5 class="card-title">{{ subject.categoryIcon | raw }} - <a href="{{ path('post_show' , {id: subject.id}) }}">{{ subject.title }}</a></h5>
+        <h5 class="card-title m-auto">
+            <img src="{{ asset(subject.getCategoryIcon) }}" alt="Icon" class="pcIconMin">
+            - <a href="{{ path('post_show' , {id: subject.id}) }}">{{ subject.title }}</a>
+        </h5>
         <p class="card-text">{{ subject.content }}</p>
     </div>
     <div class="card-footer">

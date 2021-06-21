@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Post;
 use App\Entity\PostSearch;
 use App\Form\PostAdoptionType;
+use App\Form\PostFoundType;
 use App\Form\PostMissingType;
 use App\Form\PostSearchType;
 use App\Form\PostJobType;
@@ -49,20 +50,9 @@ class PostController extends AbstractController
     public function postCategorySelection()
     {
         if (!empty($_POST) && isset($_POST['choice'])) {
-            switch ($_POST['choice']) {
-                case 0:
-                    return $this->redirectToRoute('post_new', [
-                        'choice' => 0
-                    ]);
-                case 1:
-                    return $this->redirectToRoute('post_new', [
-                        'choice' => 1
-                    ]);
-                case 2:
-                    return $this->redirectToRoute('post_new', [
-                        'choice' => 2
-                    ]);
-            }
+            return $this->redirectToRoute('post_new', [
+                'choice' => $_POST['choice']
+            ]);
         }
 
         return $this->render('post/selection.html.twig', [
@@ -96,6 +86,12 @@ class PostController extends AbstractController
                     $selectedForm = 'post/_form_adoption.html.twig';
                     $title = "Adoption";
                     $key = 'post_adoption';
+                    break;
+                case 3:
+                    $form = $this->createForm(PostFoundType::class, $post);
+                    $selectedForm = 'post/_form_found.html.twig';
+                    $title = "Apercu";
+                    $key = 'post_found';
                     break;
             }
         }
@@ -158,6 +154,9 @@ class PostController extends AbstractController
                 break;
             case 2:
                 $template = 'post/adoption.html.twig';
+                break;
+            case 3:
+                $template = 'post/found.html.twig';
                 break;
         }
         return $this->render($template, [

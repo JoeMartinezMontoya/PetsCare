@@ -4,7 +4,7 @@
 
 {% block body %}
     <div class="jumbotron jumbotron-fluid m-auto px-4"
-         style="background-image: url('/pictures/ressources/adoption.jpg');background-size: cover;background-position: center; opacity: 0.75">
+         style="background-image: url('{{ asset(post.getCategoryImage) }}');background-size: cover;background-position: center; opacity: 0.75">
         <h1 class="text-danger" style="text-shadow: 1px 1px 1px grey">{{ post.title }}</h1>
         <h5>Annonce publiée le {{ post.createdAt | date('d/m/Y') }}</h5>
     </div>

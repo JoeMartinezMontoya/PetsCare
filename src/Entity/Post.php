@@ -13,7 +13,8 @@ class Post
     public const CATEGORY = [
         0 => 'Pet Sitting',
         1 => 'Disparition',
-        2 => 'Adoption'
+        2 => 'Adoption',
+        3 => 'Apercu'
     ];
 
     public const DURATION = [
@@ -132,14 +133,43 @@ class Post
 
     public function getCategoryIcon(): ?string
     {
-        if ($this->category === 0) {
-            $output = '<i class="far fa-building"></i>';
-        } elseif ($this->category === 1) {
-            $output = '<i class="fas fa-search-location"></i>';
-        } else {
-            $output = '<i class="fas fa-paw"></i>';
+        $path = 'pictures/ressources/icons/';
+        switch ($this->category) {
+            case 0 :
+                $output = $path . 'petsitting.svg';
+                break;
+            case 1:
+                $output = $path . 'missing.svg';
+                break;
+            case 2:
+                $output = $path . 'adoption.svg';
+                break;
+            case 3:
+                $output = $path . 'found.svg';
+                break;
         }
-        return $output;
+        return $output ?? '';
+    }
+
+    public function getCategoryImage(): ?string
+    {
+        $path = 'pictures/ressources/categoryImages/';
+
+        switch ($this->category) {
+            case 0 :
+                $output = $path . 'wewantyou.jpg';
+                break;
+            case 1:
+                $output = $path . 'lost.jpg';
+                break;
+            case 2:
+                $output = $path . 'adoption.jpg';
+                break;
+            case 3:
+                $output = $path . 'found.jpg';
+                break;
+        }
+        return $output ?? '';
     }
 
     public function setCategory(int $category): self
