@@ -93,6 +93,7 @@ class Pet
     public function __construct()
     {
         $this->pictures = new ArrayCollection();
+        $this->tags = new ArrayCollection();
     }
 
     /**
@@ -101,6 +102,11 @@ class Pet
      * )
      */
     private $pictureFiles;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Tags::class, mappedBy="pet")
+     */
+    private $tags;
 
     public function getId(): ?int
     {
@@ -311,6 +317,33 @@ class Pet
             $this->addPicture($picture);
         }
         $this->pictureFiles = $pictureFiles;
+        return $this;
+    }
+
+    /**
+     * @return Collection|Tags[]
+     */
+    public function getTags(): Collection
+    {
+        return $this->tags;
+    }
+
+    public function addTag(Tags $tag): self
+    {
+        if (!$this->tags->contains($tag)) {
+            $this->tags[] = $tag;
+            $tag->addPet($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTag(Tags $tag): self
+    {
+        if ($this->tags->removeElement($tag)) {
+            $tag->removePet($this);
+        }
+
         return $this;
     }
 

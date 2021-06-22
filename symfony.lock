@@ -1,4 +1,7 @@
 {
+    "composer/ca-bundle": {
+        "version": "1.2.10"
+    },
     "composer/package-versions-deprecated": {
         "version": "1.11.99.2"
     },
@@ -97,11 +100,23 @@
     "doctrine/sql-formatter": {
         "version": "1.1.1"
     },
+    "easycorp/easyadmin-bundle": {
+        "version": "3.0",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "3.0",
+            "ref": "b131e6cbfe1b898a508987851963fff485986285"
+        }
+    },
     "egulias/email-validator": {
         "version": "3.1.1"
     },
     "friendsofphp/proxy-manager-lts": {
         "version": "v1.0.5"
+    },
+    "geoip2/geoip2": {
+        "version": "v2.11.0"
     },
     "imagine/imagine": {
         "version": "1.2.4"
@@ -136,6 +151,12 @@
             "./config/packages/liip_imagine.yaml",
             "./config/routes/liip_imagine.yaml"
         ]
+    },
+    "maxmind-db/reader": {
+        "version": "v1.10.1"
+    },
+    "maxmind/web-service-common": {
+        "version": "v0.8.1"
     },
     "monolog/monolog": {
         "version": "2.2.0"
@@ -506,6 +527,9 @@
     "symfony/polyfill-php81": {
         "version": "v1.23.0"
     },
+    "symfony/polyfill-uuid": {
+        "version": "v1.23.0"
+    },
     "symfony/process": {
         "version": "5.4.x-dev"
     },
@@ -613,6 +637,9 @@
     },
     "symfony/twig-pack": {
         "version": "v1.0.1"
+    },
+    "symfony/uid": {
+        "version": "5.4.x-dev"
     },
     "symfony/validator": {
         "version": "4.3",
