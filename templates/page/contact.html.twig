@@ -5,6 +5,7 @@
 {% block body %}
     <div class="jumbotron jumbotron-fluid">
         <div class="row m-auto p-4">
+            {# LEFT SECTION #}
             <div class="col-md-6 text-center">
                 <h1>Discutons !</h1>
                 <p>Une idée ? Une demande ? Une suggestion ?<br>
@@ -24,6 +25,9 @@
                     </div>
                 </div>
             </div>
+            {# END LEFT SECTION #}
+
+            {# RIGHT SECTION #}
             <div class="col-md-6 rounded bg-primary p-4">
                 {{ form_start(form) }}
                 <div class="row m-auto">
@@ -39,6 +43,7 @@
                 </div>
                 {{ form_end(form) }}
             </div>
+            {# END RIGHT SECTION #}
         </div>
     </div>
 {% endblock %}

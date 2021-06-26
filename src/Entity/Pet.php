@@ -177,6 +177,30 @@ class Pet
         return self::SPECIES[$this->species];
     }
 
+    public function getSpeciesIcon(): ?string
+    {
+        $output = '';
+        $path = 'pictures/ressources/icons/';
+        switch ($this->species) {
+            case 0:
+                $output = $path . 'cat.svg';
+                break;
+            case 1:
+                $output = $path . 'dog.svg';
+                break;
+            case 2:
+                $output = $path . 'rodent.svg';
+                break;
+            case 3:
+                $output = $path . 'bird.svg';
+                break;
+            case 4:
+                $output = $path . 'nac.svg';
+                break;
+        }
+        return $output;
+    }
+
     public function setSpecies(int $species): self
     {
         $this->species = $species;

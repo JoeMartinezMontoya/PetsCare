@@ -8,34 +8,24 @@
         <h1>Bonjour {{ app.user.firstname }}</h1>
     </div>
 
-    <div class="row m-auto">
-
+    <div class="row m-auto d-flex justify-content-between" style="height:300px;">
         {# SIDE MENU #}
-        <div class="col-md-3">
-            <table class="table table-striped rounded-left" id="user-profile-side-menu">
-                <tr>
-                    <td>
-                        <a href="#" id="userInformation">Mes informations</a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <a href="#" id="userPets">Mes animaux</a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <a href="#" id="userStats">Mes statistiques</a>
-                    </td>
-                </tr>
-            </table>
+        <div class="col-md-3 bg-primary rounded-right d-flex flex-column align-items-center justify-content-around" id="user-profile-side-menu">
+                <a href="#" class="btn btn-primary d-block" id="userInformation">
+                    <img src="{{ asset('pictures/ressources/icons/profile.svg') }}" alt="profile" class="pcIconMin d-block m-auto">  Mon profil
+                </a>
+                <a href="#" class="btn btn-primary d-block" id="userPets">
+                    <img src="{{ asset('pictures/ressources/icons/my-pets.svg') }}" alt="profile" class="pcIconMin d-block m-auto">  Mes animaux
+                </a>
+                <a href="#" class="btn btn-primary d-block" id="userStats">
+                    <img src="{{ asset('pictures/ressources/icons/stats.svg') }}" alt="profile" class="pcIconMin d-block m-auto">  Mes statistiques
+                </a>
         </div>
 
         {# INFORMATIONS #}
-        <div class="col-md-9">
+        <div class="col-md-8 bg-primary rounded-left">
             {# TABLE USER INFORMATIONS #}
-            <table class="table table-striped table-bordered rounded-right" id="pc-table-user-info-content"
-                   style="display:none;">
+            <table class="table text-light" id="pc-table-user-info-content">
                 <tr>
                     <td colspan="2">
                         <div class="d-flex flex-row-reverse">
@@ -65,10 +55,10 @@
             {# END TABLE USER INFORMATIONS #}
 
             {# TABLE USER PETS #}
-            <table class="table table-striped table-bordered rounded-right" id="pc-table-user-pet-content"
+            <table class="table text-light" id="pc-table-user-pet-content"
                    style="display:none;">
                 <tr>
-                    <td colspan="2">
+                    <td colspan="3">
                         <div class="d-flex flex-row-reverse">
                             <a href="{{ path('pet_new') }}" class="btn btn-info m-1">Ajouter un
                                 animal</a>
@@ -78,10 +68,13 @@
                 {% for pet in app.user.pets %}
                     <tr>
                         <td>
-                            {{ pet.genderIcon | raw }}
-                            <a href="{{ path('pet_show', {'id': pet.id}) }}">{{ pet.name }}</a>
+                            <img src="{{ asset(pet.speciesIcon) }}" alt="{{ pet.speciesString }}" class="pcIconMin">
                         </td>
                         <td>
+                            {{ pet.genderIcon | raw }}
+                            <a href="{{ path('pet_show', {'id': pet.id}) }}" class="text-light">{{ pet.name }}</a>
+                        </td>
+                        <td class="text-right">
                             {{ pet.gender is same as 0 ? 'Inscrite' : 'Inscrit' }}
                             le {{ pet.createdat | date('d/m/Y') }}
                         </td>
@@ -91,7 +84,7 @@
             {# END TABLE USER PETS #}
 
             {# TABLE USER STATS #}
-            <table class="table table-striped table-bordered rounded-right" id="pc-table-user-stat-content"
+            <table class="table text-light" id="pc-table-user-stat-content"
                    style="display:none;">
                 <tr>
                     <td>Animaux inscrit</td>

@@ -20,7 +20,7 @@
             </div>
             <div class="col-md-6" style="text-align: right">
                 <h1>{{ pet.name }}</h1>
-                <h2>{{ pet.speciesString }} // {{ pet.genderString }} - {{ pet.age }} {{ pet.age > 1 ? 'ans' : 'an' }}</h2>
+                <h2><img src="{{ asset(pet.speciesIcon) }}" alt="{{ pet.speciesString }}" class="pcIcon"> - {{ pet.speciesString }} // {{ pet.genderString }} - {{ pet.age }} {{ pet.age > 1 ? 'ans' : 'an' }}</h2>
                 <p>{{ pet.description }}</p>
                 {% if pet.owner %}
                     <p>Elle vie avec {{ pet.owner.username }}</p>

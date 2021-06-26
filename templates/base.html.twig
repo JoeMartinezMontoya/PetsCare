@@ -54,10 +54,10 @@
                 Menu
             </button>
             <div class="dropdown-menu">
-{#                {% if is_granted('ROLE_ADMIN') %}#}
-                     <a href="{{ path('admin') }}" class="dropdown-item">Panneau de contrôle</a>
-                    <div class="dropdown-divider"></div>
-{#                {% endif %}#}
+                {# {% if is_granted('ROLE_ADMIN') %} #}
+                <a href="{{ path('admin') }}" class="dropdown-item">Panneau de contrôle</a>
+                <div class="dropdown-divider"></div>
+                {# {% endif %} #}
                 <a href="{{ path('user_profile', {slug: app.user.slug ,id: app.user.id}) }}" class="dropdown-item">Mon
                     profil</a>
                 <div class="dropdown-divider"></div>
@@ -92,8 +92,43 @@
 {% block javascripts %}
 {% endblock %}
 </body>
-<footer>
-    <div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a
-                href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
-</footer>
+{#<footer>#}
+
+{#    <nav class="navbar navbar-expand-lg navbar-dark bg-primary mt-5">#}
+{#        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent2"#}
+{#                aria-controls="navbarSupportedContent2" aria-expanded="false" aria-label="Toggle navigation">#}
+{#            <span class="navbar-toggler-icon"></span>#}
+{#        </button>#}
+
+{#        <div class="collapse navbar-collapse" id="navbarSupportedContent2">#}
+{#            <ul class="navbar-nav mr-auto">#}
+{#                <li class="nav-item">#}
+{#                    <a class="nav-link {% if current_menu is defined and current_menu == 'home' %} active {% endif %}"#}
+{#                       href="{{ path('home') }}">Accueil</a>#}
+{#                </li>#}
+{#                <li class="nav-item">#}
+{#                    <a class="nav-link {% if current_menu is defined and current_menu == 'about' %} active {% endif %}"#}
+{#                       href="{{ path('about') }}">A propos</a>#}
+{#                </li>#}
+{#                {% if app.user %}#}
+{#                    <li>#}
+{#                        <a class="nav-link {% if current_menu is defined and current_menu == 'postList' %} active {% endif %}"#}
+{#                           href="{{ path('post_index') }}">Liste des annonces</a>#}
+{#                    </li>#}
+{#                    <li>#}
+{#                        <a class="nav-link {% if current_menu is defined and current_menu == 'createPost' %} active {% endif %}"#}
+{#                           href="{{ path('post_category_selection') }}">Publier une annonce</a>#}
+{#                    </li>#}
+{#                    <li>#}
+{#                        <a class="nav-link {% if current_menu is defined and current_menu == 'contact' %} active {% endif %}"#}
+{#                           href="{{ path('contact') }}">Contact</a>#}
+{#                    </li>#}
+{#                {% endif %}#}
+{#            </ul>#}
+
+{#        </div>#}
+{#        <div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a#}
+{#                    href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>#}
+{#    </nav>#}
+{#</footer>#}
 </html>
