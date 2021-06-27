@@ -6,6 +6,7 @@ use App\Entity\Post;
 use App\Entity\Pet;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -22,8 +23,15 @@ class PostAdoptionType extends AbstractType
             ])
             ->add('species', ChoiceType::class, [
                 'label' => "Qu'est ce que c'est ?",
-                'mapped' => false,
                 'choices' => $this->getChoices(Pet::SPECIES)
+            ])
+            ->add('pictureFiles', FileType::class, [
+                'required' => false,
+                'multiple' => true,
+                'label' => 'Des photos ?',
+                'label_attr' => [
+                    'data-browse' => 'Parcourir'
+                ]
             ])
             ->add('content', TextareaType::class, [
                 'label' => "Que pouvez vous nous dire à ce propos ?",

@@ -1,13 +1,47 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit Post{% endblock %}
+{% block title %}PetsCare | Modification d'annonce{% endblock %}
+{% block stylesheets %}
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet"/>
+{% endblock %}
 
 {% block body %}
-    <h1>Edit Post</h1>
+    <div class="container bg-light p-4">
+        <h1>Modification de votre annonce</h1>
 
-    {{ include('post/_form_job.html.twig', {'button_label': 'Update'}) }}
-
-    <a href="{{ path('post_index') }}">back to list</a>
-
-    {{ include('post/_delete_form.html.twig') }}
+        {{ include(template, {'button_label': 'Mettre à jour'}) }}
+    </div>
+{% endblock %}
+{% block javascripts %}
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('.pcSelect').select2();
+        });
+    </script>
+    <script>
+        document.querySelectorAll('[data-delete]').forEach(a => {
+            a.addEventListener('click', e => {
+                e.preventDefault();
+                fetch(a.getAttribute('href'), {
+                    method: 'DELETE',
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest',
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        '_token': a.dataset.token
+                    })
+                }).then(r => r.json())
+                    .then(data => {
+                        if (data.success) {
+                            a.parentNode.parentNode.removeChild(a.parentNode);
+                        } else {
+                            alert(data.error)
+                        }
+                    })
+                    .catch(g => alert(e))
+            })
+        });
+    </script>
 {% endblock %}

@@ -3,7 +3,10 @@
 namespace App\Entity;
 
 use App\Repository\PostRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=PostRepository::class)
@@ -84,6 +87,33 @@ class Post
      * @ORM\Column(type="integer", nullable=true)
      */
     private $missingPet;
+
+    /**
+     * @var Picture|null
+     */
+    private $picture;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Picture::class, mappedBy="post", orphanRemoval=true, cascade={"persist"})
+     */
+    private $pictures;
+
+    /**
+     * @Assert\All(
+     *     @Assert\Image(mimeTypes="image/jpeg")
+     * )
+     */
+    private $pictureFiles;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $species;
+
+    public function __construct()
+    {
+        $this->pictures = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -264,6 +294,89 @@ class Post
     public function setMissingPet(?int $missingPet): self
     {
         $this->missingPet = $missingPet;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Picture[]
+     */
+    public function getPictures(): Collection
+    {
+        return $this->pictures;
+    }
+
+    public function addPicture(Picture $picture): self
+    {
+        if (!$this->pictures->contains($picture)) {
+            $this->pictures[] = $picture;
+            $picture->setPost($this);
+        }
+
+        return $this;
+    }
+
+    public function removePicture(Picture $picture): self
+    {
+        if ($this->pictures->removeElement($picture)) {
+            // set the owning side to null (unless already changed)
+            if ($picture->getPost() === $this) {
+                $picture->setPost(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Picture|null
+     */
+    public function getPicture(): ?Picture
+    {
+        return $this->picture;
+    }
+
+    /**
+     * @param Picture|null $picture
+     * @return Post
+     */
+    public function setPicture(?Picture $picture): Post
+    {
+        $this->picture = $picture;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPictureFiles()
+    {
+        return $this->pictureFiles;
+    }
+
+    /**
+     * @param mixed $pictureFiles
+     * @return Post
+     */
+    public function setPictureFiles($pictureFiles): Post
+    {
+        foreach ($pictureFiles as $pictureFile) {
+            $picture = new Picture();
+            $picture->setImageFile($pictureFile);
+            $this->addPicture($picture);
+        }
+        $this->pictureFiles = $pictureFiles;
+        return $this;
+    }
+
+    public function getSpecies(): ?int
+    {
+        return $this->species;
+    }
+
+    public function setSpecies(?int $species): self
+    {
+        $this->species = $species;
 
         return $this;
     }

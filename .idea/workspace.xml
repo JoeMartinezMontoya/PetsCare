@@ -6,9 +6,13 @@
   <component name="ChangeListManager">
     <list default="true" id="58145cfb-fb3b-4bfd-a7ab-6d34921fc2a8" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/UserController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/user/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/user/index.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/PostController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/PostController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Picture.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Picture.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Post.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Post.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Form/PostAdoptionType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/PostAdoptionType.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/post/_form_adoption.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/post/_form_adoption.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/post/adoption.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/post/adoption.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/post/edit.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/post/edit.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -260,7 +264,7 @@
       <workItem from="1624185158003" duration="18953000" />
       <workItem from="1624206633437" duration="142000" />
       <workItem from="1624268169314" duration="10193000" />
-      <workItem from="1624296719529" duration="52812000" />
+      <workItem from="1624296719529" duration="57637000" />
     </task>
     <servers />
   </component>

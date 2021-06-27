@@ -4,6 +4,28 @@
     <div class="col">{{ form_row(form.species) }}</div>
 </div>
 <div class="row">
+    <div class="col-md-12">
+        <div class="row flex justify-content-start flex-wrap">
+            {% for picture in post.pictures %}
+                <div class="col" style="width: 200px; flex: none; margin: 5px">
+                    <img style="width: 100%;border-radius: 8px;"
+                         src="{{ vich_uploader_asset(picture, 'imageFile') | imagine_filter('thumb') }}"
+                         width="100"
+                         alt="{{ post.title }}">
+                    <a href="{{ path('post_picture_delete', {id: picture.id}) }}"
+                       style="width: 100%"
+                       class="btn btn-danger"
+                       data-delete
+                       data-token="{{ csrf_token('delete' ~ picture.id) }}">Supprimer</a>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col">{{ form_row(form.pictureFiles) }}</div>
+</div>
+<div class="row">
     <div class="col">{{ form_row(form.content) }}</div>
 </div>
 <button class="btn btn-success">{{ button_label|default('Publier') }}</button>

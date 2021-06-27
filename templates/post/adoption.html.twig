@@ -1,6 +1,10 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}PetsCare | {{ post.title }}{% endblock %}
+{% block stylesheets %}
+    <link rel="stylesheet" type="text/css" href="{{ asset('build/css/slick.css') }}"/>
+    <link rel="stylesheet" type="text/css" href="{{ asset('build/css/slick-theme.css') }}"/>
+{% endblock %}
 
 {% block body %}
     <div class="jumbotron jumbotron-fluid m-auto px-4"
@@ -9,6 +13,12 @@
         <h5>Annonce publiée le {{ post.createdAt | date('d/m/Y') }}</h5>
     </div>
     <div class="container bg-light p-4">
+        <div class="col-md-6 pc-pet-carousel mx-auto my-4">
+            {% for picture in post.pictures %}
+                <img src="{{ vich_uploader_asset(picture, 'imageFile') | imagine_filter('medium') }}"
+                     alt="{{ post.title }}" class="rounded">
+            {% endfor %}
+        </div>
         <table class="table table-striped">
             <tbody>
             <tr>
@@ -31,4 +41,19 @@
 
         {{ include('post/_delete_form.html.twig') }}
     </div>
+{% endblock %}
+{% block javascripts %}
+    <script type="text/javascript" src="{{asset('build/js/slick.js')}}"></script>
+    <script>
+        $(document).ready(function () {
+            $('.pc-pet-carousel').slick({
+                accessibility: false,
+                autoplay: true,
+                autoplaySpeed: 3000,
+                dots: true,
+                cssEase: 'ease',
+                fade: true
+            });
+        });
+    </script>
 {% endblock %}

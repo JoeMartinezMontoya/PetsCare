@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Picture;
 use App\Entity\Post;
 use App\Entity\PostSearch;
 use App\Form\PostAdoptionType;
@@ -13,6 +14,7 @@ use App\Repository\PostRepository;
 use DateTime;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -170,19 +172,68 @@ class PostController extends AbstractController
      */
     public function edit(Request $request, Post $post): Response
     {
-        $form = $this->createForm(PostJobType::class, $post);
+        $template = '';
+        $form = '';
+        dump($post);
+        switch ($post->getCategory()) {
+            case 0:
+                $template = 'post/job.html.twig';
+                $form = PostJobType::class;
+                break;
+            case 1:
+                $template = 'post/_form_missing.html.twig';
+                $form = PostMissingType::class;
+                break;
+            case 2:
+                $template = 'post/_form_adoption.html.twig';
+                $form = PostAdoptionType::class;
+                break;
+            case 3:
+                $template = 'post/found.html.twig';
+                $form = PostFoundType::class;
+                break;
+        }
+
+        $form = $this->createForm($form, $post);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
-
             return $this->redirectToRoute('post_index');
         }
 
         return $this->render('post/edit.html.twig', [
             'post' => $post,
+            'template' => $template,
             'form' => $form->createView(),
         ]);
+    }
+
+    /**
+     * @Route("/{id}", name="post_picture_delete", methods={"DELETE"})
+     * @param Picture $picture
+     * @param Request $request
+     * @return JsonResponse
+     * @throws \JsonException
+     */
+    public function pictureDelete(Picture $picture, Request $request)
+    {
+        $data = json_decode($request->getContent(), true, 512, JSON_THROW_ON_ERROR);
+
+        if ($this->isCsrfTokenValid('delete'.$picture->getId(), $data['_token'])) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->remove($picture);
+            $entityManager->flush();
+
+            return new JsonResponse([
+                'success' => 1
+            ]);
+
+        }
+        return new JsonResponse([
+            'error' => 'Token invalide'
+        ],400);
+
     }
 
     /**
