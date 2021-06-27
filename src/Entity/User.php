@@ -60,12 +60,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $lastname;
 
     /**
-     * @ORM\OneToMany(targetEntity=Pet::class, mappedBy="owner")
+     * @ORM\OneToMany(targetEntity=Pet::class, mappedBy="owner", orphanRemoval=true)
      */
     private $pets;
 
     /**
-     * @ORM\OneToMany(targetEntity=Post::class, mappedBy="author")
+     * @ORM\OneToMany(targetEntity=Post::class, mappedBy="author", orphanRemoval=true)
      */
     private $posts;
 

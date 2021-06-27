@@ -5,21 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="58145cfb-fb3b-4bfd-a7ab-6d34921fc2a8" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/public/build/ajax-loader.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/build/css/slick-theme.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/build/css/slick.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/build/fonts/slick.eot" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/build/fonts/slick.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/build/fonts/slick.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/build/fonts/slick.woff" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/build/js/slick.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/build/css/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/build/css/app.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/PetController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/PetController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/pet/_form.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/pet/_form.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/pet/edit.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/pet/edit.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/pet/show.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/pet/show.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/UserController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/User.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/user/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/user/index.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -271,7 +260,7 @@
       <workItem from="1624185158003" duration="18953000" />
       <workItem from="1624206633437" duration="142000" />
       <workItem from="1624268169314" duration="10193000" />
-      <workItem from="1624296719529" duration="49926000" />
+      <workItem from="1624296719529" duration="52812000" />
     </task>
     <servers />
   </component>
