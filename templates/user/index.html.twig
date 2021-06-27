@@ -75,7 +75,7 @@
                             <a href="{{ path('pet_show', {'id': pet.id}) }}" class="text-light">{{ pet.name }}</a>
                         </td>
                         <td class="text-right">
-                            {{ pet.gender is same as 0 ? 'Inscrite' : 'Inscrit' }}
+                            Inscrit{{ pet.gender is same as 0 ? 'e' : ''}}
                             le {{ pet.createdat | date('d/m/Y') }}
                         </td>
                     </tr>

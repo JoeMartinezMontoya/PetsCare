@@ -104,7 +104,7 @@ class Pet
     private $pictureFiles;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Tags::class, mappedBy="pet")
+     * @ORM\ManyToMany(targetEntity=Tags::class, inversedBy="pets")
      */
     private $tags;
 
@@ -266,6 +266,11 @@ class Pet
         return self::GENDER[$this->gender];
     }
 
+    public function getGenderPronoun(): ?string
+    {
+        return $this->gender === 0 ? 'Elle' : 'Il';
+    }
+
     public function setGender(int $gender): self
     {
         $this->gender = $gender;
@@ -299,7 +304,6 @@ class Pet
                 $picture->setPet(null);
             }
         }
-
         return $this;
     }
 
@@ -367,9 +371,6 @@ class Pet
         if ($this->tags->removeElement($tag)) {
             $tag->removePet($this);
         }
-
         return $this;
     }
-
-
 }

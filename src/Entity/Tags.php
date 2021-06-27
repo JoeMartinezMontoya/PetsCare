@@ -30,13 +30,14 @@ class Tags
     private $category;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Pet::class, inversedBy="tags")
+     * @ORM\ManyToMany(targetEntity=Pet::class, mappedBy="tags")
      */
-    private $pet;
+    private $pets;
 
     public function __construct()
     {
         $this->pet = new ArrayCollection();
+        $this->pets = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -71,15 +72,15 @@ class Tags
     /**
      * @return Collection|Pet[]
      */
-    public function getPet(): Collection
+    public function getPets(): Collection
     {
-        return $this->pet;
+        return $this->pets;
     }
 
     public function addPet(Pet $pet): self
     {
-        if (!$this->pet->contains($pet)) {
-            $this->pet[] = $pet;
+        if (!$this->pets->contains($pet)) {
+            $this->pets[] = $pet;
         }
 
         return $this;
@@ -87,7 +88,7 @@ class Tags
 
     public function removePet(Pet $pet): self
     {
-        $this->pet->removeElement($pet);
+        $this->pets->removeElement($pet);
 
         return $this;
     }

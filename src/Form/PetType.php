@@ -3,6 +3,8 @@
 namespace App\Form;
 
 use App\Entity\Pet;
+use App\Entity\Tags;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -61,6 +63,15 @@ class PetType extends AbstractType
             ->add('owned', CheckboxType::class, [
                 'label' => "C'est mon compagnon !",
                 'required' => false
+            ])
+            ->add('tags', EntityType::class, [
+                'class' => Tags::class,
+                'choice_label' => 'name',
+                'multiple' => true,
+                'required' => false,
+                'attr' => [
+                    'class' => 'pcSelect'
+                ]
             ]);
     }
 

@@ -1,6 +1,9 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}PetsCare | Nouvel arrivant !{% endblock %}
+{% block stylesheets %}
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+{% endblock %}
 
 {% block body %}
     <div class="container bg-light p-4">
@@ -8,4 +11,13 @@
 
         {{ include('pet/_form.html.twig') }}
     </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('.pcSelect').select2();
+        });
+    </script>
 {% endblock %}

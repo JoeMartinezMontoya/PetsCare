@@ -1,11 +1,23 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit Pet{% endblock %}
+{% block title %}PetsCare | Edition{% endblock %}
+{% block stylesheets %}
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet"/>
+{% endblock %}
 
 {% block body %}
-    <h1>Edit Pet</h1>
+    <div class="container bg-light p-4">
+        <h1>Edition de {{ pet.name }}</h1>
 
-    {{ include('pet/_form.html.twig', {'button_label': 'Update'}) }}
+        {{ include('pet/_form.html.twig', {'button_label' : 'Enregistrer'}) }}
+    </div>
+{% endblock %}
 
-    {{ include('pet/_delete_form.html.twig') }}
+{% block javascripts %}
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('.pcSelect').select2();
+        });
+    </script>
 {% endblock %}
