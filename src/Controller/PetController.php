@@ -3,10 +3,13 @@
 namespace App\Controller;
 
 use App\Entity\Pet;
+use App\Entity\Picture;
 use App\Form\PetType;
 use App\Repository\PetRepository;
 use DateTime;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -90,11 +93,38 @@ class PetController extends AbstractController
     }
 
     /**
+     * @Route("/{id}", name="pet_picture_delete", methods={"DELETE"})
+     * @param Picture $picture
+     * @param Request $request
+     * @return JsonResponse
+     * @throws \JsonException
+     */
+    public function pictureDelete(Picture $picture, Request $request)
+    {
+        $data = json_decode($request->getContent(), true, 512, JSON_THROW_ON_ERROR);
+
+        if ($this->isCsrfTokenValid('delete'.$picture->getId(), $data['_token'])) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->remove($picture);
+            $entityManager->flush();
+
+            return new JsonResponse([
+                'success' => 1
+            ]);
+
+        }
+        return new JsonResponse([
+            'error' => 'Token invalide'
+        ],400);
+
+    }
+
+    /**
      * @Route("/{id}", name="pet_delete", methods={"POST"})
      */
     public function delete(Request $request, Pet $pet): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$pet->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $pet->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($pet);
             $entityManager->flush();
