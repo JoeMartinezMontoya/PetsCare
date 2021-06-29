@@ -4,6 +4,8 @@ namespace App\Form;
 
 use App\Entity\Pet;
 use App\Entity\Post;
+use App\Entity\Tags;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
@@ -26,7 +28,16 @@ class PostFoundType extends AbstractType
                 'choices' => $this->getChoices(Pet::SPECIES)
             ])
             ->add('content', TextareaType::class, [
-                'label' => 'Décrivez le, le plus précis sont les infos, le plus de chances on à de retrouver votre compagnon'
+                'label' => 'Décrivez le'
+            ])
+            ->add('tags', EntityType::class, [
+                'class' => Tags::class,
+                'choice_label' => 'name',
+                'multiple' => true,
+                'required' => false,
+                'attr' => [
+                    'class' => 'pcSelect'
+                ]
             ]);
     }
 

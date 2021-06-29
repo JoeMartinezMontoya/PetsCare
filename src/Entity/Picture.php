@@ -15,6 +15,10 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
  */
 class Picture
 {
+    public function __toString() {
+        return $this->imageName;
+    }
+
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -23,7 +27,7 @@ class Picture
     private $id;
 
     /**
-     * @Vich\UploadableField(mapping="pet_picture", fileNameProperty="imageName", size="imageSize")
+     * @Vich\UploadableField(mapping="pet_picture", fileNameProperty="imageName")
      * @Assert\Image(
      *     mimeTypes="image/jpeg"
      * )
@@ -35,11 +39,6 @@ class Picture
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $imageName;
-
-    /**
-     * @ORM\Column(type="integer", nullable=true)
-     */
-    private $imageSize;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
@@ -92,18 +91,6 @@ class Picture
     public function setImageName(?string $imageName): self
     {
         $this->imageName = $imageName;
-
-        return $this;
-    }
-
-    public function getImageSize(): ?int
-    {
-        return $this->imageSize;
-    }
-
-    public function setImageSize(?int $imageSize): self
-    {
-        $this->imageSize = $imageSize;
 
         return $this;
     }

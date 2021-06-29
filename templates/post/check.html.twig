@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+
+{% block title %}PetsCare | Ce sont eux ?{% endblock %}
+
+{% block body %}
+    <div class="container bg-light p-4">
+        <h1 class="my-4 mx-5">Des animaux semblables ont été trouvés</h1>
+        <div class="card-deck">
+            {% for pet in missingPets %}
+                {{ include('informations/_card_animal.html.twig') }}
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
+

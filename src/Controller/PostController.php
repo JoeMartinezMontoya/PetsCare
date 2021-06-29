@@ -10,8 +10,10 @@ use App\Form\PostFoundType;
 use App\Form\PostMissingType;
 use App\Form\PostSearchType;
 use App\Form\PostJobType;
+use App\Repository\PetRepository;
 use App\Repository\PostRepository;
 use DateTime;
+use Doctrine\DBAL\Driver\Exception;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -63,13 +65,41 @@ class PostController extends AbstractController
     }
 
     /**
-     * @Route("/new", name="post_new", methods={"GET","POST"})
+     * @Route("/check", name="post_check")
      */
-    public function new(Request $request): Response
+    public function check(PetRepository $repository): Response
+    {
+        $missingPets = [];
+        if (!empty($_GET) && isset($_GET['check'])) {
+            $results = $_GET['check'];
+
+            // Transform every result to Object
+            foreach ($results as $result) {
+                $missingPets[] = $repository->findOneBy(['id' => $result['id']]);
+            }
+
+            // For the example, set the first of their pictures as their banner
+            foreach ($missingPets as $iValue) {
+                if (!empty($iValue->getPictures()->getValues())) {
+                    $iValue->setPicture($iValue->getPictures()->first());
+                }
+            }
+        }
+        return $this->render('post/check.html.twig', [
+            'missingPets' => $missingPets
+        ]);
+    }
+
+    /**
+     * @Route("/new", name="post_new", methods={"GET","POST"})
+     * @throws \Exception
+     */
+    public function new(Request $request, PetRepository $repository): Response
     {
         $post = new Post();
+        $choice = null;
         if (!empty($_GET) && isset($_GET['choice'])) {
-            $choice = $_GET['choice'];
+            $choice = (int)$_GET['choice'];
             switch ($choice) {
                 case 0:
                     $form = $this->createForm(PostJobType::class, $post);
@@ -102,26 +132,47 @@ class PostController extends AbstractController
             $form->handleRequest($request);
             if ($form->isSubmitted() && $form->isValid()) {
 
-                // MISSING
-                if ($choice === 1) {
-                    // Looking for the corresponding entity
-                    $missingPetIndex = (int)$request->request->get($key)['missingPet'];
-                    $missingPet = $this->getUser()->getPets()[$missingPetIndex]->getId();
-
-                    $post->setMissingPet($missingPet);
-                }
-
-
                 // GLOBAL
-                $post->setTitle($request->request->get($key)['title'] ?? $title);
-                $post->setContent($request->request->get($key)['content'] ?? '');
+                $post->setTitle($form->getData()->getTitle() ?? $title);
+                $post->setContent($form->getData()->getContent() ?? '');
                 $post->setCategory($choice);
                 $post->setCreatedAt(new DateTime());
                 $post->setAuthor($this->getUser());
 
+                // MISSING
+                if ($choice === 1) {
+                    // Looking for the corresponding entity
+                    $missingPet = $this->getUser()->getPets()[$form->getData()->getMissingPet()];
+                    $missingPet->setIsMissing(true);
+                    $post->setMissingPet($missingPet->getId());
+                }
+
+                // FOUND
+                if ($choice === 3) {
+                    $foundPet = $form->getData();
+                    if (!empty($foundPet->getTags()->toArray())) {
+                        $tags = [];
+                        foreach ($foundPet->getTags() as $tag) {
+                            $tags[] = $tag->getId();
+                        }
+                        try {
+                            $check = $repository->findLostByTags($tags);
+                        } catch (Exception | \Doctrine\DBAL\Exception $e) {
+                            throw new \Exception($e->getMessage());
+                        }
+                    }
+                }
+
                 $entityManager = $this->getDoctrine()->getManager();
                 $entityManager->persist($post);
                 $entityManager->flush();
+
+                if (isset($check)) {
+                    // If there is a match, it is sent by GET method
+                    return $this->redirectToRoute('post_check', [
+                        'check' => $check
+                    ]);
+                }
 
                 return $this->redirectToRoute('post_index');
             }
@@ -174,7 +225,6 @@ class PostController extends AbstractController
     {
         $template = '';
         $form = '';
-        dump($post);
         switch ($post->getCategory()) {
             case 0:
                 $template = 'post/job.html.twig';
@@ -220,7 +270,7 @@ class PostController extends AbstractController
     {
         $data = json_decode($request->getContent(), true, 512, JSON_THROW_ON_ERROR);
 
-        if ($this->isCsrfTokenValid('delete'.$picture->getId(), $data['_token'])) {
+        if ($this->isCsrfTokenValid('delete' . $picture->getId(), $data['_token'])) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($picture);
             $entityManager->flush();
@@ -232,7 +282,7 @@ class PostController extends AbstractController
         }
         return new JsonResponse([
             'error' => 'Token invalide'
-        ],400);
+        ], 400);
 
     }
 

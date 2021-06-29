@@ -34,10 +34,16 @@ class Tags
      */
     private $pets;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=Post::class, mappedBy="tags")
+     */
+    private $posts;
+
     public function __construct()
     {
         $this->pet = new ArrayCollection();
         $this->pets = new ArrayCollection();
+        $this->posts = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -89,6 +95,33 @@ class Tags
     public function removePet(Pet $pet): self
     {
         $this->pets->removeElement($pet);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Post[]
+     */
+    public function getPosts(): Collection
+    {
+        return $this->posts;
+    }
+
+    public function addPost(Post $post): self
+    {
+        if (!$this->posts->contains($post)) {
+            $this->posts[] = $post;
+            $post->addTag($this);
+        }
+
+        return $this;
+    }
+
+    public function removePost(Post $post): self
+    {
+        if ($this->posts->removeElement($post)) {
+            $post->removeTag($this);
+        }
 
         return $this;
     }

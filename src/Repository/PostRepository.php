@@ -43,4 +43,22 @@ class PostRepository extends ServiceEntityRepository
 
         return $query->getQuery()->getResult();
     }
+
+    /**
+     * Used by the Owner of the missingPet when it is found, retrieve all posts about the missingPet and delete them
+     * @param $pet
+     * @return int|mixed|string
+     */
+    public function findLostAndFoundPostsAbout($pet)
+    {
+        $categories = [1, 3];
+        return $this->createQueryBuilder('p')
+            ->delete()
+            ->andWhere('p.category IN (:category)')
+            ->setParameter('category', $categories)
+            ->andWhere('p.missingPet = :pet')
+            ->setParameter('pet', $pet)
+            ->getQuery()
+            ->getResult();
+    }
 }

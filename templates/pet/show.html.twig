@@ -11,8 +11,8 @@
         <div class="row">
             <div class="col-md-6 pc-pet-carousel">
                 {% for picture in pet.pictures %}
-                        <img src="{{ vich_uploader_asset(picture, 'imageFile') | imagine_filter('medium') }}"
-                             alt="{{ pet.name }}" class="rounded">
+                    <img src="{{ vich_uploader_asset(picture, 'imageFile') | imagine_filter('medium') }}"
+                         alt="{{ pet.name }}" class="rounded">
                 {% endfor %}
             </div>
             <div class="col-md-6" style="text-align: right">
@@ -26,8 +26,16 @@
                 {% endif %}
                 <p>{{ pet.genderPronoun }} est inscrit{{ pet.gender is same as 0 ? 'e' : '' }} depuis
                     le {{ pet.createdAt | date('d/m/Y') }}</p>
-                <a href="{{ path('pet_edit', {'id': pet.id}) }}" class="btn btn-success">Modifier les informations</a>
-                {{ include('pet/_delete_form.html.twig') }}
+                {% if app.user.id is same as pet.owner.id %}
+                    {% if pet.isMissing is same as true %}
+                        {{ form_start(form, {'attr' : {'style' : 'display:inline;'}}) }}
+                        {{ form_row(form.isBack, {'attr': {'onclick': 'return confirm("En confirmant, votre compagnon sera retiré de la liste des animaux disparus, vous confirmer ?")'}}) }}
+                        {{ form_end(form) }}
+                    {% endif %}
+                    <a href="{{ path('pet_edit', {'id': pet.id}) }}" class="btn btn-success">Modifier les
+                        informations</a>
+                    {{ include('pet/_delete_form.html.twig') }}
+                {% endif %}
             </div>
         </div>
     </div>
@@ -49,7 +57,7 @@
     </div>
 {% endblock %}
 {% block javascripts %}
-    <script type="text/javascript" src="{{asset('build/js/slick.js')}}"></script>
+    <script type="text/javascript" src="{{ asset('build/js/slick.js') }}"></script>
     <script>
         $(document).ready(function () {
             $('.pc-pet-carousel').slick({

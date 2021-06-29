@@ -4,10 +4,11 @@ namespace App\Controller;
 
 use App\Entity\Pet;
 use App\Entity\Picture;
+use App\Form\PetIsFoundType;
 use App\Form\PetType;
 use App\Repository\PetRepository;
+use App\Repository\PostRepository;
 use DateTime;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -35,14 +36,15 @@ class PetController extends AbstractController
     public function new(Request $request): Response
     {
         $pet = new Pet();
+        $user = $this->getUser();
         $form = $this->createForm(PetType::class, $pet);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $newPet = $request->request->get('pet');
-            if (isset($newPet['owned']) && $newPet['owned'] === "1") {
+            if ($form->getData()->isOwned() === true) {
+                $pet->setIsMissing(false);
                 $pet->setOwned(true);
-                $pet->setOwner($this->getUser());
+                $pet->setOwner($user);
             }
             $pet->setCreatedAt(new DateTime());
             $entityManager = $this->getDoctrine()->getManager();
@@ -50,8 +52,8 @@ class PetController extends AbstractController
             $entityManager->flush();
 
             return $this->redirectToRoute('user_profile', [
-                'id' => $this->getUser()->getId(),
-                'slug' => $this->getUser()->getSlug()
+                'id' => $user->getId(),
+                'slug' => $user->getSlug()
             ]);
         }
 
@@ -62,12 +64,23 @@ class PetController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="pet_show", methods={"GET"})
+     * @Route("/{id}", name="pet_show", methods={"GET|POST"})
      */
-    public function show(Pet $pet): Response
+    public function show(Pet $pet, Request $request, PostRepository $repository): Response
     {
+        $form = $this->createForm(PetIsFoundType::class);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $posts = $repository->findLostAndFoundPostsAbout($pet->getId());
+            $entityManager = $this->getDoctrine()->getManager();
+            $pet->setIsMissing(false);
+            $entityManager->persist($pet);
+            $entityManager->flush();
+        }
+
         return $this->render('pet/show.html.twig', [
             'pet' => $pet,
+            'form' => $form->createView()
         ]);
     }
 
@@ -103,7 +116,7 @@ class PetController extends AbstractController
     {
         $data = json_decode($request->getContent(), true, 512, JSON_THROW_ON_ERROR);
 
-        if ($this->isCsrfTokenValid('delete'.$picture->getId(), $data['_token'])) {
+        if ($this->isCsrfTokenValid('delete' . $picture->getId(), $data['_token'])) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($picture);
             $entityManager->flush();
@@ -115,7 +128,7 @@ class PetController extends AbstractController
         }
         return new JsonResponse([
             'error' => 'Token invalide'
-        ],400);
+        ], 400);
 
     }
 

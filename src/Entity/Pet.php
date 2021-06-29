@@ -108,6 +108,11 @@ class Pet
      */
     private $tags;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isMissing;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -371,6 +376,18 @@ class Pet
         if ($this->tags->removeElement($tag)) {
             $tag->removePet($this);
         }
+        return $this;
+    }
+
+    public function getIsMissing(): ?bool
+    {
+        return $this->isMissing;
+    }
+
+    public function setIsMissing(bool $isMissing): self
+    {
+        $this->isMissing = $isMissing;
+
         return $this;
     }
 }

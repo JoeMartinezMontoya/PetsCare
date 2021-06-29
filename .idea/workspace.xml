@@ -5,14 +5,35 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="58145cfb-fb3b-4bfd-a7ab-6d34921fc2a8" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/Form/ContactUserType.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Form/PetIsFoundType.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/informations/_card_animal.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/post/check.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/ab0d5cae-f618-48c9-b7cc-58143b1bfcbc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/ab0d5cae-f618-48c9-b7cc-58143b1bfcbc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/services.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/services.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/pictures/pets/60d8aa9fb9036464831045.JPG" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/pictures/pets/60d8b852009f0962381515.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/pictures/pets/60d8b8520205d030378592.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/pictures/pets/60d8b9be8920e835134724.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/pictures/pets/60d8b9be8a650820489056.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/pictures/pets/60d8b9be8b934522926529.JPG" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/pictures/pets/60d8b9be8cd12137262754.JPG" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/PetController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/PetController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/PostController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/PostController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Pet.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Pet.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Entity/Picture.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Picture.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Entity/Post.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Post.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Form/PostAdoptionType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/PostAdoptionType.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/post/_form_adoption.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/post/_form_adoption.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/post/adoption.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/post/adoption.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/post/edit.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/post/edit.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Tags.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Tags.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/User.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Form/PostFoundType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/PostFoundType.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Repository/PetRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/PetRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Repository/PostRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/PostRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/informations/_card.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/informations/_card.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/pet/show.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/pet/show.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/post/_form_found.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/post/_form_found.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/post/new.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/post/new.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/post/selection.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/post/selection.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -264,7 +285,7 @@
       <workItem from="1624185158003" duration="18953000" />
       <workItem from="1624206633437" duration="142000" />
       <workItem from="1624268169314" duration="10193000" />
-      <workItem from="1624296719529" duration="57637000" />
+      <workItem from="1624296719529" duration="99540000" />
     </task>
     <servers />
   </component>

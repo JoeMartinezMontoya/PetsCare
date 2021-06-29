@@ -110,9 +110,15 @@ class Post
      */
     private $species;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=Tags::class, inversedBy="posts")
+     */
+    private $tags;
+
     public function __construct()
     {
         $this->pictures = new ArrayCollection();
+        $this->tags = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -377,6 +383,30 @@ class Post
     public function setSpecies(?int $species): self
     {
         $this->species = $species;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Tags[]
+     */
+    public function getTags(): Collection
+    {
+        return $this->tags;
+    }
+
+    public function addTag(Tags $tag): self
+    {
+        if (!$this->tags->contains($tag)) {
+            $this->tags[] = $tag;
+        }
+
+        return $this;
+    }
+
+    public function removeTag(Tags $tag): self
+    {
+        $this->tags->removeElement($tag);
 
         return $this;
     }

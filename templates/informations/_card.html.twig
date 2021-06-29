@@ -1,4 +1,5 @@
 <div class="card">
+    {{ dump(subject.getCategoryImage) }}
         <img src="{{ asset(subject.getCategoryImage) | imagine_filter('thumb') }}" class="card-img-top"
              alt="...">
     <div class="card-body">

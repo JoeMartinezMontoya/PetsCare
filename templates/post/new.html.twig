@@ -1,6 +1,9 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}PetsCare | Nouvelle annonce{% endblock %}
+{% block stylesheets %}
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet"/>
+{% endblock %}
 
 {% block body %}
     <div class="container bg-light p-4">
@@ -8,4 +11,37 @@
 
         {{ include(selectedForm) }}
     </div>
+{% endblock %}
+{% block javascripts %}
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('.pcSelect').select2();
+        });
+    </script>
+    <script>
+        document.querySelectorAll('[data-delete]').forEach(a => {
+            a.addEventListener('click', e => {
+                e.preventDefault();
+                fetch(a.getAttribute('href'), {
+                    method: 'DELETE',
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest',
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        '_token': a.dataset.token
+                    })
+                }).then(r => r.json())
+                    .then(data => {
+                        if (data.success) {
+                            a.parentNode.parentNode.removeChild(a.parentNode);
+                        } else {
+                            alert(data.error)
+                        }
+                    })
+                    .catch(g => alert(e))
+            })
+        });
+    </script>
 {% endblock %}
