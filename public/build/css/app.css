@@ -1,9 +1,28 @@
-.pcIcon {
+.pc-icon-min {
+    width: 30px;
+    height: auto;
+}
+
+.pc-icon{
     width: 50px;
     height: auto;
 }
 
-.pcIconMin {
-    width: 30px;
+.pc-icon-lg {
+    width: 75px;
     height: auto;
+}
+
+.paws {
+    background-image: url("../../pictures/ressources/paws.png");
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.pc-login {
+    background-image: url("../../pictures/ressources/scribble-light.png");
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
 }

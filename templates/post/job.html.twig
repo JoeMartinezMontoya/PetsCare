@@ -1,39 +1,65 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}PetsCare | {{ post.title }}{% endblock %}
+{% block stylesheets %}
+    <link rel="stylesheet" type="text/css" href="{{ asset('build/css/slick.css') }}"/>
+    <link rel="stylesheet" type="text/css" href="{{ asset('build/css/slick-theme.css') }}"/>
+{% endblock %}
 
 {% block body %}
-    <div class="jumbotron jumbotron-fluid m-auto px-4"
-         style="background-image: url('{{ asset(post.getCategoryImage) }}');background-size: cover;background-position: center; opacity: 0.75">
-        <h1 class="text-danger" style="text-shadow: 1px 1px 1px grey">{{ post.title }}</h1>
-        <h5>Annonce publiée le {{ post.createdAt | date('d/m/Y') }}</h5>
-    </div>
     <div class="container bg-light p-4">
-        <table class="table table-striped">
-            <tbody>
-            <tr>
-                <th scope="row">Auteur</th>
-                <td>{{ post.author.username }}</td>
-            </tr>
-            <tr>
-                <th scope="row">Description de l'offre</th>
-                <td>{{ post.content }}</td>
-            </tr>
-            <tr>
-                <th scope="row">Durée</th>
-                <td>{{ post.duration }} {{ post.durationTypeString }}</td>
-            </tr>
-            <tr>
-                <th scope="row">Date de début</th>
-                <td>{{ post.petSittingStart | date('d/m/Y') }}</td>
-            </tr>
-            </tbody>
-        </table>
-        <a href="{{ path('post_index') }}">back to list</a>
+        <div class="row">
+            <div class="col-md-3 d-flex align-items-center justify-content-around" style="height: 100px;">
+                <img src="{{ asset('pictures/ressources/icons/profile.svg') }}" alt="Avatar" class="pc-icon-lg">
+                <h2 class="d-inline">{{ post.author.username }}</h2>
+            </div>
+            <div class="col-md-9 rounded d-flex align-items-center justify-content-around"
+                 style="height: 100px;background-image: url('{{ asset(post.getCategoryImage) }}'); background-size: 750px;background-position: center; opacity: 0.80">
+            </div>
+        </div>
+        <div class="row mt-4 mx-4">
+            <div class="col-md-6 d-flex flex-column justify-content-around">
+                <div class="row d-flex flex-column">
+                    <h4>{{ post.title }}</h4>
+                    <p>{{ post.content }}</p>
+                    <h6>Pour une durée de : {{ post.duration }} {{ post.durationTypeString }}</h6>
+                    <h6>A partir de : {{ post.petSittingStart | date('d/m/Y') }}</h6>
+                    <hr>
+                    <small>Annonce publiée le {{ post.createdAt | date('d/m/Y') }}</small>
+                </div>
+                <div class="row d-flex flex-column">
+                    <h4>Où ?</h4>
+                    <p>{{ post.location }}</p>
+                </div>
+            </div>
+            <div class="col-md-6 pc-pet-carousel mx-auto my-4">
+                {% for picture in post.pictures %}
+                    <img src="{{ vich_uploader_asset(picture, 'imageFile') | imagine_filter('medium') }}"
+                         alt="{{ post.title }}" class="rounded">
+                {% endfor %}
+            </div>
+        </div>
+        <a href="{{ path('post_index') }}" class="btn btn-primary">Retour aux annonces</a>
+        {% if app.user.id is same as post.author.id %}
 
-        <a href="{{ path('post_edit', {'id': post.id}) }}">edit</a>
+            <a href="{{ path('post_edit', {'id': post.id}) }}" class="btn btn-info">Modifier</a>
 
-        {{ include('post/_delete_form.html.twig') }}
+            {{ include('post/_delete_form.html.twig') }}
+        {% endif %}
     </div>
-
+{% endblock %}
+{% block javascripts %}
+    <script type="text/javascript" src="{{ asset('build/js/slick.js') }}"></script>
+    <script>
+        $(document).ready(function () {
+            $('.pc-pet-carousel').slick({
+                accessibility: false,
+                autoplay: true,
+                autoplaySpeed: 3000,
+                dots: true,
+                cssEase: 'ease',
+                fade: true
+            });
+        });
+    </script>
 {% endblock %}

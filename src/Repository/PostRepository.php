@@ -2,10 +2,13 @@
 
 namespace App\Repository;
 
+use App\Entity\Picture;
 use App\Entity\Post;
 use App\Entity\PostSearch;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Knp\Component\Pager\Pagination\PaginationInterface;
+use Knp\Component\Pager\PaginatorInterface;
 
 /**
  * @method Post|null find($id, $lockMode = null, $lockVersion = null)
@@ -15,23 +18,33 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class PostRepository extends ServiceEntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
+    private PaginatorInterface $paginator;
+
+    public function __construct(ManagerRegistry $registry, PaginatorInterface $paginator)
     {
         parent::__construct($registry, Post::class);
+        $this->paginator = $paginator;
     }
 
     public function findLatest($category)
     {
-        return $this->createQueryBuilder('p')
+        $posts = $this->createQueryBuilder('p')
             ->andWhere('p.category = :val')
             ->setParameter('val', $category)
             ->orderBy('p.created_at', 'DESC')
             ->setMaxResults(4)
             ->getQuery()
             ->getResult();
+        $this->hydratePicture($posts);
+        return $posts;
     }
 
-    public function findAllVisible(PostSearch $search)
+    /**
+     * @param PostSearch $search
+     * @param int $page
+     * @return PaginationInterface
+     */
+    public function paginateAllVisible(PostSearch $search, int $page): PaginationInterface
     {
         $query = $this->createQueryBuilder('p')
             ->orderBy('p.created_at', 'DESC');
@@ -41,7 +54,29 @@ class PostRepository extends ServiceEntityRepository
                 ->setParameter('val', $search->getCategory());
         }
 
-        return $query->getQuery()->getResult();
+        if ($search->getCreatedAt()) {
+            $query->andWhere('p.created_at > :date')
+                ->setParameter('date', $search->getCreatedAt());
+        }
+
+        $posts = $this->paginator->paginate($query->getQuery(), $page, 12);
+
+        $this->hydratePicture($posts);
+        return $posts;
+    }
+
+    private function hydratePicture($posts): void
+    {
+        if (method_exists($posts, 'getItems')) {
+            $posts = $posts->getItems();
+        }
+        $pictures = $this->getEntityManager()->getRepository(Picture::class)->findForPosts($posts);
+        foreach ($posts as $post) {
+            /*** @var Post $post */
+            if ($pictures->containsKey($post->getId())) {
+                $post->setPicture($pictures->get($post->getId()));
+            }
+        }
     }
 
     /**

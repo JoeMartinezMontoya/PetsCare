@@ -3,8 +3,11 @@
 namespace App\Repository;
 
 use App\Entity\Picture;
+use App\Entity\Post;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Persistence\ManagerRegistry;
+use function Doctrine\ORM\QueryBuilder;
 
 /**
  * @method Picture|null find($id, $lockMode = null, $lockVersion = null)
@@ -19,32 +22,33 @@ class PictureRepository extends ServiceEntityRepository
         parent::__construct($registry, Picture::class);
     }
 
-    // /**
-    //  * @return Picture[] Returns an array of Picture objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    /**
+     * @param Post[] $posts
+     * @return ArrayCollection
+     */
+    public function findForPosts(array $posts): ArrayCollection
     {
-        return $this->createQueryBuilder('p')
-            ->andWhere('p.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('p.id', 'ASC')
-            ->setMaxResults(10)
+        $qb = $this->createQueryBuilder('p');
+        $pictures = $qb
+            ->select('p')
+            ->where(
+                $qb->expr()->in(
+                    'p.id',
+                    $this->createQueryBuilder('p2')
+                        ->select('MAX(p2.id)')
+                        ->where('p2.post IN (:posts)')
+                        ->groupBy('p2.post')
+                        ->getDQL()
+                )
+            )
             ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
+            ->setParameter('posts', $posts)
+            ->getResult();
 
-    /*
-    public function findOneBySomeField($value): ?Picture
-    {
-        return $this->createQueryBuilder('p')
-            ->andWhere('p.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
+        $pictures = array_reduce($pictures, static function (array $acc, Picture $picture) {
+            $acc[$picture->getPost()->getId()] = $picture;
+            return $acc;
+        }, []);
+        return new ArrayCollection($pictures);
     }
-    */
 }

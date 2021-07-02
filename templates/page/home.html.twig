@@ -3,43 +3,41 @@
 {% block title %}PetsCare | Accueil{% endblock %}
 
 {% block body %}
-
     {% for message in app.flashes('success') %}
-        <div class="alert alert-success">
+        <div class="alert alert-success float-left m-auto">
             {{ message }}
         </div>
     {% endfor %}
-
-    <div class="jumbotron">
+    <div class="jumbotron jumbotron-fluid text-center m-auto paws">
         <h1>Bonjour {% if app.user %} {{ app.user.username }} {% else %} PetsCarer !{% endif %}</h1>
     </div>
-    <div class="container">
+    <div class="container bg-light p-4">
         <h2 class="text-center">Les dernières annonces</h2>
         <h3>Les avez-vous vu ?</h3>
         <div class="card-deck m-4">
             {% for subject in petMissing %}
-                {% include 'informations/_card.html.twig' %}
+                    {% include 'informations/_card.html.twig' %}
             {% endfor %}
         </div>
 
         <h3>Ils sont à adopter !</h3>
         <div class="card-deck m-4">
             {% for subject in petToAdopt %}
-                {% include 'informations/_card.html.twig' %}
+                    {% include 'informations/_card.html.twig' %}
             {% endfor %}
         </div>
 
         <h3>Annonces de Pet Sitting !</h3>
         <div class="card-deck m-4">
             {% for subject in petSitting %}
-                {% include 'informations/_card.html.twig' %}
+                    {% include 'informations/_card.html.twig' %}
             {% endfor %}
         </div>
 
         <h3>Ils ont été retrouvé !</h3>
         <div class="card-deck m-4">
             {% for subject in petFound %}
-                {% include 'informations/_card.html.twig' %}
+                    {% include 'informations/_card.html.twig' %}
             {% endfor %}
         </div>
     </div>

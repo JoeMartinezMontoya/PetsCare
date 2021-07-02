@@ -5,35 +5,44 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="58145cfb-fb3b-4bfd-a7ab-6d34921fc2a8" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Form/ContactUserType.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Form/PetIsFoundType.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/informations/_card_animal.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/post/check.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/ab0d5cae-f618-48c9-b7cc-58143b1bfcbc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/ab0d5cae-f618-48c9-b7cc-58143b1bfcbc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/build/js/bs-custom-file-input.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/pictures/ressources/categoryImages/adoption.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/pictures/ressources/categoryImages/found.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/pictures/ressources/categoryImages/missing.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/pictures/ressources/categoryImages/petsitting.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/pictures/ressources/paws.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/pictures/ressources/scribble-light.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/informations/_card_animal_to_adopt.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/services.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/services.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/pictures/pets/60d8aa9fb9036464831045.JPG" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/pictures/pets/60d8b852009f0962381515.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/pictures/pets/60d8b8520205d030378592.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/pictures/pets/60d8b9be8920e835134724.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/pictures/pets/60d8b9be8a650820489056.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/pictures/pets/60d8b9be8b934522926529.JPG" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/pictures/pets/60d8b9be8cd12137262754.JPG" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/PetController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/PetController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/build/css/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/build/css/app.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/pictures/ressources/categoryImages/adoption.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/pictures/ressources/categoryImages/found.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/pictures/ressources/categoryImages/lost.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/pictures/ressources/categoryImages/wewantyou.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/PageController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/PageController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/PostController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/PostController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Entity/Pet.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Pet.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Picture.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Picture.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Entity/Post.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Post.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Tags.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Tags.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Form/PostFoundType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/PostFoundType.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/PostSearch.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/PostSearch.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Form/PostSearchType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/PostSearchType.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Repository/PetRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/PetRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Repository/PictureRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/PictureRepository.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Repository/PostRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/PostRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/informations/_card.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/informations/_card.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/page/home.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/page/home.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/pet/show.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/pet/show.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/post/_form_found.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/post/_form_found.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/post/_delete_form.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/post/_delete_form.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/post/_form_adoption.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/post/_form_adoption.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/post/adoption.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/post/adoption.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/post/found.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/post/found.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/post/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/post/index.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/post/job.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/post/job.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/post/missing.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/post/missing.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/post/new.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/post/new.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/post/selection.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/post/selection.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/security/login.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/security/login.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/user/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/user/index.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -233,7 +242,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="com.jetbrains.php.lang.actions.generation.PhpGenerateFieldAccessorHandlerBase$MyMemberChooser.fluent.setters.last.selected" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/public/build" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/public/pictures/ressources/categoryImages" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="php.override.implement.member.chooser.php.doc" value="DEFAULT" />
     <property name="settings.editor.selected.configurable" value="preferences.sourceCode.PHP" />
@@ -241,17 +250,18 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\wamp64\www\Lab\Projets\PetsCare\public\pictures\ressources\categoryImages" />
+      <recent name="C:\wamp64\www\Lab\Projets\PetsCare\public\pictures\ressources" />
+      <recent name="C:\wamp64\www\Lab\Projets\PetsCare\public\pictures" />
       <recent name="C:\wamp64\www\Lab\Projets\PetsCare\public\build" />
       <recent name="C:\wamp64\www\Lab\Projets\PetsCare\public\build\js" />
-      <recent name="C:\wamp64\www\Lab\Projets\PetsCare\public\build\css" />
-      <recent name="C:\wamp64\www\Lab\Projets\PetsCare\public\pictures\ressources\icons" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\wamp64\www\Lab\Projets\PetsCare\public\pictures\ressources" />
+      <recent name="C:\wamp64\www\Lab\Projets\PetsCare\public\pictures" />
+      <recent name="C:\wamp64\www\Lab\Projets\PetsCare\public" />
       <recent name="C:\wamp64\www\Lab\Projets\PetsCare\public\build" />
       <recent name="C:\wamp64\www\Lab\Projets\PetsCare\public\pictures\ressources\categoryImages" />
-      <recent name="C:\wamp64\www\Lab\Projets\PetsCare\public" />
-      <recent name="C:\wamp64\www\Lab\Projets\PetsCare\public\pictures\ressources\icons" />
-      <recent name="C:\wamp64\www\Lab\Projets\PetsCare\public\pictures\ressources" />
     </key>
   </component>
   <component name="RunManager">
@@ -285,7 +295,10 @@
       <workItem from="1624185158003" duration="18953000" />
       <workItem from="1624206633437" duration="142000" />
       <workItem from="1624268169314" duration="10193000" />
-      <workItem from="1624296719529" duration="99540000" />
+      <workItem from="1624296719529" duration="105542000" />
+      <workItem from="1625027412143" duration="26484000" />
+      <workItem from="1625081922295" duration="3591000" />
+      <workItem from="1625232716948" duration="333000" />
     </task>
     <servers />
   </component>

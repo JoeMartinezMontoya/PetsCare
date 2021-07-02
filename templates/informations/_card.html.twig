@@ -1,15 +1,24 @@
 <div class="card">
-    {{ dump(subject.getCategoryImage) }}
+    {# IMAGE MANAGEMENT #}
+    {% if subject.picture is not null %}
+        <img src="{{ asset('pictures/pets/' ~ subject.picture) | imagine_filter('thumb') }}" class="card-img-top"
+             alt="...">
+    {% else %}
         <img src="{{ asset(subject.getCategoryImage) | imagine_filter('thumb') }}" class="card-img-top"
              alt="...">
+    {% endif %}
+    {# END IMAGE MANAGEMENT #}
+
     <div class="card-body">
         <h5 class="card-title m-auto">
-            <img src="{{ asset(subject.getCategoryIcon) }}" alt="Icon" class="pcIconMin">
+            <img src="{{ asset(subject.getCategoryIcon) }}" alt="Icon" class="pc-icon-min">
             - <a href="{{ path('post_show' , {id: subject.id}) }}">{{ subject.title }}</a>
         </h5>
-        <p class="card-text">{{ subject.content }}</p>
+        <p class="card-text my-2">{{ subject.excerpt }}</p>
+        <hr>
+        <a href="{{ path('post_show' , {id: subject.id}) }}" class="btn btn-sm btn-info">Voir plus</a>
     </div>
     <div class="card-footer">
-        <small class="text-muted">Émis par {{ subject.author }} le {{ subject.createdAt | date('d/m/Y') }}</small>
+        <small class="text-muted">Auteur : {{ subject.author }} le {{ subject.createdAt | date('d/m/Y') }}</small>
     </div>
 </div>

@@ -3,46 +3,58 @@
 {% block title %}PetsCare | Se connecter{% endblock %}
 
 {% block body %}
+    <div class="row m-auto">
+        <div class="col-md-6 bg-light d-flex flex-column justify-content-center" style="height: 90vh">
+            <div class="container w-50">
+                <form method="post">
+                    {% if error %}
+                        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                    {% endif %}
 
-    <div class="container mt-4">
-        <form method="post">
-            {% if error %}
-                <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-            {% endif %}
+                    {% if app.user %}
+                        <div class="mb-3">
+                            Vous êtes connecté en tant que {{ app.user.username }}, <a href="{{ path('logout') }}">Se
+                                déconnecter</a>
+                        </div>
+                    {% endif %}
 
-            {% if app.user %}
-                <div class="mb-3">
-                    Vous êtes connecté en tant que {{ app.user.username }}, <a href="{{ path('logout') }}">Se déconnecter</a>
-                </div>
-            {% endif %}
+                    <h1 class="h3 mb-3 font-weight-normal text-center">Connectez vous</h1>
+                    <label for="inputEmail"></label>
+                    <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control"
+                           autocomplete="email" required autofocus placeholder="example@petscare.com">
+                    <label for="inputPassword"></label>
+                    <input type="password" name="password" id="inputPassword" class="form-control"
+                           autocomplete="current-password" required placeholder="SuperCutePaws99">
 
-            <h1 class="h3 mb-3 font-weight-normal">Connectez vous</h1>
-            <label for="inputEmail">Email</label>
-            <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control"
-                   autocomplete="email" required autofocus>
-            <label for="inputPassword">Mot de passe</label>
-            <input type="password" name="password" id="inputPassword" class="form-control"
-                   autocomplete="current-password" required>
+                    <input type="hidden" name="_csrf_token"
+                           value="{{ csrf_token('authenticate') }}"
+                    >
+                    {#
+                    Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
+                    See https://symfony.com/doc/current/security/remember_me.html
 
-            <input type="hidden" name="_csrf_token"
-                   value="{{ csrf_token('authenticate') }}"
-            >
-
-            {#
-            Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
-            See https://symfony.com/doc/current/security/remember_me.html
-
-            <div class="checkbox mb-3">
-                <label>
-                    <input type="checkbox" name="_remember_me"> Remember me
-                </label>
+                    <div class="checkbox mb-3">
+                        <label>
+                            <input type="checkbox" name="_remember_me"> Remember me
+                        </label>
+                    </div>
+                    #}
+                    <button class="btn btn-sm btn-info mt-4" type="submit">
+                        Se connecter
+                    </button>
+                    <button class="btn btn-sm btn-outline-info mt-4" type="submit">
+                        Mot de passe oublié ?
+                    </button>
+                    <hr>
+                    <a href="{{ path('registration') }}" class="btn btn-sm btn-secondary">S'inscrire</a>
+                </form>
             </div>
-            #}
-
-            <button class="btn btn-lg btn-primary mt-4" type="submit">
-                Se connecter
-            </button>
-        </form>
+        </div>
+        <div class="col-md-6 bg-secondary pc-login d-flex flex-column justify-content-center" style="height: 90vh">
+            <h2 class="text-left">PetCaring</h2>
+            <h2 class="text-center">is</h2>
+            <h2 class="text-right">PetSharing</h2>
+        </div>
     </div>
 {% endblock %}
 

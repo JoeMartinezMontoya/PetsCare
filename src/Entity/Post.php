@@ -150,6 +150,18 @@ class Post
         return $this;
     }
 
+    /**
+     * Return a small sample of the content
+     * @return string
+     */
+    public function getExcerpt(): string
+    {
+        if (strlen($this->content) > 80) {
+            return substr($this->content, 0, 80) . '...';
+        }
+        return $this->content;
+    }
+
     public function getCreatedAt(): ?\DateTimeInterface
     {
         return $this->created_at;
@@ -193,16 +205,16 @@ class Post
 
         switch ($this->category) {
             case 0 :
-                $output = $path . 'wewantyou.jpg';
+                $output = $path . 'petsitting.png';
                 break;
             case 1:
-                $output = $path . 'lost.jpg';
+                $output = $path . 'missing.png';
                 break;
             case 2:
-                $output = $path . 'adoption.jpg';
+                $output = $path . 'adoption.png';
                 break;
             case 3:
-                $output = $path . 'found.jpg';
+                $output = $path . 'found.png';
                 break;
         }
         return $output ?? '';
@@ -346,7 +358,7 @@ class Post
      * @param Picture|null $picture
      * @return Post
      */
-    public function setPicture(?Picture $picture): Post
+    public function setPicture(Picture $picture): Post
     {
         $this->picture = $picture;
         return $this;
@@ -378,6 +390,11 @@ class Post
     public function getSpecies(): ?int
     {
         return $this->species;
+    }
+
+    public function getSpeciesString(): ?string
+    {
+        return Pet::SPECIES[$this->species];
     }
 
     public function setSpecies(?int $species): self

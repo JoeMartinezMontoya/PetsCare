@@ -324,7 +324,7 @@ class Pet
      * @param Picture|null $picture
      * @return Pet
      */
-    public function setPicture(?Picture $picture): Pet
+    public function setPicture(Picture $picture): Pet
     {
         $this->picture = $picture;
         return $this;

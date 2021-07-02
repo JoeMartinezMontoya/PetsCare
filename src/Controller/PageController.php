@@ -7,6 +7,7 @@ use App\Repository\PostRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Email;
 use Symfony\Component\Routing\Annotation\Route;
@@ -43,8 +44,9 @@ class PageController extends AbstractController
 
     /**
      * @Route("/contact", name="contact")
+     * @throws TransportExceptionInterface
      */
-    public function index(Request $request, MailerInterface $mailer): Response
+    public function contact(Request $request, MailerInterface $mailer): Response
     {
         $form = $this->createForm(ContactType::class);
         $form->handleRequest($request);
@@ -60,7 +62,7 @@ class PageController extends AbstractController
                     'text/plain');
             $mailer->send($message);
             $this->addFlash('success', 'Vore message a été envoyé');
-            return $this->redirectToRoute('contact');
+            return $this->redirectToRoute('home');
         }
 
         return $this->render('page/contact.html.twig', [

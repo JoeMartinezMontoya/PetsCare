@@ -27,23 +27,26 @@ use Symfony\Component\Security\Core\Security;
  */
 class PostController extends AbstractController
 {
+
+    private PostRepository $repository;
+
+    public function __construct(PostRepository $repository)
+    {
+        $this->repository = $repository;
+    }
+
     /**
      * @Route("/", name="post_index", methods={"GET"})
      */
-    public function index(PostRepository $postRepository, PaginatorInterface $paginator, Request $request): Response
+    public function index(Request $request): Response
     {
         $search = new PostSearch();
         $form = $this->createForm(PostSearchType::class, $search);
         $form->handleRequest($request);
 
-        $posts = $paginator->paginate(
-            $postRepository->findAllVisible($search),
-            $request->query->getInt('page', 1),
-            12
-        );
         return $this->render('post/index.html.twig', [
-            'posts' => $posts,
-            'current_menu' => 'postList',
+            'posts' => $this->repository->paginateAllVisible($search, $request->query->getInt('page', 1)),
+            'current_menu' => 'post',
             'form' => $form->createView()
         ]);
     }
@@ -147,6 +150,13 @@ class PostController extends AbstractController
                     $post->setMissingPet($missingPet->getId());
                 }
 
+                // ADOPTION
+                if ($choice === 2) {
+                    if (!empty($post->getPictures()->getValues())) {
+                        $post->setPicture($post->getPictures()->first());
+                    }
+                }
+
                 // FOUND
                 if ($choice === 3) {
                     $foundPet = $form->getData();
@@ -162,12 +172,11 @@ class PostController extends AbstractController
                         }
                     }
                 }
-
                 $entityManager = $this->getDoctrine()->getManager();
                 $entityManager->persist($post);
                 $entityManager->flush();
 
-                if (isset($check)) {
+                if (!empty($check)) {
                     // If there is a match, it is sent by GET method
                     return $this->redirectToRoute('post_check', [
                         'check' => $check

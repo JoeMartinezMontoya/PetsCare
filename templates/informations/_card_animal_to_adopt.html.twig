@@ -1,0 +1,26 @@
+<div class="card">
+    {# IMAGE MANAGEMENT #}
+    {% if pet.pictures is not empty %}
+        {% for picture in pet.pictures %}
+            {% if loop.last %}
+                <img src="{{ asset('pictures/pets/' ~ picture) | imagine_filter('thumb') }}" class="card-img-top"
+                     alt="...">
+            {% endif %}
+        {% endfor %}
+    {% else %}
+        <img src="{{ asset(pet.getCategoryImage) | imagine_filter('thumb') }}" class="card-img-top"
+             alt="...">
+    {% endif %}
+    {# END IMAGE MANAGEMENT #}
+
+    <div class="card-body">
+        <h5 class="card-title m-auto">
+            <img src="{{ asset(pet.getCategoryIcon) }}" alt="Icon" class="pc-icon-min">
+            - <a href="{{ path('post_show' , {id: pet.id}) }}">{{ pet.title }}</a>
+        </h5>
+        <p class="card-text my-2">{{ pet.content }}</p>
+    </div>
+    <div class="card-footer">
+        <small class="text-muted">Auteur : {{ pet.author }} le {{ pet.createdAt | date('d/m/Y') }}</small>
+    </div>
+</div>
