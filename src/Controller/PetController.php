@@ -71,7 +71,19 @@ class PetController extends AbstractController
         $form = $this->createForm(PetIsFoundType::class);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            $posts = $repository->findLostAndFoundPostsAbout($pet->getId());
+
+            $post = $repository->findOneBy([
+                'missingPet' => $pet->getId(),
+                'category' => 1
+            ]);
+            $entityManager = $this->getDoctrine()->getManager();
+            foreach ($post->getPictures() as $picture) {
+                $post->removePicture($picture);
+            }
+            $entityManager->persist($post);
+            $entityManager->flush();
+
+            $repository->findLostAndFoundPostsAbout($pet->getId());
             $entityManager = $this->getDoctrine()->getManager();
             $pet->setIsMissing(false);
             $entityManager->persist($pet);
@@ -103,33 +115,6 @@ class PetController extends AbstractController
             'pet' => $pet,
             'form' => $form->createView(),
         ]);
-    }
-
-    /**
-     * @Route("/{id}", name="pet_picture_delete", methods={"DELETE"})
-     * @param Picture $picture
-     * @param Request $request
-     * @return JsonResponse
-     * @throws \JsonException
-     */
-    public function pictureDelete(Picture $picture, Request $request)
-    {
-        $data = json_decode($request->getContent(), true, 512, JSON_THROW_ON_ERROR);
-
-        if ($this->isCsrfTokenValid('delete' . $picture->getId(), $data['_token'])) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($picture);
-            $entityManager->flush();
-
-            return new JsonResponse([
-                'success' => 1
-            ]);
-
-        }
-        return new JsonResponse([
-            'error' => 'Token invalide'
-        ], 400);
-
     }
 
     /**

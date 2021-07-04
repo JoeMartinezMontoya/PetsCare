@@ -111,6 +111,11 @@ class Post
     private $species;
 
     /**
+     * @ORM\Column(type="array", nullable=true)
+     */
+    private $petsToBeWatched = [];
+
+    /**
      * @ORM\ManyToMany(targetEntity=Tags::class, inversedBy="posts")
      */
     private $tags;
@@ -400,6 +405,18 @@ class Post
     public function setSpecies(?int $species): self
     {
         $this->species = $species;
+
+        return $this;
+    }
+
+    public function getPetsToBeWatched(): ?array
+    {
+        return $this->petsToBeWatched;
+    }
+
+    public function setPetsToBeWatched(array $petsToBeWatched): self
+    {
+        $this->petsToBeWatched = $petsToBeWatched;
 
         return $this;
     }

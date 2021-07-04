@@ -1,6 +1,7 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}PetsCare | Annonces{% endblock %}
+{% block title %}PetsCare | Mes annonces{% endblock %}
+
 {% block body %}
     {% for message in app.flashes('success') %}
         <div class="alert alert-success float-left m-auto">
@@ -8,7 +9,7 @@
         </div>
     {% endfor %}
     <div class="jumbotron jumbotron-fluid pc-paws">
-        <h1 class="text-center">Liste d'annonces</h1>
+        <h1 class="text-center">Mes annonces</h1>
         {{ form_start(form) }}
         <div class="form-row align-items-end justify-content-center m-auto">
             <div class="col-md-2">

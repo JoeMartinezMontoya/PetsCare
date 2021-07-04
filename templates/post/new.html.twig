@@ -6,9 +6,8 @@
 {% endblock %}
 
 {% block body %}
-    <div class="container bg-light p-4">
-        <h1>Créer une annonce</h1>
-
+    <div class="container bg-transparent p-4">
+        <h1 class="text-center mb-4">Créer une annonce</h1>
         {{ include(selectedForm) }}
     </div>
 {% endblock %}
@@ -17,7 +16,7 @@
     <script src="{{ asset('build/js/bs-custom-file-input.js') }}"></script>
     <script>
         $(document).ready(function () {
-            $('.pcSelect').select2();
+            $('.pc-select').select2();
             bsCustomFileInput.init();
         });
     </script>

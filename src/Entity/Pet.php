@@ -218,6 +218,18 @@ class Pet
         return $this->description;
     }
 
+    /**
+     * Return a small sample of the description
+     * @return string|null
+     */
+    public function getExcerpt(): ?string
+    {
+        if ($this->description !== null && strlen($this->description) > 80) {
+            return substr($this->description, 0, 80) . '...';
+        }
+        return $this->description;
+    }
+
     public function setDescription(?string $description): self
     {
         $this->description = $description;

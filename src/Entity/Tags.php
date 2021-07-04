@@ -39,9 +39,9 @@ class Tags
      */
     private $posts;
 
+
     public function __construct()
     {
-        $this->pet = new ArrayCollection();
         $this->pets = new ArrayCollection();
         $this->posts = new ArrayCollection();
     }

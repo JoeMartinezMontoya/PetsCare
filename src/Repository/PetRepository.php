@@ -5,7 +5,6 @@ namespace App\Repository;
 use App\Entity\Pet;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\DBAL\Driver\Exception;
-use Doctrine\DBAL\FetchMode;
 use Doctrine\DBAL\ParameterType;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -27,17 +26,19 @@ class PetRepository extends ServiceEntityRepository
      * @throws Exception
      * @throws \Doctrine\DBAL\Exception
      */
-    public function findLostByTags($tags): array
+    public function findLostByTags($species , $tags): array
     {
         $db = $this->getEntityManager()->getConnection();
         $sql = "SELECT * FROM pet p 
                 LEFT JOIN pet_tags pt on p.id = pt.pet_id 
                 WHERE pt.tags_id IN (:tags)
+                AND p.species = :species    
                 AND p.is_missing = 1";
         $query = $db->prepare($sql);
         foreach ($tags as $tag) {
             $query->bindParam(':tags', $tag, ParameterType::INTEGER);
         }
+        $query->bindParam(':species', $species, ParameterType::INTEGER);
         $query->executeQuery();
         return $query->fetchAll();
     }

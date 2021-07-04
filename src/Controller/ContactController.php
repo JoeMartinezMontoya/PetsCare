@@ -47,15 +47,14 @@ class ContactController extends AbstractController
             $mailer->send($message);
 
             // Get the last Post from founder
-            $searchedPost = $postRepository->findBy(['author' => $founderId], ['created_at'=>'DESC'],1,0);
-            $lastPost = array_shift($searchedPost);
-
+            $lastPost = $postRepository->findOneBy(['author' => $founderId], ['created_at'=>'DESC'],1,0);
             $lastPost->setMissingPet($petId);
+
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($lastPost);
             $entityManager->flush();
 
-            $this->addFlash('success', 'Vore message a été envoyé');
+            $this->addFlash('success', 'Votre message a été envoyé');
             return $this->redirectToRoute('user_profile', [
                 'id' => $this->getUser()->getId(),
                 'slug' => $this->getUser()->getSlug()

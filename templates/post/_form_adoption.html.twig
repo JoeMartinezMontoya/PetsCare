@@ -1,34 +1,32 @@
 {{ form_start(form) }}
-<div class="row">
-    <div class="col">{{ form_row(form.location) }}</div>
-    <div class="col">{{ form_row(form.species) }}</div>
+<div class="row justify-content-center">
+    <div class="col-md-3">{{ form_row(form.location) }}</div>
+    <div class="col-md-2">{{ form_row(form.species) }}</div>
+    <div class="col-md-4">{{ form_row(form.pictureFiles) }}</div>
 </div>
-<div class="row">
-    <div class="col-md-12">
+<div class="row justify-content-center">
+    <div class="col-md-9">
         <div class="row flex justify-content-start flex-wrap">
-                {% for picture in post.pictures %}
-                    {% if post.pictures is not empty and vich_uploader_asset(picture, 'imageFile') is not null %}
+            {% for picture in post.pictures %}
+                {% if post.pictures is not empty and vich_uploader_asset(picture, 'imageFile') is not null %}
                     <div class="col" style="width: 200px; flex: none; margin: 5px">
-                        <img style="width: 100%;border-radius: 8px;"
+                        <img class="w-100 rounded"
                              src="{{ vich_uploader_asset(picture, 'imageFile') | imagine_filter('thumb') }}"
-                             width="100"
                              alt="{{ post.title }}">
-                        <a href="{{ path('post_picture_delete', {id: picture.id}) }}"
-                           style="width: 100%"
-                           class="btn btn-danger"
+                        <a href="{{ path('picture_delete', {id: picture.id}) }}"
+                           class="w-100 btn btn-outline-danger"
                            data-delete
                            data-token="{{ csrf_token('delete' ~ picture.id) }}">Supprimer</a>
                     </div>
-                    {% endif %}
-                {% endfor %}
+                {% endif %}
+            {% endfor %}
         </div>
     </div>
 </div>
-<div class="row">
-    <div class="col">{{ form_row(form.pictureFiles) }}</div>
+<div class="row justify-content-center">
+    <div class="col-md-9">{{ form_row(form.content) }}</div>
 </div>
-<div class="row">
-    <div class="col">{{ form_row(form.content) }}</div>
+<div class="row justify-content-center">
+    <button class="btn btn-success">{{ button_label|default('Publier') }}</button>
 </div>
-<button class="btn btn-success">{{ button_label|default('Publier') }}</button>
 {{ form_end(form) }}

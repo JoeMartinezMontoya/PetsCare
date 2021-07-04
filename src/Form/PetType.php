@@ -70,7 +70,7 @@ class PetType extends AbstractType
                 'multiple' => true,
                 'required' => false,
                 'attr' => [
-                    'class' => 'pcSelect'
+                    'class' => 'pc-select'
                 ]
             ]);
     }

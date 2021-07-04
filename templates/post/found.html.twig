@@ -7,44 +7,66 @@
 {% endblock %}
 
 {% block body %}
-    {{ dump(post) }}
+    <a href="{{ app.request.headers.get('referer') }}" class="btn btn-primary float-left mt-4 ml-4">
+        <i class="fas fa-arrow-circle-left"></i>
+    </a>
     <div class="container bg-light p-4">
-        <div class="row">
-            <div class="col-md-3 d-flex align-items-center justify-content-around" style="height: 100px;">
+        <div class="row h-100">
+            <div class="col-md-3 d-flex align-items-center justify-content-around">
                 <img src="{{ asset('pictures/ressources/icons/profile.svg') }}" alt="Avatar" class="pc-icon-lg">
-                <h2 class="d-inline">{{ post.author.username }}</h2>
+                <h2><a href="#">{{ post.author.username }}</a></h2>
             </div>
-            <div class="col-md-9 rounded d-flex align-items-center justify-content-around"
-                 style="height: 100px;background-image: url('{{ asset(post.getCategoryImage) }}'); background-size: 750px;background-position: center; opacity: 0.80">
+            <div class="col-md-9 d-flex align-items-center justify-content-around"
+                 style="background-image: url('{{ asset(post.getCategoryImage) }}'); background-size: 750px;background-position: center; opacity: 0.80">
             </div>
         </div>
-        <div class="row mt-4 mx-4">
-            <div class="col-md-6 d-flex flex-column justify-content-around">
-                <div class="row d-flex flex-column">
-                    <h4>{{ post.title }}</h4>
-                    <p>{{ post.content }}</p>
-                    <hr>
+        <div class="row m-4">
+            <div class="row w-100 my-4">
+                <div class="col-md-6 d-flex flex-column justify-content-between">
+                    <div>
+                        <h5>{{ post.title }}</h5>
+                        <p>{{ post.content }}</p>
+                    </div>
                     <small>Annonce publiée le {{ post.createdAt | date('d/m/Y') }}</small>
                 </div>
-                <div class="row d-flex flex-column">
-                    <h4>Où ?</h4>
+                <div class="col-md-6 pc-pet-carousel mx-auto my-4">
+                    {% for picture in post.pictures %}
+                        <img src="{{ vich_uploader_asset(picture, 'imageFile') | imagine_filter('medium') }}"
+                             alt="{{ post.title }}" class="rounded">
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="row w-100 my-4">
+                <div class="col">
+                    <h5>Signes particulier</h5>
+                    <ul class="list-group list-group-horizontal">
+                        {% for tag in post.tags %}
+                            <li class="list-group-item">{{ tag.name }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+            <div class="row w-100 my-4">
+                <div class="col">
+                    <h5>Où ?</h5>
                     <p>{{ post.location }}</p>
                 </div>
             </div>
-            <div class="col-md-6 pc-pet-carousel mx-auto my-4">
-                {% for picture in post.pictures %}
-                    <img src="{{ vich_uploader_asset(picture, 'imageFile') | imagine_filter('medium') }}"
-                         alt="{{ post.title }}" class="rounded">
-                {% endfor %}
+        </div>
+        <div class="row justify-content-between">
+            <div>
+                {% if app.user.id is same as post.author.id %}
+
+                    <a href="{{ path('post_edit', {'id': post.id}) }}" class="btn btn-info">Modifier</a>
+
+                    {{ include('post/_delete_form.html.twig') }}
+
+                {% endif %}
+            </div>
+            <div>
+                <a href="#" class="btn btn-warning">Contacter l'auteur</a>
             </div>
         </div>
-        <a href="{{ path('post_index') }}" class="btn btn-primary">Retour aux annonces</a>
-        {% if app.user.id is same as post.author.id %}
-
-            <a href="{{ path('post_edit', {'id': post.id}) }}" class="btn btn-info">Modifier</a>
-
-            {{ include('post/_delete_form.html.twig') }}
-        {% endif %}
     </div>
 {% endblock %}
 {% block javascripts %}

@@ -1,12 +1,18 @@
 {{ form_start(form) }}
-<div class="row">
-    <div class="col-md-4">{{ form_row(form.location) }}</div>
-    <div class="col">{{ form_row(form.petSittingStart) }}</div>
+<div class="row justify-content-center">
+    <div class="col-md-3">{{ form_row(form.location) }}</div>
+    <div class="col-md-3">{{ form_row(form.petsToBeWatched) }}</div>
+</div>
+
+<div class="row justify-content-center">
+    <div class="col-md-3">{{ form_row(form.petSittingStart) }}</div>
     <div class="col-md-1">{{ form_row(form.duration) }}</div>
     <div class="col-md-2">{{ form_row(form.durationType) }}</div>
 </div>
-<div class="row">
-    <div class="col-md-12">{{ form_row(form.content) }}</div>
+<div class="row justify-content-center">
+    <div class="col-md-9">{{ form_row(form.content) }}</div>
 </div>
-<button class="btn btn-success">{{ button_label|default('Publier') }}</button>
+<div class="row justify-content-center">
+    <button class="btn btn-success">{{ button_label|default('Publier') }}</button>
+</div>
 {{ form_end(form) }}

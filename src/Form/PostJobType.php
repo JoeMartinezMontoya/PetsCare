@@ -11,17 +11,35 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Security\Core\Security;
 
 class PostJobType extends AbstractType
 {
+
+    private Security $security;
+
+    public function __construct(Security $security)
+    {
+        $this->security = $security;
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
             ->add('location', TextType::class, [
-                'label' => 'Où?',
+                'label' => 'Où doit-on venir ?',
+            ])
+            ->add('petsToBeWatched', ChoiceType::class, [
+                'label' => 'Pour qui ?',
+                'choices' => $this->getUserPetList($this->security->getUser()),
+                'multiple' => true,
+                'attr' => [
+                    'class' => 'pc-select'
+                ]
             ])
             ->add('petSittingStart', DateType::class, [
-                'label' => 'A partir de quand ?'
+                'label' => 'A partir de quand ?',
+                'widget' => 'single_text'
             ])
             ->add('duration', IntegerType::class, [
                 'label' => 'Combien',
@@ -35,7 +53,10 @@ class PostJobType extends AbstractType
                 'choices' => $this->getChoices(Post::DURATION)
             ])
             ->add('content', TextareaType::class, [
-                'label' => 'Une petite description ?'
+                'label' => 'Une petite description ?',
+                'attr' => [
+                    'rows' => 5
+                ]
             ]);
     }
 
@@ -44,15 +65,5 @@ class PostJobType extends AbstractType
         $resolver->setDefaults([
             'data_class' => Post::class,
         ]);
-    }
-
-    public function getChoices($const): array
-    {
-        $choices = $const;
-        $output = [];
-        foreach ($choices as $k => $v) {
-            $output[$v] = $k;
-        }
-        return $output;
     }
 }

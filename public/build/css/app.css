@@ -1,9 +1,14 @@
+.pc-body-bg {
+    background-color: #f7f7f9;
+    background-image: url("https://www.transparenttextures.com/patterns/inspiration-geometry.png");
+}
+
 .pc-icon-min {
     width: 30px;
     height: auto;
 }
 
-.pc-icon{
+.pc-icon {
     width: 50px;
     height: auto;
 }
@@ -13,7 +18,7 @@
     height: auto;
 }
 
-.paws {
+.pc-paws {
     background-image: url("../../pictures/ressources/paws.png");
     background-position: center;
     background-size: cover;
@@ -25,4 +30,30 @@
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
+}
+
+/*NORMALIZE SELECT2*/
+
+.select2-container .select2-selection--single {
+    height: 37px !important;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+    line-height: 34px !important;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__arrow {
+    top: 6px !important;
+}
+
+.select2-container--default .select2-selection--single {
+    border-color: #ced4da !important;
+}
+
+.select2-container--default .select2-selection--multiple {
+    border-color: #ced4da !important;
+}
+
+.select2-container .select2-selection--multiple {
+    min-height: 38px !important;
 }

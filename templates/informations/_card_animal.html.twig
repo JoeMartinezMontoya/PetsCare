@@ -1,15 +1,17 @@
 <div class="card" style="max-width: 25%">
-    <img src="{{ asset('pictures/pets/' ~ pet.picture) | imagine_filter('medium') }}" class="card-img-top"
-         alt="..." style="width: 100%">
+    <img src="{{ asset('pictures/pets/' ~ pet.picture) | imagine_filter('medium') }}" class="card-img-top w-100"
+         alt="{{ pet.name }}">
     <div class="card-body">
         <h5 class="card-title m-auto">
-            {# <img src="{{ asset(subject.getCategoryIcon) }}" alt="Icon" class="pcIconMin"> - #}
             <a href="{{ path('pet_show' , {id: pet.id}) }}">{{ pet.name }}</a>
         </h5>
-        <p class="card-text">{{ pet.description }}</p>
+        <p class="card-text">{{ pet.excerpt }}</p>
+        <hr>
+        <a href="{{ path('pet_show' , {id: pet.id}) }}" class="btn btn-info">Voir son profil</a>
     </div>
     <div class="card-footer d-flex justify-content-between align-items-center">
         <small class="text-muted">Vit avec {{ pet.owner }}</small>
-        <a href="{{ path('meeting', {userid: app.user.id ,petid: pet.id,ownerid : pet.owner.id}) }}" class="btn btn-success d-inline">Trouvé !</a>
+        <a href="{{ path('meeting', {userid: app.user.id , petid: pet.id, ownerid : pet.owner.id}) }}"
+           class="btn btn-success d-inline">Trouvé !</a>
     </div>
 </div>

@@ -37,7 +37,7 @@ class PostAdoptionType extends AbstractType
                 'label' => "Que pouvez vous nous dire à ce propos ?",
                 'required' => true,
                 'attr' => [
-                    'placeholder' => "Des précisions ?"
+                    'rows' => 5
                 ]
             ]);
     }
@@ -47,15 +47,5 @@ class PostAdoptionType extends AbstractType
         $resolver->setDefaults([
             'data_class' => Post::class
         ]);
-    }
-
-    public function getChoices($const): array
-    {
-        $choices = $const;
-        $output = [];
-        foreach ($choices as $k => $v) {
-            $output[$v] = $k;
-        }
-        return $output;
     }
 }

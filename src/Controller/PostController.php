@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use App\Entity\Picture;
 use App\Entity\Post;
 use App\Entity\PostSearch;
 use App\Form\PostAdoptionType;
@@ -14,9 +13,7 @@ use App\Repository\PetRepository;
 use App\Repository\PostRepository;
 use DateTime;
 use Doctrine\DBAL\Driver\Exception;
-use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -43,7 +40,6 @@ class PostController extends AbstractController
         $search = new PostSearch();
         $form = $this->createForm(PostSearchType::class, $search);
         $form->handleRequest($request);
-
         return $this->render('post/index.html.twig', [
             'posts' => $this->repository->paginateAllVisible($search, $request->query->getInt('page', 1)),
             'current_menu' => 'post',
@@ -63,8 +59,90 @@ class PostController extends AbstractController
         }
 
         return $this->render('post/selection.html.twig', [
-            'post' => $_POST
+            'current_menu' => 'post'
         ]);
+    }
+
+    /**
+     * @Route("/new", name="post_new", methods={"GET","POST"})
+     * @throws \Exception
+     */
+    public function new(Request $request, PetRepository $repository): Response
+    {
+        $post = new Post();
+        $choice = null;
+        if (!empty($_GET) && isset($_GET['choice'])) {
+            $choice = (int)$_GET['choice'];
+            $selection = $this->crossRoad($choice, $post);
+        }
+
+        if (isset($selection['form'])) {
+            $selection['form']->handleRequest($request);
+            if ($selection['form']->isSubmitted() && $selection['form']->isValid()) {
+                $data = $selection['form']->getData();
+
+                // GLOBAL
+                $post->setTitle($data->getTitle() ?? $selection['title']);
+                $post->setContent($data->getContent() ?? '');
+                $post->setCategory($choice);
+                $post->setCreatedAt(new DateTime());
+                $post->setAuthor($this->getUser());
+
+                // PETSITTING
+                if ($choice === 0) {
+                    $post->setPetsToBeWatched($data->getPetsToBeWatched());
+                    foreach ($this->getUser()->getPets() as $pet) {
+                        if ($pet->getPictures()->first() !== false) {
+                            $post->addPicture($pet->getPictures()->first());
+                        }
+                    }
+                }
+
+                // MISSING
+                if ($choice === 1) {
+                    // Looking for the corresponding entity
+                    $missingPet = $this->getUser()->getPets()[$data->getMissingPet()];
+                    $missingPet->setIsMissing(true);
+                    $post->addPicture($missingPet->getPictures()->first());
+                    $post->setMissingPet($missingPet->getId());
+                }
+
+                // FOUND
+                if ($choice === 3) {
+                    if (!empty($data->getTags()->toArray())) {
+                        $tags = [];
+                        foreach ($data->getTags() as $tag) {
+                            $tags[] = $tag->getId();
+                        }
+                        try {
+                            $check = $repository->findLostByTags($data->getSpecies(), $tags);
+                        } catch (Exception | \Doctrine\DBAL\Exception $e) {
+                            throw new \Exception($e->getMessage());
+                        }
+                    }
+                }
+                $entityManager = $this->getDoctrine()->getManager();
+                $entityManager->persist($post);
+                $entityManager->flush();
+
+                if (!empty($check)) {
+                    // If there is a match, it is sent by GET method
+                    return $this->redirectToRoute('post_check', [
+                        'check' => $check
+                    ]);
+                }
+                $this->addFlash('success', 'Votre annonce à été publiée');
+                return $this->redirectToRoute('post_index');
+            }
+            return $this->render('post/new.html.twig', [
+                'current_menu' => 'post',
+                'post' => $post,
+                'form' => $selection['form']->createView(),
+                'selectedForm' => $selection['selectedForm']
+            ]);
+        }
+        // Redirection if no choice passed in GET
+        return $this->redirectToRoute('post_category_selection');
     }
 
     /**
@@ -89,111 +167,24 @@ class PostController extends AbstractController
             }
         }
         return $this->render('post/check.html.twig', [
+            'current_menu' => 'post',
             'missingPets' => $missingPets
         ]);
     }
 
     /**
-     * @Route("/new", name="post_new", methods={"GET","POST"})
-     * @throws \Exception
+     * @Route("/user-posts", name="user_posts_index", methods={"GET"})
      */
-    public function new(Request $request, PetRepository $repository): Response
+    public function userPosts(PostRepository $repository, Request $request): Response
     {
-        $post = new Post();
-        $choice = null;
-        if (!empty($_GET) && isset($_GET['choice'])) {
-            $choice = (int)$_GET['choice'];
-            switch ($choice) {
-                case 0:
-                    $form = $this->createForm(PostJobType::class, $post);
-                    $selectedForm = 'post/_form_job.html.twig';
-                    $title = "Demande de PetSitting";
-                    $key = 'post_job';
-                    break;
-                case 1:
-                    $form = $this->createForm(PostMissingType::class, $post);
-                    $selectedForm = 'post/_form_missing.html.twig';
-                    $title = "Disparition";
-                    $key = 'post_missing';
-                    break;
-                case 2:
-                    $form = $this->createForm(PostAdoptionType::class, $post);
-                    $selectedForm = 'post/_form_adoption.html.twig';
-                    $title = "Adoption";
-                    $key = 'post_adoption';
-                    break;
-                case 3:
-                    $form = $this->createForm(PostFoundType::class, $post);
-                    $selectedForm = 'post/_form_found.html.twig';
-                    $title = "Apercu";
-                    $key = 'post_found';
-                    break;
-            }
-        }
-
-        if (isset($form)) {
-            $form->handleRequest($request);
-            if ($form->isSubmitted() && $form->isValid()) {
-
-                // GLOBAL
-                $post->setTitle($form->getData()->getTitle() ?? $title);
-                $post->setContent($form->getData()->getContent() ?? '');
-                $post->setCategory($choice);
-                $post->setCreatedAt(new DateTime());
-                $post->setAuthor($this->getUser());
-
-                // MISSING
-                if ($choice === 1) {
-                    // Looking for the corresponding entity
-                    $missingPet = $this->getUser()->getPets()[$form->getData()->getMissingPet()];
-                    $missingPet->setIsMissing(true);
-                    $post->setMissingPet($missingPet->getId());
-                }
-
-                // ADOPTION
-                if ($choice === 2) {
-                    if (!empty($post->getPictures()->getValues())) {
-                        $post->setPicture($post->getPictures()->first());
-                    }
-                }
-
-                // FOUND
-                if ($choice === 3) {
-                    $foundPet = $form->getData();
-                    if (!empty($foundPet->getTags()->toArray())) {
-                        $tags = [];
-                        foreach ($foundPet->getTags() as $tag) {
-                            $tags[] = $tag->getId();
-                        }
-                        try {
-                            $check = $repository->findLostByTags($tags);
-                        } catch (Exception | \Doctrine\DBAL\Exception $e) {
-                            throw new \Exception($e->getMessage());
-                        }
-                    }
-                }
-                $entityManager = $this->getDoctrine()->getManager();
-                $entityManager->persist($post);
-                $entityManager->flush();
-
-                if (!empty($check)) {
-                    // If there is a match, it is sent by GET method
-                    return $this->redirectToRoute('post_check', [
-                        'check' => $check
-                    ]);
-                }
-
-                return $this->redirectToRoute('post_index');
-            }
-            return $this->render('post/new.html.twig', [
-                'post' => $post,
-                'form' => $form->createView(),
-                'selectedForm' => $selectedForm,
-                'current_menu' => 'createPost'
-            ]);
-        }
-        // Redirection if no choice passed in GET
-        return $this->redirectToRoute('post_category_selection');
+        $search = new PostSearch();
+        $form = $this->createForm(PostSearchType::class, $search);
+        $form->handleRequest($request);
+        return $this->render('post/user_posts.html.twig', [
+            'current_menu' => 'post',
+            'posts' => $this->repository->paginateAllVisible($search, $request->query->getInt('page', 1), $this->getUser()->getId()),
+            'form' => $form->createView()
+        ]);
     }
 
     /**
@@ -232,67 +223,20 @@ class PostController extends AbstractController
      */
     public function edit(Request $request, Post $post): Response
     {
-        $template = '';
-        $form = '';
-        switch ($post->getCategory()) {
-            case 0:
-                $template = 'post/job.html.twig';
-                $form = PostJobType::class;
-                break;
-            case 1:
-                $template = 'post/_form_missing.html.twig';
-                $form = PostMissingType::class;
-                break;
-            case 2:
-                $template = 'post/_form_adoption.html.twig';
-                $form = PostAdoptionType::class;
-                break;
-            case 3:
-                $template = 'post/found.html.twig';
-                $form = PostFoundType::class;
-                break;
-        }
+        $selection = $this->crossRoad($post->getCategory(), $post);
+        $selection['form']->handleRequest($request);
 
-        $form = $this->createForm($form, $post);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($selection['form']->isSubmitted() && $selection['form']->isValid()) {
             $this->getDoctrine()->getManager()->flush();
-            return $this->redirectToRoute('post_index');
+            $this->addFlash('success', 'Annonce modifiée');
+            return $this->redirectToRoute('user_posts_index');
         }
 
         return $this->render('post/edit.html.twig', [
             'post' => $post,
-            'template' => $template,
-            'form' => $form->createView(),
+            'template' => $selection['selectedForm'],
+            'form' => $selection['form']->createView(),
         ]);
-    }
-
-    /**
-     * @Route("/{id}", name="post_picture_delete", methods={"DELETE"})
-     * @param Picture $picture
-     * @param Request $request
-     * @return JsonResponse
-     * @throws \JsonException
-     */
-    public function pictureDelete(Picture $picture, Request $request)
-    {
-        $data = json_decode($request->getContent(), true, 512, JSON_THROW_ON_ERROR);
-
-        if ($this->isCsrfTokenValid('delete' . $picture->getId(), $data['_token'])) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($picture);
-            $entityManager->flush();
-
-            return new JsonResponse([
-                'success' => 1
-            ]);
-
-        }
-        return new JsonResponse([
-            'error' => 'Token invalide'
-        ], 400);
-
     }
 
     /**
@@ -307,5 +251,38 @@ class PostController extends AbstractController
         }
 
         return $this->redirectToRoute('post_index');
+    }
+
+    /**
+     * @param $choice
+     * @param $entity
+     * @return array
+     */
+    private function crossRoad($choice, $entity): array
+    {
+        $output = [];
+        switch ($choice) {
+            case 0:
+                $output['form'] = $this->createForm(PostJobType::class, $entity);
+                $output['selectedForm'] = 'post/_form_job.html.twig';
+                $output['title'] = "Demande de PetSitting";
+                break;
+            case 1:
+                $output['form'] = $this->createForm(PostMissingType::class, $entity);
+                $output['selectedForm'] = 'post/_form_missing.html.twig';
+                $output['title'] = "Disparition";
+                break;
+            case 2:
+                $output['form'] = $this->createForm(PostAdoptionType::class, $entity);
+                $output['selectedForm'] = 'post/_form_adoption.html.twig';
+                $output['title'] = "Adoption";
+                break;
+            case 3:
+                $output['form'] = $this->createForm(PostFoundType::class, $entity);
+                $output['selectedForm'] = 'post/_form_found.html.twig';
+                $output['title'] = "Apercu";
+                break;
+        }
+        return $output;
     }
 }

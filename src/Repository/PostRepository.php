@@ -42,9 +42,10 @@ class PostRepository extends ServiceEntityRepository
     /**
      * @param PostSearch $search
      * @param int $page
+     * @param int|null $user
      * @return PaginationInterface
      */
-    public function paginateAllVisible(PostSearch $search, int $page): PaginationInterface
+    public function paginateAllVisible(PostSearch $search, int $page, int $user = null): PaginationInterface
     {
         $query = $this->createQueryBuilder('p')
             ->orderBy('p.created_at', 'DESC');
@@ -57,6 +58,11 @@ class PostRepository extends ServiceEntityRepository
         if ($search->getCreatedAt()) {
             $query->andWhere('p.created_at > :date')
                 ->setParameter('date', $search->getCreatedAt());
+        }
+
+        if ($user !== null) {
+            $query->andWhere('p.author = :user')
+                ->setParameter('user', $user);
         }
 
         $posts = $this->paginator->paginate($query->getQuery(), $page, 12);
