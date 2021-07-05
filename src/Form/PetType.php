@@ -21,13 +21,12 @@ class PetType extends AbstractType
     {
         $builder
             ->add('name', TextType::class, [
-                'label' => "C'est quoi son p'tit nom ?",
                 'required' => true,
-                'help' => "Veuillez laisser le champs ci-dessus vide si il s'agit d'un animal égaré"
+                'label' => 'Nom'
             ])
             ->add('age', IntegerType::class, [
                 'required' => true,
-                'label' => "Il a quel âge ?",
+                'label' => 'Âge',
                 'attr' => [
                     'min' => 0,
                     'max' => 60
@@ -35,22 +34,21 @@ class PetType extends AbstractType
             ])
             ->add('gender', ChoiceType::class, [
                 'choices' => $this->getChoices(Pet::GENDER),
-                'label' => "Femelle ou Mâle ?",
-                'placeholder' => 'Ou Hermaphrodite..',
-                'required' => true
+                'required' => true,
+                'label' => 'Sexe'
             ])
             ->add('species', ChoiceType::class, [
                 'choices' => $this->getChoices(Pet::SPECIES),
-                'label' => "C'est un quoi ?",
-                'placeholder' => 'Choisissez son espèce',
-                'required' => true
+                'required' => true,
+                'label' => 'Espèce'
             ])
             ->add('description', TextareaType::class, [
+                'required' => false,
                 'label' => 'Comment le/la décrireriez vous ? (Dites le 3 fois rapidement...)',
                 'attr' => [
                     'placeholder' => "On sait déjà que c'est une beauté !",
-                ],
-                'required' => false
+                    'rows' => 5
+                ]
             ])
             ->add('pictureFiles', FileType::class, [
                 'required' => false,
@@ -61,8 +59,10 @@ class PetType extends AbstractType
                 ]
             ])
             ->add('owned', CheckboxType::class, [
-                'label' => "C'est mon compagnon !",
-                'required' => false
+                'label' => 'C\'est mon compagnon !',
+                'label_attr' => [
+                    'class' => 'switch-custom'
+                ],
             ])
             ->add('tags', EntityType::class, [
                 'class' => Tags::class,

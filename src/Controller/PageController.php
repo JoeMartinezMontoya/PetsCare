@@ -17,18 +17,10 @@ class PageController extends AbstractController
     /**
      * @Route("/", name="home")
      */
-    public function home(PostRepository $posts): Response
+    public function home(): Response
     {
-        $petSitting = $posts->findLatest(0);
-        $petMissing = $posts->findLatest(1);
-        $petToAdopt = $posts->findLatest(2);
-        $petFound = $posts->findLatest(3);
         return $this->render('page/home.html.twig', [
-            'current_menu' => 'home',
-            'petSitting' => $petSitting,
-            'petMissing' => $petMissing,
-            'petToAdopt' => $petToAdopt,
-            'petFound' => $petFound
+            'current_menu' => 'home'
         ]);
     }
 

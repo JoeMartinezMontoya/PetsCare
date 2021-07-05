@@ -5,10 +5,7 @@
     <div class="col-md-3">{{ form_row(form.tags) }}</div>
 </div>
 <div class="row justify-content-center">
-    <div class="col-md-9">{{ form_row(form.pictureFiles) }}</div>
-</div>
-<div class="row justify-content-center">
-    <div class="col-md-9">
+    <div class="col-md-8">
         <div class="row flex justify-content-start flex-wrap">
             {% for picture in post.pictures %}
                 {% if post.pictures is not empty and vich_uploader_asset(picture, 'imageFile') is not null %}
@@ -25,6 +22,9 @@
             {% endfor %}
         </div>
     </div>
+</div>
+<div class="row justify-content-center">
+    <div class="col-md-8">{{ form_row(form.pictureFiles) }}</div>
 </div>
 <div class="row justify-content-center">
     <div class="col-md-9">{{ form_row(form.content) }}</div>

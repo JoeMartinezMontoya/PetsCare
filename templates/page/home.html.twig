@@ -8,37 +8,51 @@
             {{ message }}
         </div>
     {% endfor %}
-    <div class="jumbotron jumbotron-fluid text-center m-auto pc-paws">
-        <h1>Bonjour {% if app.user %} {{ app.user.username }} {% else %} PetsCarer !{% endif %}</h1>
+    <div class="row w-100 m-auto justify-content-between">
+        <div class="jumbotron w-50 ml-5 my-4 bg-primary pc-paws">
+            <h1 class="text-light pc-f-f">
+                Bonjour {% if app.user %} {{ app.user.username }} {% else %} PetsCarer !{% endif %}
+            </h1>
+            <h5 class="font-italic">Avec PetsCare, facilitez vous la vie en facilitant celle de vos compagnons</h5>
+            {% if not app.user %}
+                <div class="row mt-4 mx-auto">
+                    <a href="{{ path('login') }}" class="btn btn-sm btn-info border-light mx-2">Se connecter</a>
+                    <a href="{{ path('registration') }}"
+                       class="btn btn-sm btn-secondary border-light mx-2">S'inscrire</a>
+                </div>
+            {% endif %}
+        </div>
+        <div class="col mx-auto d-flex align-items-center justify-content-center">
+            <img src="{{ asset('pictures/ressources/banner.png') }}" alt="banner" class="w-75">
+        </div>
     </div>
-    <div class="container bg-light p-4">
-        <h2 class="text-center">Les dernières annonces</h2>
-        <h3>Les avez-vous vu ?</h3>
-        <div class="card-deck m-4">
-            {% for subject in petMissing %}
-                    {% include 'informations/_card.html.twig' %}
-            {% endfor %}
-        </div>
-
-        <h3>Ils sont à adopter !</h3>
-        <div class="card-deck m-4">
-            {% for subject in petToAdopt %}
-                    {% include 'informations/_card.html.twig' %}
-            {% endfor %}
-        </div>
-
-        <h3>Annonces de Pet Sitting !</h3>
-        <div class="card-deck m-4">
-            {% for subject in petSitting %}
-                    {% include 'informations/_card.html.twig' %}
-            {% endfor %}
-        </div>
-
-        <h3>Ils ont été retrouvé !</h3>
-        <div class="card-deck m-4">
-            {% for subject in petFound %}
-                    {% include 'informations/_card.html.twig' %}
-            {% endfor %}
+    <div class="jumbotron m-auto p-5 bg-transparent">
+        <div class="row w-75 m-auto justify-content-around text-center">
+            <div class="col">
+                <i class="fas fa-users pc-f-40 text-primary"></i>
+                <h2 class="text-black-50 font-weight-bolder">100.000</h2>
+                <h6>PetsCarer inscrits</h6>
+            </div>
+            <div class="col">
+                <i class="fas fa-paw pc-f-40 text-primary"></i>
+                <h2 class="text-black-50 font-weight-bolder">250.000</h2>
+                <h6>Compagnons inscrits</h6>
+            </div>
+            <div class="col">
+                <i class="fas fa-mail-bulk pc-f-40 text-primary"></i>
+                <h2 class="text-black-50 font-weight-bolder">500.000</h2>
+                <h6>Annonces postées</h6>
+            </div>
+            <div class="col">
+                <i class="fas fa-heart pc-f-40 text-primary"></i>
+                <h2 class="text-black-50 font-weight-bolder">200.000</h2>
+                <h6>Compagnons adoptées</h6>
+            </div>
+            <div class="col">
+                <i class="fas fa-search-location pc-f-40 text-primary"></i>
+                <h2 class="text-black-50 font-weight-bolder">150.000</h2>
+                <h6>Compagnons retrouvées</h6>
+            </div>
         </div>
     </div>
 {% endblock %}

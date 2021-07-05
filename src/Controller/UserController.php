@@ -15,7 +15,7 @@ class UserController extends AbstractController
     /**
      * @Route("/user/{slug}-{id}", name="user_profile", requirements={"slug" : "[a-z0-9\-]*"})
      */
-    public function index(User $user, string $slug): Response
+    public function userProfile(User $user, string $slug): Response
     {
         //Redirection si quelqu'un essaie de rentrer un autre slug
         if ($user->getSlug() !== $slug) {
@@ -24,7 +24,7 @@ class UserController extends AbstractController
                 'slug' => $user->getSlug()
             ], 301);
         }
-        return $this->render('user/index.html.twig');
+        return $this->render('user/user_profile.html.twig');
     }
 
     /**

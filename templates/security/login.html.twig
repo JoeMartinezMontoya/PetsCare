@@ -4,7 +4,7 @@
 
 {% block body %}
     <div class="row m-auto">
-        <div class="col-md-6 bg-light d-flex flex-column justify-content-center" style="height: 90vh">
+        <div class="col-md-6 d-flex flex-column justify-content-center" style="height: 90vh">
             <div class="container w-50">
                 <form method="post">
                     {% if error %}
@@ -18,7 +18,7 @@
                         </div>
                     {% endif %}
 
-                    <h1 class="h3 mb-3 font-weight-normal text-center">Connectez vous</h1>
+                    <h1 class="h3 mb-3 text-center pc-f-f">Connectez vous</h1>
                     <label for="inputEmail"></label>
                     <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control"
                            autocomplete="email" required autofocus placeholder="example@petscare.com">
@@ -50,10 +50,10 @@
                 </form>
             </div>
         </div>
-        <div class="col-md-6 bg-secondary pc-login d-flex flex-column justify-content-center" style="height: 90vh">
-            <h2 class="text-left">PetCaring</h2>
-            <h2 class="text-center">is</h2>
-            <h2 class="text-right">PetSharing</h2>
+        <div class="col-md-6 rounded px-5 d-flex flex-column justify-content-center bg-secondary pc-login" style="height: 91vh">
+            <h2 class="text-left pc-f-f">PetCaring</h2>
+            <h2 class="text-center pc-f-f">is</h2>
+            <h2 class="text-right pc-f-f">PetSharing</h2>
         </div>
     </div>
 {% endblock %}

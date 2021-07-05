@@ -8,18 +8,17 @@
             {{ message }}
         </div>
     {% endfor %}
-    <div class="jumbotron jumbotron-fluid pc-paws">
-        <h1 class="text-center">Mes annonces</h1>
+    <div class="jumbotron mx-auto w-75 bg-primary pc-paws">
         {{ form_start(form) }}
-        <div class="form-row align-items-end justify-content-center m-auto">
-            <div class="col-md-2">
+        <div class="form-row align-items-end justify-content-center">
+            <div class="col-md-3">
                 {{ form_row(form.category) }}
             </div>
-            <div class="col-md-2">
+            <div class="col-md-3">
                 {{ form_row(form.created_at) }}
             </div>
             <div class="form-group">
-                <button type="submit" class="btn btn-primary">Rechercher</button>
+                <button type="submit" class="btn btn-secondary border-light">Rechercher</button>
             </div>
         </div>
         {{ form_end(form) }}

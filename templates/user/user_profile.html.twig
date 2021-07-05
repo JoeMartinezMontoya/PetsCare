@@ -1,0 +1,154 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}PetsCare | Profil d'utilisateur{% endblock %}
+
+{% block body %}
+    {# TOP MENU #}
+    <div class="row mx-auto mt-5 w-50 rounded-top bg-primary pc-paws">
+        <div class="row mx-auto my-3 w-100 justify-content-end">
+
+            <div class="col-md-4">
+                <a href="#" class="btn btn-transparent d-block pc-f-f" id="userInformation">
+                    <img src="{{ asset('pictures/ressources/icons/profile.svg') }}" alt="Profile"
+                         class="pc-icon-min d-block m-auto"> Informations
+                </a>
+            </div>
+            <div class="col-md-4">
+                <a href="#" class="btn btn-transparent d-block pc-f-f" id="userPets">
+                    <img src="{{ asset('pictures/ressources/icons/my-pets.svg') }}" alt="Pets"
+                         class="pc-icon-min d-block m-auto"> Compagnons
+                </a>
+            </div>
+            <div class="col-md-4">
+                <a href="#" class="btn btn-transparent d-block pc-f-f" id="userStats">
+                    <img src="{{ asset('pictures/ressources/icons/stats.svg') }}" alt="Stats"
+                         class="pc-icon-min d-block m-auto"> Statistiques
+                </a>
+            </div>
+
+        </div>
+    </div>
+    {# END TOP MENU #}
+
+    <div class="row mx-auto">
+        {# INFORMATIONS #}
+        <div class="row mx-auto w-50 rounded-bottom bg-primary pc-paws" id="pc-table-user-info-content">
+            <div class="row w-100 flex-row-reverse">
+                <form method="post" action="{{ path('user_delete', {'id': app.user.id}) }}"
+                      onsubmit="return confirm('Êtes vous vraiment sûr de vouloir supprimer votre profil ({{ app.user.username }}) ?');">
+                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ app.user.id) }}">
+                    <button class="btn btn-danger m-1 border-light"><i class="fas fa-trash-alt"></i></button>
+                </form>
+                <a href="{{ path('user_edit', {id: app.user.id}) }}" class="btn btn-info m-1 border-light"><i
+                            class="far fa-edit"></i></a>
+            </div>
+            <table class="table table-borderless text-light">
+                <tr>
+                    <td class="font-weight-bold text-black-50">Prénom</td>
+                    <td>{{ app.user.firstname }}</td>
+                    <td class="font-weight-bold text-black-50">Nom de famille</td>
+                    <td>{{ app.user.lastname }}</td>
+                </tr>
+                <tr>
+                    <td class="font-weight-bold text-black-50">Nom d'utilisateur</td>
+                    <td>{{ app.user.username }}</td>
+                    <td class="font-weight-bold text-black-50">Date de naissance</td>
+                    <td>{{ app.user.birthdate| date('d/m/Y') }}</td>
+                </tr>
+                <tr>
+                    <td class="font-weight-bold text-black-50">Adresse e-mail</td>
+                    <td>{{ app.user.email }}</td>
+                    <td class="font-weight-bold text-black-50">Numéro de téléphone</td>
+                    <td>{{ app.user.phone is not null ? app.user.phone : 'Non renseigné' }}
+                    </td>
+                </tr>
+                <tr>
+                    <td class="font-weight-bold text-black-50 bg">PetSitting</td>
+                    <td>{{ app.user.isPetsitter ?
+                        '<i class="fas fa-check-circle text-secondary"></i>' :
+                        '<i class="fas fa-times-circle text-danger"></i>' }}
+                    </td>
+                    <td class="font-weight-bold text-black-50">Membre vérifié</td>
+                    <td>{{ app.user.isVerified ?
+                        '<i class="fas fa-check-circle text-secondary"></i>' :
+                        '<i class="fas fa-times-circle text-danger"></i>' }}
+                    </td>
+                </tr>
+            </table>
+        </div>
+        {# END INFORMATIONS #}
+
+        {# PETS #}
+        <div class="row mx-auto w-50 rounded-bottom bg-primary pc-paws" style="display:none;"
+             id="pc-table-user-pet-content">
+            <div class="row w-100 flex-row-reverse">
+                <a href="{{ path('pet_new') }}" class="btn btn-warning m-1"><i class="fas fa-plus-circle"></i></a>
+            </div>
+            <table class="table table-borderless text-light text-center">
+                {% for pet in app.user.pets %}
+                    <tr>
+                        <td>
+                            <img src="{{ asset(pet.speciesIcon) }}" alt="{{ pet.speciesString }}" class="pc-icon-min">
+                        </td>
+                        <td>
+                            {{ pet.genderIcon | raw }}
+                            <a href="{{ path('pet_show', {'id': pet.id}) }}" class="text-light">{{ pet.name }}</a>
+                        </td>
+                        <td class="text-right">
+                            Inscrit{{ pet.gender is same as 0 ? 'e' : '' }}
+                            le {{ pet.createdat | date('d/m/Y') }}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+        {# END PETS #}
+
+        {# STATS #}
+        <div class="row mx-auto w-50 rounded-bottom bg-primary pc-paws" style="display:none;"
+             id="pc-table-user-stat-content">
+            <table class="table table-borderless text-light text-center">
+                <tr>
+                    <td>Animaux inscrit</td>
+                    <td>{{ app.user.pets.count }} inscrit(s)</td>
+                </tr>
+                <tr>
+                    <td>Annonces postés</td>
+                    <td>{{ app.user.posts.count }} annonce(s)</td>
+                </tr>
+            </table>
+        </div>
+        {# END STATS #}
+    </div>
+{% endblock %}
+{% block javascripts %}
+    <script>
+        /*HOVER*/
+        $('#userInformation').hover(() => {
+            $('#userInformation').toggleClass('bg-primary');
+        })
+        $('#userPets').hover(() => {
+            $('#userPets').toggleClass('bg-primary');
+        })
+        $('#userStats').hover(() => {
+            $('#userStats').toggleClass('bg-primary');
+        })
+
+        /*TOGGLE MENU*/
+        $('#userInformation').click(() => {
+            $('#pc-table-user-info-content').show();
+            $('#pc-table-user-pet-content').hide();
+            $('#pc-table-user-stat-content').hide();
+        })
+        $('#userPets').click(() => {
+            $('#pc-table-user-info-content').hide();
+            $('#pc-table-user-pet-content').show();
+            $('#pc-table-user-stat-content').hide();
+        })
+        $('#userStats').click(() => {
+            $('#pc-table-user-info-content').hide();
+            $('#pc-table-user-pet-content').hide();
+            $('#pc-table-user-stat-content').show();
+        })
+    </script>
+{% endblock %}

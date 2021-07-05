@@ -18,11 +18,17 @@ class PostSearchType extends AbstractType
             ->add('category', ChoiceType::class, [
                 'required' => false,
                 'choices' => $this->getChoices(Post::CATEGORY),
-                'label' => "Quel type d'annonce ?"
+                'label' => "Type d'annonce ?",
+                'label_attr' => [
+                    'class' => 'text-light'
+                ]
             ])
             ->add('created_at', DateType::class, [
                 'required' => false,
-                'label' => 'Publié à partir de quand ?',
+                'label' => 'Date de parution ?',
+                'label_attr' => [
+                    'class' => 'text-light'
+                ],
                 'widget' => 'single_text',
             ]);
     }

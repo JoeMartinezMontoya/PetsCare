@@ -14,7 +14,7 @@
         <div class="row h-100">
             <div class="col-md-3 d-flex align-items-center justify-content-around">
                 <img src="{{ asset('pictures/ressources/icons/profile.svg') }}" alt="Avatar" class="pc-icon-lg">
-                <h2><a href="#">{{ post.author.username }}</a></h2>
+                <h2><a href="#" class="pc-f-f">{{ post.author.username }}</a></h2>
             </div>
             <div class="col-md-9 d-flex align-items-center justify-content-around"
                  style="background-image: url('{{ asset(post.getCategoryImage) }}'); background-size: 750px;background-position: center; opacity: 0.80">
@@ -26,7 +26,7 @@
                     <div>
                         {% for pet in post.author.pets %}
                             {% if pet.id is same as post.missingPet %}
-                                <h5>{{ post.title }} de {{ pet.name }}</h5>
+                                <h5 class="pc-f-f">{{ post.title }} de {{ pet.name }}</h5>
                             {% endif %}
                         {% endfor %}
                         <p>{{ post.content }}</p>
@@ -42,23 +42,24 @@
             </div>
             <div class="row w-100 my-4">
                 <div class="col">
-                    <h5>Vu pour la dernière fois</h5>
+                    <h5 class="pc-f-f">Vu pour la dernière fois</h5>
                     <p>A : {{ post.location }}, le : {{ post.lastSeen | date('d/m/Y') }}</p>
                 </div>
             </div>
         </div>
-        <div class="row justify-content-between">
+        <div class="row px-4 justify-content-between">
             <div>
                 {% if app.user.id is same as post.author.id %}
 
-                    <a href="{{ path('post_edit', {'id': post.id}) }}" class="btn btn-info">Modifier</a>
+                    <a href="{{ path('post_edit', {'id': post.id}) }}" class="btn btn-info"><i
+                                class="far fa-edit"></i></a>
 
                     {{ include('post/_delete_form.html.twig') }}
 
                 {% endif %}
             </div>
             <div>
-                <a href="#" class="btn btn-warning">Contacter l'auteur</a>
+                <a href="#" class="btn btn-warning"><i class="fas fa-comments"></i></a>
             </div>
         </div>
     </div>

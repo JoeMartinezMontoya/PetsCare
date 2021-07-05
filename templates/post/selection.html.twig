@@ -2,32 +2,32 @@
 
 {% block title %}PetsCare | Publication{% endblock %}
 {% block body %}
-    <div class="jumbotron jumbotron-fluid pc-paws m-auto">
+    <div class="jumbotron mx-auto w-75 bg-primary pc-paws">
         <form name="selection" method="post">
-            <div class="row justify-content-around mt-4 m-auto">
-                <div class="col d-flex flex-column align-items-center">
-                    <button type="submit" name="choice" value="0" class="btn btn-primary">
+            <div class="row justify-content-around text-center text-light pc-f-f">
+                <div class="col">
+                    <button type="submit" name="choice" value="0" class="btn btn-lg btn-secondary">
                         <img src="{{ asset('pictures/ressources/icons/petsitting.svg') }}" alt="Pet Sitting"
                              class="pc-icon">
                     </button>
                     <p class="align-self-center">Pet Sitting</p>
                 </div>
-                <div class="col d-flex flex-column align-items-center">
-                    <button type="submit" name="choice" value="2" class="btn btn-primary">
+                <div class="col">
+                    <button type="submit" name="choice" value="2" class="btn btn-lg btn-secondary">
                         <img src="{{ asset('pictures/ressources/icons/adoption.svg') }}" alt="Adoption"
                              class="pc-icon">
                     </button>
                     <p>Adoption</p>
                 </div>
-                <div class="col d-flex flex-column align-items-center">
-                    <button type="submit" name="choice" value="1" class="btn btn-primary">
+                <div class="col">
+                    <button type="submit" name="choice" value="1" class="btn btn-lg btn-secondary">
                         <img src="{{ asset('pictures/ressources/icons/missing.svg') }}" alt="Disparition"
                              class="pc-icon">
                     </button>
                     <p>Disparition</p>
                 </div>
-                <div class="col d-flex flex-column align-items-center">
-                    <button type="submit" name="choice" value="3" class="btn btn-primary">
+                <div class="col">
+                    <button type="submit" name="choice" value="3" class="btn btn-lg btn-secondary">
                         <img src="{{ asset('pictures/ressources/icons/found.svg') }}" alt="Apercu"
                              class="pc-icon">
                     </button>
@@ -36,9 +36,10 @@
             </div>
         </form>
     </div>
-    <div class="container p-4">
-        <h1 class="text-center">Aidons nous à nous aider</h1>
-        <p>Afin d'assurer une qualité optimale d'efficacité, n'hésitez pas à bien documenter vos annonces, une description détaillée laisse peu de place au doute</p>
+    <div class="container mx-auto w-75 p-4 text-justify">
+        <h1 class="text-center pc-f-f">Aidons nous à nous aider</h1>
+        <p>Afin d'assurer une qualité optimale d'efficacité, n'hésitez pas à bien documenter vos annonces, une
+            description détaillée laisse peu de place au doute</p>
         <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores commodi dolorum ea esse harum magni
             perspiciatis quas qui quia, totam. Excepturi expedita fugiat itaque mollitia, nisi provident quaerat sit
             suscipit?

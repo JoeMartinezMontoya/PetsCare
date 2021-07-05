@@ -19,20 +19,35 @@ class ContactUserType extends AbstractType
         $builder
             ->add('username', TextType::class, [
                 'label' => 'Votre nom',
+                'label_attr' => [
+                    'class' => 'text-light'
+                ],
                 'required' => true
             ])
             ->add('email', EmailType::class, [
-                'label' => 'Votre email'
+                'label' => 'Votre email',
+                'label_attr' => [
+                    'class' => 'text-light'
+                ]
             ])
             ->add('phone', NumberType::class, [
                 'required' => false,
                 'label' => 'Votre numéro',
+                'label_attr' => [
+                    'class' => 'text-light'
+                ],
                 'attr' => [
                     'placeholder' => 'Pas obligé'
                 ]
             ])
             ->add('message', TextareaType::class, [
-                'label' => 'Rassurez le propriétaire :)'
+                'label' => 'Rassurez le propriétaire :)',
+                'label_attr' => [
+                    'class' => 'text-light'
+                ],
+                'attr' => [
+                    'rows' => 5
+                ]
             ]);
 
     }

@@ -1,3 +1,9 @@
+/*FONT*/
+@font-face {
+    font-family: "PCMontserrat";
+    src: url("../fonts/MontserratAlternates-ExtraBold.ttf") format("woff");
+}
+
 .pc-body-bg {
     background-color: #f7f7f9;
     background-image: url("https://www.transparenttextures.com/patterns/inspiration-geometry.png");
@@ -20,7 +26,7 @@
 
 .pc-paws {
     background-image: url("../../pictures/ressources/paws.png");
-    background-position: center;
+    background-position: bottom;
     background-size: cover;
     background-repeat: no-repeat;
 }
@@ -30,6 +36,14 @@
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
+}
+
+.pc-f-40 {
+    font-size: 40px;
+}
+
+.pc-f-f {
+    font-family: 'PCMontserrat', serif;
 }
 
 /*NORMALIZE SELECT2*/

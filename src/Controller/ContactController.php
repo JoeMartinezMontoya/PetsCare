@@ -62,7 +62,7 @@ class ContactController extends AbstractController
 
         }
 
-        return $this->render('contact/index.html.twig', [
+        return $this->render('contact/meeting.html.twig', [
             'form' => $form->createView(),
             'founder' => $founder
         ]);

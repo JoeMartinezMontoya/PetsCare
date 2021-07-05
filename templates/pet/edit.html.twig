@@ -6,8 +6,8 @@
 {% endblock %}
 
 {% block body %}
-    <div class="container bg-light p-4">
-        <h1>Edition de {{ pet.name }}</h1>
+    <div class="container mt-4 text-center">
+        <h1 class="pc-f-f">Edition de {{ pet.name }}</h1>
 
         {{ include('pet/_form.html.twig', {'button_label' : 'Enregistrer'}) }}
     </div>
@@ -17,7 +17,7 @@
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script>
         $(document).ready(function () {
-            $('.pcSelect').select2();
+            $('.pc-select').select2();
         });
     </script>
     <script>

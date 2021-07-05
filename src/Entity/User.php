@@ -74,6 +74,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $phone;
 
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $birthdate;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isPetsitter;
+
     public function __construct()
     {
         $this->pets = new ArrayCollection();
@@ -290,6 +300,30 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setPhone(?int $phone): self
     {
         $this->phone = $phone;
+
+        return $this;
+    }
+
+    public function getBirthdate(): ?\DateTimeInterface
+    {
+        return $this->birthdate;
+    }
+
+    public function setBirthdate(\DateTimeInterface $birthdate): self
+    {
+        $this->birthdate = $birthdate;
+
+        return $this;
+    }
+
+    public function getIsPetsitter(): ?bool
+    {
+        return $this->isPetsitter;
+    }
+
+    public function setIsPetsitter(bool $isPetsitter): self
+    {
+        $this->isPetsitter = $isPetsitter;
 
         return $this;
     }

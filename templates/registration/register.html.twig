@@ -7,34 +7,32 @@
         <div class="alert alert-danger" role="alert">{{ flashError }}</div>
     {% endfor %}
 
-    <div class="container mt-4">
-        <h1>Inscription</h1>
-
+    <div class="container mt-4 text-center">
+        <h1 class="my-4 pc-f-f">Inscription</h1>
         {{ form_start(registrationForm) }}
-        <div class="row">
-            <div class="col-md-12">
-                <div class="row">
-                    <div class="col-md-6">{{ form_row(registrationForm.username) }}</div>
-                    <div class="col-md-6">{{ form_row(registrationForm.firstname) }}</div>
-                </div>
+        <div class="row justify-content-center">
+            <div class="col-md-3">{{ form_row(registrationForm.firstname) }}</div>
+            <div class="col-md-3">{{ form_row(registrationForm.lastname) }}</div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-md-3">{{ form_row(registrationForm.username) }}</div>
+            <div class="col-md-3">{{ form_row(registrationForm.birthdate) }}</div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-md-3">{{ form_row(registrationForm.email) }}</div>
+            <div class="col-md-3">{{ form_row(registrationForm.phone) }}</div>
+        </div>
+        <div class="row justify-content-center">
+            {% for passwordField in registrationForm.plainPassword %}
+                <div class="col-md-3">{{ form_row(passwordField) }}</div>
+            {% endfor %}
+        </div>
+        <div class="row justify-content-center">
+            <div class="col">
+                {{ form_row(registrationForm.isPetsitter) }}
+                {{ form_row(registrationForm.agreeTerms) }}
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-12">
-                <div class="row">
-                    <div class="col-md-6">{{ form_row(registrationForm.lastname) }}</div>
-                    <div class="col-md-6">{{ form_row(registrationForm.email) }}</div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12">
-                <div class="row">
-                    <div class="col-md-6">{{ form_row(registrationForm.plainPassword) }}</div>
-                </div>
-            </div>
-        </div>
-
         <button type="submit" class="btn btn-success">M'inscrire</button>
         {{ form_end(registrationForm) }}
 

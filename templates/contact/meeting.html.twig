@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}PetsCare | Meeting{% endblock %}
+
+{% block body %}
+    <div class="jumbotron bg-transparent">
+        <div class="rounded p-4 m-auto w-75 bg-primary pc-paws">
+            <h1 class="text-center text-light pc-f-f">Contactez le propriétaire</h1>
+            {{ form_start(form) }}
+            <div class="row m-auto justify-content-center">
+                <div class="col-md-3">{{ form_row(form.username) }}</div>
+                <div class="col-md-4">{{ form_row(form.email) }}</div>
+                <div class="col-md-3">{{ form_row(form.phone) }}</div>
+            </div>
+            <div class="row m-auto justify-content-center">
+                <div class="col-md-10">{{ form_row(form.message) }}</div>
+            </div>
+            <div class="row justify-content-center">
+                <button type="submit" class="btn btn-sm btn-secondary border-light">Envoyer</button>
+            </div>
+            {{ form_end(form) }}
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        $(document).ready(() => {
+            $("#contact_user_username").val('{{ founder.username }}');
+            $("#contact_user_email").val('{{ founder.email }}');
+            $("#contact_user_phone").val('{{ founder.phone }}');
+        });
+    </script>
+{% endblock %}
