@@ -1,0 +1,9 @@
+<div class="row h-100">
+    <div class="col-md-3 d-flex align-items-center justify-content-around">
+        <img src="{{ asset('pictures/ressources/icons/profile.svg') }}" alt="Avatar" class="pc-icon-lg">
+        <h2><a href="#" class="pc-f-f">{{ post.author.username }}</a></h2>
+    </div>
+    <div class="col-md-9 d-flex align-items-center justify-content-around"
+         style="background-image: url('{{ asset(post.getCategoryImage) }}'); background-size: 750px;background-position: center; opacity: 0.80">
+    </div>
+</div>

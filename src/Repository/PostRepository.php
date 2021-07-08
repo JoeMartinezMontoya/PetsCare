@@ -90,16 +90,14 @@ class PostRepository extends ServiceEntityRepository
      * @param $pet
      * @return int|mixed|string
      */
-    public function findLostAndFoundPostsAbout($pet)
+    public function deleteLostAndFoundPostsAbout($pet)
     {
-        $categories = [1, 3];
         return $this->createQueryBuilder('p')
             ->delete()
-            ->andWhere('p.category IN (:category)')
-            ->setParameter('category', $categories)
+            ->andWhere('p.category IN (1, 3)')
             ->andWhere('p.missingPet = :pet')
             ->setParameter('pet', $pet)
             ->getQuery()
-            ->getResult();
+            ->execute();
     }
 }

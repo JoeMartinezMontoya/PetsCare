@@ -1,0 +1,15 @@
+<div class="row px-4 justify-content-between">
+    <div>
+        {% if app.user.id is same as post.author.id %}
+
+            <a href="{{ path('post_edit', {'id': post.id}) }}" class="btn btn-info pl-3"><i
+                        class="far fa-edit"></i></a>
+
+            {{ include('post/_delete_form.html.twig') }}
+
+        {% endif %}
+    </div>
+    <div>
+        <a href="#" class="btn btn-warning"><i class="fas fa-comments mr-2"></i>Contacter l'auteur</a>
+    </div>
+</div>

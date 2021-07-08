@@ -8,8 +8,13 @@
             {{ message }}
         </div>
     {% endfor %}
+    {% for message in app.flashes('alert') %}
+        <div class="alert alert-danger float-left m-auto">
+            {{ message }}
+        </div>
+    {% endfor %}
     <div class="row w-100 m-auto justify-content-between">
-        <div class="jumbotron w-50 ml-5 my-4 bg-primary pc-paws">
+        <div class="jumbotron w-50 ml-5 mt-5 bg-primary pc-paws">
             <h1 class="text-light pc-f-f">
                 Bonjour {% if app.user %} {{ app.user.username }} {% else %} PetsCarer !{% endif %}
             </h1>

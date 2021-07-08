@@ -37,23 +37,17 @@ class Pet
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private ?string $name;
+    private $name;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private ?int $age;
+    private $age;
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="pets")
      */
-    private ?User $owner;
-
-    /**
-     * Only used in the Pet creation form, if TRUE then Pet->setOwner() = $this->getUser()->getId();
-     * @var bool
-     */
-    private bool $owned;
+    private $owner;
 
     /**
      * @ORM\Column(type="integer")
@@ -151,24 +145,6 @@ class Pet
     {
         $this->owner = $owner;
 
-        return $this;
-    }
-
-    /**
-     * @return bool
-     */
-    public function isOwned(): bool
-    {
-        return $this->owned;
-    }
-
-    /**
-     * @param bool $owned
-     * @return Pet
-     */
-    public function setOwned(bool $owned): Pet
-    {
-        $this->owned = $owned;
         return $this;
     }
 

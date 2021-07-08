@@ -46,6 +46,10 @@
     font-family: 'PCMontserrat', serif;
 }
 
+#posts_list .card {
+    min-height: 500px
+}
+
 /*NORMALIZE SELECT2*/
 
 .select2-container .select2-selection--single {

@@ -3,14 +3,12 @@
 namespace App\Controller;
 
 use App\Entity\Pet;
-use App\Entity\Picture;
 use App\Form\PetIsFoundType;
 use App\Form\PetType;
-use App\Repository\PetRepository;
+use App\Repository\PictureRepository;
 use App\Repository\PostRepository;
 use DateTime;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -21,39 +19,24 @@ use Symfony\Component\Routing\Annotation\Route;
 class PetController extends AbstractController
 {
     /**
-     * @Route("/", name="pet_list", methods={"GET"})
-     */
-    public function index(PetRepository $petRepository): Response
-    {
-        return $this->render('pet/index.html.twig', [
-            'pets' => $petRepository->findAll(),
-        ]);
-    }
-
-    /**
      * @Route("/new", name="pet_new", methods={"GET","POST"})
      */
     public function new(Request $request): Response
     {
         $pet = new Pet();
-        $user = $this->getUser();
         $form = $this->createForm(PetType::class, $pet);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            if ($form->getData()->isOwned() === true) {
-                $pet->setIsMissing(false);
-                $pet->setOwned(true);
-                $pet->setOwner($user);
-            }
+            $pet->setOwner($this->getUser());
+            $pet->setIsMissing(false);
             $pet->setCreatedAt(new DateTime());
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($pet);
             $entityManager->flush();
 
-            return $this->redirectToRoute('user_profile', [
-                'id' => $user->getId(),
-                'slug' => $user->getSlug()
+            return $this->redirectToRoute('pet_show', [
+                'id' => $pet->getId(),
             ]);
         }
 
@@ -66,28 +49,38 @@ class PetController extends AbstractController
     /**
      * @Route("/{id}", name="pet_show", methods={"GET|POST"})
      */
-    public function show(Pet $pet, Request $request, PostRepository $repository): Response
+    public function show(Pet $pet, Request $request, PostRepository $postRepository, PictureRepository $pictureRepository): Response
     {
         $form = $this->createForm(PetIsFoundType::class);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-
-            $post = $repository->findOneBy([
+            $posts = $postRepository->findBy([
                 'missingPet' => $pet->getId(),
-                'category' => 1
+                'category' => [1,3]
             ]);
-            $entityManager = $this->getDoctrine()->getManager();
-            foreach ($post->getPictures() as $picture) {
-                $post->removePicture($picture);
+
+            $postsIds = [];
+            foreach ($posts as $post) {
+                $postsIds[] = $post->getId();
             }
-            $entityManager->persist($post);
+            $pictures = $pictureRepository->findBy([
+                'post' => $postsIds
+            ]);
+
+            // Dissociate pictures from posts, otherwise it throws an error
+            $entityManager = $this->getDoctrine()->getManager();
+            foreach ($pictures as $picture) {
+                $picture->setPost(null);
+                $entityManager->persist($picture);
+            }
             $entityManager->flush();
 
-            $repository->findLostAndFoundPostsAbout($pet->getId());
-            $entityManager = $this->getDoctrine()->getManager();
+            $postRepository->deleteLostAndFoundPostsAbout($pet);
             $pet->setIsMissing(false);
             $entityManager->persist($pet);
             $entityManager->flush();
+
+            $this->addFlash('success', 'Bon retour ' . $pet->getName());
         }
 
         return $this->render('pet/show.html.twig', [
@@ -118,7 +111,7 @@ class PetController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="pet_delete", methods={"POST"})
+     * @Route("/delete/{id}", name="pet_delete", methods={"POST"})
      */
     public function delete(Request $request, Pet $pet): Response
     {

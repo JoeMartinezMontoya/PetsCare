@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\PictureRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -15,7 +17,11 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
  */
 class Picture
 {
-    public function __toString() {
+    public function __toString()
+    {
+        if (is_null($this->imageName)) {
+            return 'NULL';
+        }
         return $this->imageName;
     }
 

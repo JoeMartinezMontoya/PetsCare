@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Picture;
 use App\Entity\Post;
 use App\Entity\PostSearch;
 use App\Form\PostAdoptionType;
@@ -34,15 +35,19 @@ class PostController extends AbstractController
 
     /**
      * @Route("/", name="post_index", methods={"GET"})
+     * @Route("/mine", name="my_post_index", methods={"GET"})
+     * @param Request $request
+     * @return Response
      */
     public function index(Request $request): Response
     {
+        $id = strpos($_SERVER['REQUEST_URI'], 'mine') ? $this->getUser()->getId() : null;
         $search = new PostSearch();
         $form = $this->createForm(PostSearchType::class, $search);
         $form->handleRequest($request);
         return $this->render('post/index.html.twig', [
-            'posts' => $this->repository->paginateAllVisible($search, $request->query->getInt('page', 1)),
             'current_menu' => 'post',
+            'posts' => $this->repository->paginateAllVisible($search, $request->query->getInt('page', 1), $id),
             'form' => $form->createView()
         ]);
     }
@@ -132,7 +137,7 @@ class PostController extends AbstractController
                     ]);
                 }
                 $this->addFlash('success', 'Votre annonce à été publiée');
-                return $this->redirectToRoute('post_index');
+                return $this->redirectToRoute('my_post_index');
             }
             return $this->render('post/new.html.twig', [
                 'current_menu' => 'post',
@@ -173,24 +178,13 @@ class PostController extends AbstractController
     }
 
     /**
-     * @Route("/user-posts", name="user_posts_index", methods={"GET"})
+     * @Route("/show/{id}", name="post_show", methods={"GET"})
+     * @param Post $post
+     * @param Security $security
+     * @param int $id
+     * @return Response
      */
-    public function userPosts(PostRepository $repository, Request $request): Response
-    {
-        $search = new PostSearch();
-        $form = $this->createForm(PostSearchType::class, $search);
-        $form->handleRequest($request);
-        return $this->render('post/user_posts.html.twig', [
-            'current_menu' => 'post',
-            'posts' => $this->repository->paginateAllVisible($search, $request->query->getInt('page', 1), $this->getUser()->getId()),
-            'form' => $form->createView()
-        ]);
-    }
-
-    /**
-     * @Route("/{id}", name="post_show", methods={"GET"})
-     */
-    public function show(Post $post, Security $security): Response
+    public function show(Post $post, Security $security, int $id): Response
     {
         $missingPet = [];
         switch ($post->getCategory()) {
@@ -223,13 +217,18 @@ class PostController extends AbstractController
      */
     public function edit(Request $request, Post $post): Response
     {
+        if ($this->getUser()->getId() !== $post->getAuthor()->getId()) {
+            $this->addFlash('danger', 'Il est interdit d\'essayer de modifier les données des autres !');
+            return $this->redirectToRoute('my_post_index', [
+            ], 301);
+        }
         $selection = $this->crossRoad($post->getCategory(), $post);
         $selection['form']->handleRequest($request);
 
         if ($selection['form']->isSubmitted() && $selection['form']->isValid()) {
             $this->getDoctrine()->getManager()->flush();
             $this->addFlash('success', 'Annonce modifiée');
-            return $this->redirectToRoute('user_posts_index');
+            return $this->redirectToRoute('my_post_index');
         }
 
         return $this->render('post/edit.html.twig', [
@@ -240,7 +239,7 @@ class PostController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="post_delete", methods={"POST"})
+     * @Route("/delete/{id}", name="post_delete", methods={"POST"})
      */
     public function delete(Request $request, Post $post): Response
     {
@@ -265,7 +264,7 @@ class PostController extends AbstractController
             case 0:
                 $output['form'] = $this->createForm(PostJobType::class, $entity);
                 $output['selectedForm'] = 'post/_form_job.html.twig';
-                $output['title'] = "Demande de PetSitting";
+                $output['title'] = "PetSitting";
                 break;
             case 1:
                 $output['form'] = $this->createForm(PostMissingType::class, $entity);

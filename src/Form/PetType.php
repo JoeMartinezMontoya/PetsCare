@@ -58,17 +58,12 @@ class PetType extends AbstractType
                     'data-browse' => 'Parcourir'
                 ]
             ])
-            ->add('owned', CheckboxType::class, [
-                'label' => 'C\'est mon compagnon !',
-                'label_attr' => [
-                    'class' => 'switch-custom'
-                ],
-            ])
             ->add('tags', EntityType::class, [
                 'class' => Tags::class,
                 'choice_label' => 'name',
                 'multiple' => true,
                 'required' => false,
+                'label' => 'Signes particuliers',
                 'attr' => [
                     'class' => 'pc-select'
                 ]

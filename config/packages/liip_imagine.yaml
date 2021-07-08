@@ -1,4 +1,7 @@
 liip_imagine:
+    resolvers:
+        default:
+            web_path: ~
     filter_sets:
         thumb:
             quality: 75
@@ -10,5 +13,5 @@ liip_imagine:
             quality: 75
             filters:
                 thumbnail:
-                    size: [600,330]
+                    size: [460,330]
                     mode: outbound

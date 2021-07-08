@@ -7,7 +7,15 @@
             {{ message }}
         </div>
     {% endfor %}
-    <div class="jumbotron mx-auto w-75 bg-primary pc-paws">
+    {% for message in app.flashes('danger') %}
+        <div class="alert alert-danger float-left m-auto">
+            {{ message }}
+        </div>
+    {% endfor %}
+    <div class="jumbotron mx-auto mt-5 p-5 w-75 bg-primary pc-paws">
+        {% if app.request.attributes.get('_route') == 'my_post_index' %}
+            <h1 class="pc-f-f mb-4 text-center text-light">Mes annonces</h1>
+        {% endif %}
         {{ form_start(form) }}
         <div class="form-row align-items-end justify-content-center">
             <div class="col-md-3">
@@ -22,9 +30,9 @@
         </div>
         {{ form_end(form) }}
     </div>
-    <div class="container">
+    <div class="container w-75 mx-auto" id="posts_list">
         <small class="m-3">{{ posts.count }} résultat{{ posts.count > 1 ? 's' : '' }}</small>
-        <div class="row m-auto">
+        <div class="row">
             {% for subject in posts %}
                 <div class="col-md-4 mb-4">
                     {% include 'informations/_card.html.twig' %}

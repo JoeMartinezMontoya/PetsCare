@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Form\ContactUserType;
+use App\Repository\PetRepository;
 use App\Repository\PostRepository;
 use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -19,18 +20,33 @@ class ContactController extends AbstractController
      * @Route("/meeting/{userid}-{petid}-{ownerid}", name="meeting")
      * @throws TransportExceptionInterface
      */
-    public function meeting(UserRepository $userRepository, PostRepository $postRepository, Request $request, MailerInterface $mailer): Response
+    public function meeting(PetRepository $petRepository, UserRepository $userRepository, PostRepository $postRepository, Request $request, MailerInterface $mailer, int $userid, int $petid, int $ownerid): Response
     {
-        // Catch the ids in GET
-        #TODO: Find a better way to do so
-        $array = explode('/', $request->getPathInfo());
-        $subjects = explode('-', end($array));
-        $founderId = (int)reset($subjects);
-        $petId = (int)$subjects[1];
-        $ownerId = (int)end($subjects);
+        if ($userid !== $this->getUser()->getId()) {
+            return $this->redirectToRoute('meeting', [
+                'userid' => $this->getUser()->getId(),
+                'petid' => $petid,
+                'ownerid' => $ownerid
+            ], 301);
+        }
 
-        $founder = $userRepository->findOneBy(['id' => $founderId]);
-        $owner = $userRepository->findOneBy(['id' => $ownerId]);
+        $founder = $userRepository->findOneBy(['id' => $userid]);
+        $owner = $userRepository->findOneBy(['id' => $ownerid]);
+        $foundPet = $petRepository->findOneBy(['id' => $petid]);
+
+        if ($owner !== null) {
+            $ownerPetsIds = [] ;
+            foreach ($owner->getPets() as $pet) {
+                $ownerPetsIds[] = $pet->getId();
+            }
+        }
+
+        if (!in_array($petid, $ownerPetsIds, true) || $ownerid !== $foundPet->getOwner()->getId()) {
+            #TODO: Find a better way to secure the URL
+            $this->addFlash('alert', 'On ne fait pas de faux espoir !');
+            return $this->redirectToRoute('home', [
+            ], 301);
+        }
 
         $form = $this->createForm(ContactUserType::class);
         $form->handleRequest($request);
@@ -47,8 +63,8 @@ class ContactController extends AbstractController
             $mailer->send($message);
 
             // Get the last Post from founder
-            $lastPost = $postRepository->findOneBy(['author' => $founderId], ['created_at'=>'DESC'],1,0);
-            $lastPost->setMissingPet($petId);
+            $lastPost = $postRepository->findOneBy(['author' => $founder->getId()], ['created_at' => 'DESC']);
+            $lastPost->setMissingPet($foundPet->getId());
 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($lastPost);

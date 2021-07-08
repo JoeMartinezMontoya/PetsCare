@@ -3,7 +3,6 @@
 namespace App\Controller;
 
 use App\Form\ContactType;
-use App\Repository\PostRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -14,6 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class PageController extends AbstractController
 {
+    private const MAIL = 'martinez.m.joe@hotmail.fr';
     /**
      * @Route("/", name="home")
      */
@@ -47,9 +47,9 @@ class PageController extends AbstractController
             $contactFormData = $form->getData();
             $message = (new Email())
                 ->from($contactFormData['email'])
-                ->to('martinez.m.joe@hotmail.fr')
-                ->subject('vous avez reçu un email')
-                ->text('Sender : ' . $contactFormData['email'] . \PHP_EOL .
+                ->to(self::MAIL)
+                ->subject('Quelqu\'un vous contacte via PetsCare !')
+                ->text('Emetteur : ' . $contactFormData['email'] . \PHP_EOL .
                     $contactFormData['message'],
                     'text/plain');
             $mailer->send($message);

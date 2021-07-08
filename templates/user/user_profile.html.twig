@@ -4,23 +4,23 @@
 
 {% block body %}
     {# TOP MENU #}
-    <div class="row mx-auto mt-5 w-50 rounded-top bg-primary pc-paws">
-        <div class="row mx-auto my-3 w-100 justify-content-end">
+    <div class="row mx-auto mt-5 w-75 rounded-top bg-primary pc-paws">
+        <div class="row mx-auto my-3 w-100 text-center">
 
             <div class="col-md-4">
-                <a href="#" class="btn btn-transparent d-block pc-f-f" id="userInformation">
+                <a href="#" class="btn btn-transparent d-inline-block pc-f-f" id="userInformation">
                     <img src="{{ asset('pictures/ressources/icons/profile.svg') }}" alt="Profile"
                          class="pc-icon-min d-block m-auto"> Informations
                 </a>
             </div>
             <div class="col-md-4">
-                <a href="#" class="btn btn-transparent d-block pc-f-f" id="userPets">
+                <a href="#" class="btn btn-transparent d-inline-block pc-f-f" id="userPets">
                     <img src="{{ asset('pictures/ressources/icons/my-pets.svg') }}" alt="Pets"
                          class="pc-icon-min d-block m-auto"> Compagnons
                 </a>
             </div>
             <div class="col-md-4">
-                <a href="#" class="btn btn-transparent d-block pc-f-f" id="userStats">
+                <a href="#" class="btn btn-transparent d-inline-block pc-f-f" id="userStats">
                     <img src="{{ asset('pictures/ressources/icons/stats.svg') }}" alt="Stats"
                          class="pc-icon-min d-block m-auto"> Statistiques
                 </a>
@@ -32,7 +32,7 @@
 
     <div class="row mx-auto">
         {# INFORMATIONS #}
-        <div class="row mx-auto w-50 rounded-bottom bg-primary pc-paws" id="pc-table-user-info-content">
+        <div class="row mx-auto w-75 px-5 rounded-bottom bg-primary" id="pc-table-user-info-content">
             <div class="row w-100 flex-row-reverse">
                 <form method="post" action="{{ path('user_delete', {'id': app.user.id}) }}"
                       onsubmit="return confirm('Êtes vous vraiment sûr de vouloir supprimer votre profil ({{ app.user.username }}) ?');">
@@ -63,15 +63,29 @@
                     </td>
                 </tr>
                 <tr>
-                    <td class="font-weight-bold text-black-50 bg">PetSitting</td>
-                    <td>{{ app.user.isPetsitter ?
-                        '<i class="fas fa-check-circle text-secondary"></i>' :
-                        '<i class="fas fa-times-circle text-danger"></i>' }}
+                    <td class="font-weight-bold text-black-50">PetSitting</td>
+                    <td>
+                        {% if app.user.isPetsitter %}
+                            <button class="btn btn-success border-light">
+                                <i class="fas fa-check-circle text-light"></i>
+                            </button>
+                        {% else %}
+                            <button class="btn btn-danger border-light">
+                                <i class="fas fa-times-circle text-light"></i>
+                            </button>
+                        {% endif %}
                     </td>
                     <td class="font-weight-bold text-black-50">Membre vérifié</td>
-                    <td>{{ app.user.isVerified ?
-                        '<i class="fas fa-check-circle text-secondary"></i>' :
-                        '<i class="fas fa-times-circle text-danger"></i>' }}
+                    <td>
+                        {% if app.user.isVerified %}
+                            <button class="btn btn-success border-light">
+                                <i class="fas fa-check-circle text-light"></i>
+                            </button>
+                        {% else %}
+                            <button class="btn btn-danger border-light">
+                                <i class="fas fa-times-circle text-light"></i>
+                            </button>
+                        {% endif %}
                     </td>
                 </tr>
             </table>
@@ -79,7 +93,7 @@
         {# END INFORMATIONS #}
 
         {# PETS #}
-        <div class="row mx-auto w-50 rounded-bottom bg-primary pc-paws" style="display:none;"
+        <div class="row mx-auto w-75 px-5 rounded-bottom bg-primary" style="display:none;"
              id="pc-table-user-pet-content">
             <div class="row w-100 flex-row-reverse">
                 <a href="{{ path('pet_new') }}" class="btn btn-warning m-1"><i class="fas fa-plus-circle"></i></a>
@@ -94,7 +108,7 @@
                             {{ pet.genderIcon | raw }}
                             <a href="{{ path('pet_show', {'id': pet.id}) }}" class="text-light">{{ pet.name }}</a>
                         </td>
-                        <td class="text-right">
+                        <td>
                             Inscrit{{ pet.gender is same as 0 ? 'e' : '' }}
                             le {{ pet.createdat | date('d/m/Y') }}
                         </td>
@@ -105,7 +119,7 @@
         {# END PETS #}
 
         {# STATS #}
-        <div class="row mx-auto w-50 rounded-bottom bg-primary pc-paws" style="display:none;"
+        <div class="row mx-auto w-75 px-5 rounded-bottom bg-primary" style="display:none;"
              id="pc-table-user-stat-content">
             <table class="table table-borderless text-light text-center">
                 <tr>

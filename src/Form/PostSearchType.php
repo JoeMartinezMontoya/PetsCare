@@ -16,12 +16,12 @@ class PostSearchType extends AbstractType
     {
         $builder
             ->add('category', ChoiceType::class, [
-                'required' => false,
+                'required' => true,
                 'choices' => $this->getChoices(Post::CATEGORY),
                 'label' => "Type d'annonce ?",
                 'label_attr' => [
                     'class' => 'text-light'
-                ]
+                ],
             ])
             ->add('created_at', DateType::class, [
                 'required' => false,

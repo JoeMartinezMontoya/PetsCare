@@ -7,22 +7,27 @@
 {% endblock %}
 
 {% block body %}
-    <div class="jumbotron jumbotron-fluid m-auto p-4">
-        <div class="row">
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success float-left mx-auto">
+            {{ message }}
+        </div>
+    {% endfor %}
+    <div class="jumbotron mx-auto w-75 p-4 mt-4 bg-primary pc-paws">
+        <div class="row p-4 justify-content-between">
             <div class="col-md-6 pc-pet-carousel">
                 {% for picture in pet.pictures %}
                     <img src="{{ vich_uploader_asset(picture, 'imageFile') | imagine_filter('medium') }}"
                          alt="{{ pet.name }}" class="rounded">
                 {% endfor %}
             </div>
-            <div class="col-md-6" style="text-align: right">
-                <h1>{{ pet.name }}</h1>
-                <h2><img src="{{ asset(pet.speciesIcon) }}" alt="{{ pet.speciesString }}" class="pc-icon">
+            <div class="col-md-4 text-light text-right">
+                <h1 class="pc-f-f text-light">{{ pet.name }}</h1>
+                <h2 class="pc-f-f text-light"><img src="{{ asset(pet.speciesIcon) }}" alt="{{ pet.speciesString }}" class="pc-icon">
                     - {{ pet.speciesString }} <br> {{ pet.genderString }}
-                    - {{ pet.age }} {{ pet.age > 1 ? 'ans' : 'an' }}
+                    de {{ pet.age }} {{ pet.age > 1 ? 'ans' : 'an' }}
                 </h2>
                 {% if pet.owner %}
-                    <p>{{ pet.genderPronoun }} vit avec {{ pet.owner.username }}</p>
+                    <p>{{ pet.genderPronoun }} vit avec <a href="#" class="pc-f-f text-light">{{ pet.owner.username }}</a></p>
                 {% endif %}
                 <p>{{ pet.genderPronoun }} est inscrit{{ pet.gender is same as 0 ? 'e' : '' }} depuis
                     le {{ pet.createdAt | date('d/m/Y') }}</p>
@@ -32,14 +37,14 @@
                         {{ form_row(form.isBack, {'attr': {'onclick': 'return confirm("En confirmant, votre compagnon sera retiré de la liste des animaux disparus, vous confirmer ?")'}}) }}
                         {{ form_end(form) }}
                     {% endif %}
-                    <a href="{{ path('pet_edit', {'id': pet.id}) }}" class="btn btn-success">Modifier les
-                        informations</a>
+                    <a href="{{ path('pet_edit', {'id': pet.id}) }}" class="btn btn-info border-light pl-3"><i
+                                class="far fa-edit"></i></a>
                     {{ include('pet/_delete_form.html.twig') }}
                 {% endif %}
             </div>
         </div>
     </div>
-    <div class="container bg-light p-4">
+    <div class="container mx-auto w-75 p-4">
         <div class="row">
             <div class="col-md-8">
                 <h2>A propos de {{ pet.name }}</h2>
