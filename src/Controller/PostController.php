@@ -96,6 +96,7 @@ class PostController extends AbstractController
                 // PETSITTING
                 if ($choice === 0) {
                     $post->setPetsToBeWatched($data->getPetsToBeWatched());
+                    // PRENDRE LA PHOTO CORRESPONDANTE ET PAS TOUTE LES PHOTOS
                     foreach ($this->getUser()->getPets() as $pet) {
                         if ($pet->getPictures()->first() !== false) {
                             $post->addPicture($pet->getPictures()->first());

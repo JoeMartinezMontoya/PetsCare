@@ -57,9 +57,14 @@ class Picture
     private $pet;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Post::class, inversedBy="pictures")
+     * @ORM\ManyToMany(targetEntity=Post::class, mappedBy="pictures")
      */
-    private $post;
+    private $posts;
+
+    public function __construct()
+    {
+        $this->posts = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -125,14 +130,29 @@ class Picture
         return $this;
     }
 
-    public function getPost(): ?Post
+    /**
+     * @return Collection|Post[]
+     */
+    public function getPosts(): Collection
     {
-        return $this->post;
+        return $this->posts;
     }
 
-    public function setPost(?Post $post): self
+    public function addPost(Post $post): self
     {
-        $this->post = $post;
+        if (!$this->posts->contains($post)) {
+            $this->posts[] = $post;
+            $post->addPicture($this);
+        }
+
+        return $this;
+    }
+
+    public function removePost(Post $post): self
+    {
+        if ($this->posts->removeElement($post)) {
+            $post->removePicture($this);
+        }
 
         return $this;
     }

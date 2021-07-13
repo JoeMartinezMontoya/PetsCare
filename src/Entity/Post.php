@@ -94,11 +94,6 @@ class Post
     private $picture;
 
     /**
-     * @ORM\OneToMany(targetEntity=Picture::class, mappedBy="post", orphanRemoval=true, cascade={"persist"})
-     */
-    private $pictures;
-
-    /**
      * @Assert\All(
      *     @Assert\Image(mimeTypes="image/jpeg")
      * )
@@ -120,10 +115,15 @@ class Post
      */
     private $tags;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=Picture::class, inversedBy="posts", cascade={"persist"})
+     */
+    private $pictures;
+
     public function __construct()
     {
-        $this->pictures = new ArrayCollection();
         $this->tags = new ArrayCollection();
+        $this->pictures = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -322,36 +322,6 @@ class Post
     }
 
     /**
-     * @return Collection|Picture[]
-     */
-    public function getPictures(): Collection
-    {
-        return $this->pictures;
-    }
-
-    public function addPicture(Picture $picture): self
-    {
-        if (!$this->pictures->contains($picture)) {
-            $this->pictures[] = $picture;
-            $picture->setPost($this);
-        }
-
-        return $this;
-    }
-
-    public function removePicture(Picture $picture): self
-    {
-        if ($this->pictures->removeElement($picture)) {
-            // set the owning side to null (unless already changed)
-            if ($picture->getPost() === $this) {
-                $picture->setPost(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
      * @return Picture|null
      */
     public function getPicture(): ?Picture
@@ -441,6 +411,30 @@ class Post
     public function removeTag(Tags $tag): self
     {
         $this->tags->removeElement($tag);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Picture[]
+     */
+    public function getPictures(): Collection
+    {
+        return $this->pictures;
+    }
+
+    public function addPicture(Picture $picture): self
+    {
+        if (!$this->pictures->contains($picture)) {
+            $this->pictures[] = $picture;
+        }
+
+        return $this;
+    }
+
+    public function removePicture(Picture $picture): self
+    {
+        $this->pictures->removeElement($picture);
 
         return $this;
     }

@@ -6,6 +6,7 @@ use App\Entity\Picture;
 use App\Entity\Post;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\Query\ResultSetMappingBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 use function Doctrine\ORM\QueryBuilder;
 
@@ -28,25 +29,28 @@ class PictureRepository extends ServiceEntityRepository
      */
     public function findForPosts(array $posts): ArrayCollection
     {
-        $qb = $this->createQueryBuilder('p');
-        $pictures = $qb
-            ->select('p')
-            ->where(
-                $qb->expr()->in(
-                    'p.id',
-                    $this->createQueryBuilder('p2')
-                        ->select('MAX(p2.id)')
-                        ->where('p2.post IN (:posts)')
-                        ->groupBy('p2.post')
-                        ->getDQL()
-                )
-            )
-            ->getQuery()
-            ->setParameter('posts', $posts)
-            ->getResult();
+        $em = $this->getEntityManager();
+        $sql = "SELECT p.id, p.image_name
+                FROM picture p
+                WHERE p.id IN(SELECT MAX(pp.picture_id) 
+                              FROM post_picture pp 
+                              WHERE pp.post_id IN(:posts) 
+                              GROUP BY pp.post_id)";
+
+        $rsm = new ResultSetMappingBuilder($em);
+        $rsm->addRootEntityFromClassMetadata(Picture::class, 'p');
+        $rsm->addEntityResult(Picture::class, 'p');
+        $rsm->addFieldResult('p', 'p.image_name', 'image_name');
+
+        $query = $em->createNativeQuery($sql, $rsm);
+        $query->setParameter('posts', $posts);
+
+        $pictures = $query->getResult();
 
         $pictures = array_reduce($pictures, static function (array $acc, Picture $picture) {
-            $acc[$picture->getPost()->getId()] = $picture;
+            foreach ($picture->getPosts() as $post) {
+                $acc[$post->getId()] = $picture;
+            }
             return $acc;
         }, []);
         return new ArrayCollection($pictures);
