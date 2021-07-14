@@ -97,7 +97,9 @@ class PostController extends AbstractController
                 if ($choice === 0) {
                     $post->setPetsToBeWatched($data->getPetsToBeWatched());
                     // PRENDRE LA PHOTO CORRESPONDANTE ET PAS TOUTE LES PHOTOS
-                    foreach ($this->getUser()->getPets() as $pet) {
+                    $userPets = $this->getUser()->getPets()->toArray();
+                    $petsWatched = array_intersect_key($userPets, array_flip($data->getPetsToBeWatched()));
+                    foreach ($petsWatched as $pet) {
                         if ($pet->getPictures()->first() !== false) {
                             $post->addPicture($pet->getPictures()->first());
                         }
