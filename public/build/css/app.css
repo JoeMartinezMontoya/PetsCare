@@ -50,6 +50,10 @@
     min-height: 500px
 }
 
+#pc-map {
+    height: 200px;
+}
+
 /*NORMALIZE SELECT2*/
 
 .select2-container .select2-selection--single {

@@ -1,7 +1,9 @@
 {{ form_start(form) }}
 <div class="row justify-content-center">
-    <div class="col-md-3">{{ form_row(form.location) }}</div>
-    <div class="col-md-3">{{ form_row(form.petsToBeWatched) }}</div>
+    <div class="col-md-6">{{ form_row(form.location, {id: 'address-input'}) }}</div>
+</div>
+<div class="row justify-content-center">
+    <div class="col-md-6">{{ form_row(form.petsToBeWatched) }}</div>
 </div>
 
 <div class="row justify-content-center">

@@ -59,11 +59,6 @@ class Post
     private $author;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $location;
-
-    /**
      * @ORM\Column(type="integer", nullable=true)
      */
     private $duration;
@@ -119,6 +114,21 @@ class Post
      * @ORM\ManyToMany(targetEntity=Picture::class, inversedBy="posts", cascade={"persist"})
      */
     private $pictures;
+
+    /**
+     * @ORM\Column(type="float", scale=4, precision=6, nullable=true)
+     */
+    private $lat;
+
+    /**
+     * @ORM\Column(type="float", scale=4, precision=7, nullable=true)
+     */
+    private $lng;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $town;
 
     public function __construct()
     {
@@ -435,6 +445,56 @@ class Post
     public function removePicture(Picture $picture): self
     {
         $this->pictures->removeElement($picture);
+
+        return $this;
+    }
+
+    public function getLat(): ?float
+    {
+        return $this->lat;
+    }
+
+    public function setLat(float $lat): self
+    {
+        $this->lat = $lat;
+
+        return $this;
+    }
+
+    public function getLng(): ?float
+    {
+        return $this->lng;
+    }
+
+    public function setLng(float $lng): self
+    {
+        $this->lng = $lng;
+
+        return $this;
+    }
+
+    public function getTown(): ?string
+    {
+        if ($this->town !== null) {
+            $preposition = 'À ';
+            $formattedName = $this->town;
+
+            if (str_contains($this->town, 'Le ')) {
+                $preposition = 'Au ';
+                $formattedName = str_replace('Le ', $preposition, $this->town);
+            } elseif (str_contains($this->town, 'Les ')) {
+                $preposition = 'Aux ';
+                $formattedName =  str_replace('Les ', $preposition, $this->town);
+            } else {
+                return $preposition . $formattedName;
+            }
+        }
+        return $formattedName ?? $this->town;
+    }
+
+    public function setTown(?string $town): self
+    {
+        $this->town = $town;
 
         return $this;
     }
