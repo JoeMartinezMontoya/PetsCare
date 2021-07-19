@@ -7,8 +7,8 @@ use App\Entity\Pet;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -17,9 +17,12 @@ class PostAdoptionType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('location', TextType::class, [
-                'label' => "Où doit-on venir les chercher ?",
-                'required' => true,
+            ->add('location', ChoiceType::class, [
+                'mapped' => false,
+                'label' => 'Où doit-on venir ?',
+                'attr' => [
+                    'class' => 'address-input'
+                ]
             ])
             ->add('species', ChoiceType::class, [
                 'label' => "Qu'est ce que c'est ?",
@@ -39,13 +42,17 @@ class PostAdoptionType extends AbstractType
                 'attr' => [
                     'rows' => 5
                 ]
-            ]);
+            ])
+            ->add('town', HiddenType::class)
+            ->add('lat', HiddenType::class)
+            ->add('lng', HiddenType::class);
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Post::class
+            'data_class' => Post::class,
+            'validation_groups' => false
         ]);
     }
 }

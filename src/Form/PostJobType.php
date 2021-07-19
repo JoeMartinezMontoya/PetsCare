@@ -28,7 +28,10 @@ class PostJobType extends AbstractType
         $builder
             ->add('location', ChoiceType::class, [
                 'mapped' => false,
-                'label' => 'Où doit-on venir ?'
+                'label' => 'Où doit-on venir ?',
+                'attr' => [
+                    'class' => 'address-input'
+                ]
             ])
             ->add('petsToBeWatched', ChoiceType::class, [
                 'label' => 'Pour qui ?',
@@ -55,7 +58,10 @@ class PostJobType extends AbstractType
             ->add('durationType', ChoiceType::class, [
                 'label' => 'de temps ?',
                 'required' => true,
-                'choices' => $this->getChoices(Post::DURATION)
+                'choices' => $this->getChoices(Post::DURATION),
+                'attr' => [
+                    'class' => 'pc-select'
+                ]
             ])
             ->add('content', TextareaType::class, [
                 'label' => 'Une petite description ?',

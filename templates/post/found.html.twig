@@ -4,6 +4,9 @@
 {% block stylesheets %}
     <link rel="stylesheet" type="text/css" href="{{ asset('build/css/slick.css') }}"/>
     <link rel="stylesheet" type="text/css" href="{{ asset('build/css/slick-theme.css') }}"/>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+          integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+          crossorigin=""/>
 {% endblock %}
 
 {% block body %}
@@ -38,8 +41,8 @@
             </div>
             <div class="row w-100 my-4">
                 <div class="col">
-                    <h5 class="pc-f-f">Où ?</h5>
-                    <p>{{ post.location }}</p>
+                    <h5 class="pc-f-f">{{ post.town }}</h5>
+                    <div id="pc-map" class="rounded"></div>
                 </div>
             </div>
         </div>
@@ -47,6 +50,31 @@
     </div>
 {% endblock %}
 {% block javascripts %}
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+            integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+            crossorigin=""></script>
+    {# MAP #}
+    <script>
+        var myMap = L.map('pc-map').setView([{{ post.lat }}, {{ post.lng }}], 14);
+        L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1Ijoic2Vpa3lvbyIsImEiOiJja3E4MnBoa28wMTY3MnVsdzRibGNkNHppIn0.pexmvN7haXYzdPYwOIe0sA', {
+            attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+            maxZoom: 18,
+            id: 'mapbox/streets-v11',
+            tileSize: 512,
+            zoomOffset: -1,
+            accessToken: 'pk.eyJ1Ijoic2Vpa3lvbyIsImEiOiJja3E4MnBoa28wMTY3MnVsdzRibGNkNHppIn0.pexmvN7haXYzdPYwOIe0sA'
+        }).addTo(myMap);
+
+        var circle = L.circle([{{ post.lat }}, {{ post.lng }}], {
+            color: 'green',
+            fillColor: '#78c2ad',
+            fillOpacity: 0.7,
+            radius: 500
+        }).addTo(myMap);
+
+        circle.bindPopup('<img src="{{ asset(post.getCategoryIcon) }}" alt="Icon" class="pc-icon-min ml-2">').openPopup();
+    </script>
+    {# CAROUSEL #}
     <script type="text/javascript" src="{{ asset('build/js/slick.js') }}"></script>
     <script>
         $(document).ready(function () {

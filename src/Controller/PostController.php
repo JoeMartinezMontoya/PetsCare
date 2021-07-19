@@ -85,7 +85,6 @@ class PostController extends AbstractController
             $selection['form']->handleRequest($request);
             if ($selection['form']->isSubmitted() && $selection['form']->isValid()) {
                 $data = $selection['form']->getData();
-
                 // GLOBAL
                 $post->setTitle($data->getTitle() ?? $selection['title']);
                 $post->setContent($data->getContent() ?? '');
@@ -146,7 +145,8 @@ class PostController extends AbstractController
                 'current_menu' => 'post',
                 'post' => $post,
                 'form' => $selection['form']->createView(),
-                'selectedForm' => $selection['selectedForm']
+                'selectedForm' => $selection['selectedForm'],
+                'slug' => $selection['slug']
             ]);
         }
         // Redirection if no choice passed in GET
@@ -268,21 +268,25 @@ class PostController extends AbstractController
                 $output['form'] = $this->createForm(PostJobType::class, $entity);
                 $output['selectedForm'] = 'post/_form_job.html.twig';
                 $output['title'] = "PetSitting";
+                $output['slug'] = "job";
                 break;
             case 1:
                 $output['form'] = $this->createForm(PostMissingType::class, $entity);
                 $output['selectedForm'] = 'post/_form_missing.html.twig';
                 $output['title'] = "Disparition";
+                $output['slug'] = "missing";
                 break;
             case 2:
                 $output['form'] = $this->createForm(PostAdoptionType::class, $entity);
                 $output['selectedForm'] = 'post/_form_adoption.html.twig';
                 $output['title'] = "Adoption";
+                $output['slug'] = "adoption";
                 break;
             case 3:
                 $output['form'] = $this->createForm(PostFoundType::class, $entity);
                 $output['selectedForm'] = 'post/_form_found.html.twig';
                 $output['title'] = "Apercu";
+                $output['slug'] = "found";
                 break;
         }
         return $output;
