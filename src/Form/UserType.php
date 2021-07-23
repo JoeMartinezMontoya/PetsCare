@@ -6,7 +6,9 @@ use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\TelType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -50,6 +52,16 @@ class UserType extends AbstractType
                     'class' => 'switch-custom'
                 ],
             ])
+            ->add('location', ChoiceType::class, [
+                'mapped' => false,
+                'label' => 'Votre adresse (Elle ne sera jamais divulgée)',
+                'attr' => [
+                    'class' => 'address-input'
+                ]
+            ])
+            ->add('address', HiddenType::class)
+            ->add('lat', HiddenType::class)
+            ->add('lng', HiddenType::class);
         ;
     }
 
@@ -57,6 +69,7 @@ class UserType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => User::class,
+            'validation_groups' => false
         ]);
     }
 }

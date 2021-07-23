@@ -6,7 +6,9 @@ use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\TelType;
@@ -53,8 +55,6 @@ class RegistrationFormType extends AbstractType
             ])
             ->add('plainPassword', RepeatedType::class, [
                 'type' => PasswordType::class,
-                // instead of being set onto the object directly,
-                // this is read and encoded in the controller
                 'mapped' => false,
                 'required' => true,
                 'attr' => [
@@ -67,7 +67,6 @@ class RegistrationFormType extends AbstractType
                     new Length([
                         'min' => 6,
                         'minMessage' => 'Votre mot de passe devez contenir au moins {{ limit }} caractères',
-                        // max length allowed by Symfony for security reasons
                         'max' => 4096,
                     ]),
                 ],
@@ -103,13 +102,24 @@ class RegistrationFormType extends AbstractType
                 'label_attr' => [
                     'class' => 'switch-custom'
                 ],
-            ]);
+            ])
+            ->add('location', ChoiceType::class, [
+                'mapped' => false,
+                'label' => 'Votre adresse (Elle ne sera jamais divulgée)',
+                'attr' => [
+                    'class' => 'address-input'
+                ]
+            ])
+            ->add('address', HiddenType::class)
+            ->add('lat', HiddenType::class)
+            ->add('lng', HiddenType::class);
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
             'data_class' => User::class,
+            'validation_groups' => false
         ]);
     }
 }

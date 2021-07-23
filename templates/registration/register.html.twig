@@ -1,8 +1,12 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Inscription{% endblock %}
+{% block title %}PetsCare | Inscription{% endblock %}
+{% block stylesheets %}
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet"/>
+{% endblock %}
 
 {% block body %}
+
     {% for flashError in app.flashes('verify_email_error') %}
         <div class="alert alert-danger" role="alert">{{ flashError }}</div>
     {% endfor %}
@@ -28,6 +32,9 @@
             {% endfor %}
         </div>
         <div class="row justify-content-center">
+            <div class="col-md-6">{{ form_row(registrationForm.location) }}</div>
+        </div>
+        <div class="row justify-content-center">
             <div class="col">
                 {{ form_row(registrationForm.isPetsitter) }}
                 {{ form_row(registrationForm.agreeTerms) }}
@@ -37,4 +44,75 @@
         {{ form_end(registrationForm) }}
 
     </div>
+{% endblock %}
+{% block javascripts %}
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            let addressInput = $('.address-input');
+
+            const APPID = 'PngtAZGAQMdWWx2USwgc';
+            const APIKEY = 'UhzVA8s3d298__corkYx1FFSANWssBNKTATgvgJMByY';
+
+            if (addressInput !== null) {
+                let options = {
+                    minimumInputLength: 3,
+                    language: {
+                        noResults: function () {
+                            return "Aucun résultat";
+                        },
+                        searching: function () {
+                            return "On cherche..."
+                        },
+                        inputTooShort: function () {
+                            return "";
+                        }
+                    },
+                    ajax: {
+                        url: 'https://autocomplete.geocoder.ls.hereapi.com/6.2/suggest.json',
+                        delay: 250,
+                        dataType: 'json',
+                        data: function (params) {
+                            return {
+                                query: params.term,
+                                app_id: APPID,
+                                app_code: APIKEY,
+                                apikey: APIKEY,
+                                beginHighlight: '<b class="text-primary">',
+                                endHighlight: '</b>',
+                                country: 'FRA'
+                            };
+                        },
+                        processResults: function (data) {
+                            return {
+                                results: $.map(data.suggestions, function (obj) {
+                                    return {
+                                        id: obj.locationId, text: obj.label.split(', ').reverse().join(', ')
+                                    };
+                                })
+                            };
+                        }
+                    },
+                    escapeMarkup: function (markup) {
+                        return markup;
+                    }
+                };
+
+                /* On selection, hidden inputs catches lat and lng values */
+                addressInput.select2(options).on('select2:select', function (e) {
+                    $.getJSON('https://geocoder.ls.hereapi.com/6.2/geocode.json', {
+                        app_id: APPID,
+                        app_code: APIKEY,
+                        apikey: APIKEY,
+                        locationId: e.params.data.id
+                    }).done(function (data) {
+                        let location = data.Response.View[0].Result[0].Location;
+                        $('#registration_form_lat').val(location.DisplayPosition.Latitude);
+                        $('#registration_form_lng').val(location.DisplayPosition.Longitude);
+                        $('#registration_form_address').val(location.Address.Label);
+                    })
+                });
+            }
+        });
+    </script>
 {% endblock %}

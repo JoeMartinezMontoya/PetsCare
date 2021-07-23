@@ -84,6 +84,21 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $isPetsitter;
 
+    /**
+     * @ORM\Column(type="float", scale=4, precision=6, nullable=true)
+     */
+    private $lat;
+
+    /**
+     * @ORM\Column(type="float", scale=4, precision=7, nullable=true)
+     */
+    private $lng;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $address;
+
     public function __construct()
     {
         $this->pets = new ArrayCollection();
@@ -360,6 +375,42 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             $this->pets,
             $this->posts
         ] = unserialize($serialized, ['allowed_classes' => false]);
+    }
+
+    public function getLat(): ?float
+    {
+        return $this->lat;
+    }
+
+    public function setLat(?float $lat): self
+    {
+        $this->lat = $lat;
+
+        return $this;
+    }
+
+    public function getLng(): ?float
+    {
+        return $this->lng;
+    }
+
+    public function setLng(?float $lng): self
+    {
+        $this->lng = $lng;
+
+        return $this;
+    }
+
+    public function getAddress(): ?string
+    {
+        return $this->address;
+    }
+
+    public function setAddress(?string $address): self
+    {
+        $this->address = $address;
+
+        return $this;
     }
 
 }
