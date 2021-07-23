@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}PetsCare | Reinitialisation{% endblock %}
+
+{% block body %}
+    <div class="container w-50 m-auto">
+        <h1 class="pc-f-f text-center my-3">Nouveau mot de passe</h1>
+
+        {{ form_start(resetForm) }}
+        <div class="row justify-content-center">
+            {% for passwordField in resetForm.plainPassword %}
+                <div class="col-md-6">{{ form_row(passwordField) }}</div>
+            {% endfor %}
+        </div>
+        <button class="btn btn-sm btn-primary">Confirmer</button>
+        {{ form_end(resetForm) }}
+    </div>
+{% endblock %}

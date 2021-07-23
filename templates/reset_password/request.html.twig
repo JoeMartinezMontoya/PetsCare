@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}PetsCare | Reinitialisation{% endblock %}
+
+{% block body %}
+
+    {% for flashError in app.flashes('reset_password_error') %}
+        <div class="alert alert-danger" role="alert">{{ flashError }}</div>
+    {% endfor %}
+
+    <div class="container w-50 m-auto">
+        <h1 class="pc-f-f text-center my-3">Mot de passe perdu ?</h1>
+
+        {{ form_start(requestForm) }}
+
+        <div class="row justify-content-center">
+            <div class="col">{{ form_row(requestForm.email) }}</div>
+        </div>
+        <small class="d-block">
+            Veuillez entrer votre adresse mail afin que nous puissions vous envoyer un lien de réintialisation
+        </small>
+
+        <button class="btn btn-sm btn-primary mt-3">Envoyer le lien</button>
+        {{ form_end(requestForm) }}
+    </div>
+{% endblock %}
