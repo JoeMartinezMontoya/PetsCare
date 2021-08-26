@@ -16,6 +16,13 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class PostFoundType extends AbstractType
 {
+    private PetsCareFormType $pc;
+
+    public function __construct(PetsCareFormType $pc)
+    {
+        $this->pc = $pc;
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
@@ -28,7 +35,7 @@ class PostFoundType extends AbstractType
             ])
             ->add('species', ChoiceType::class, [
                 'label' => "Qu'est ce que c'est ?",
-                'choices' => $this->getChoices(Pet::SPECIES)
+                'choices' => $this->pc->getChoices(Pet::SPECIES)
             ])
             ->add('content', TextareaType::class, [
                 'label' => 'Décrivez le',

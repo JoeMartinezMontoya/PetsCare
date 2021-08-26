@@ -5,7 +5,123 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="58145cfb-fb3b-4bfd-a7ab-6d34921fc2a8" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/Controller/ResetPasswordController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/ResetPasswordController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Form/PetsCareFormType.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/ab0d5cae-f618-48c9-b7cc-58143b1bfcbc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/ab0d5cae-f618-48c9-b7cc-58143b1bfcbc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/migrations/Version20210615162148.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/migrations/Version20210616182938.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/migrations/Version20210617144224.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/migrations/Version20210617152339.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/migrations/Version20210617163325.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/migrations/Version20210617171748.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/migrations/Version20210617173045.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/migrations/Version20210618120243.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/migrations/Version20210619071149.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/migrations/Version20210619073308.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/migrations/Version20210619073604.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/migrations/Version20210619074339.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/migrations/Version20210619074439.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/migrations/Version20210620122420.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/migrations/Version20210620125628.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/migrations/Version20210620132406.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/migrations/Version20210620132442.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/migrations/Version20210620132503.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/migrations/Version20210627104011.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/migrations/Version20210627164249.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/migrations/Version20210627174529.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/migrations/Version20210627210115.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/migrations/Version20210629092453.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/migrations/Version20210629124723.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/migrations/Version20210704105043.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/migrations/Version20210704120214.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/migrations/Version20210705161853.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/migrations/Version20210708122024.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/migrations/Version20210708122800.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/migrations/Version20210708165835.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/migrations/Version20210713162209.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/migrations/Version20210713162449.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/migrations/Version20210714132012.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/migrations/Version20210714135952.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/migrations/Version20210718133304.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/migrations/Version20210719091400.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/migrations/Version20210719131508.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/migrations/Version20210719135954.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/migrations/Version20210723113531.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/migrations/Version20210723131919.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/pictures/pets/60d8aa78b595e477915331.JPG" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/pictures/pets/60daeaef4cf76901707231.JPG" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/pictures/pets/60daef923aa2d602385321.JPG" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/pictures/pets/60e214b17e3ab855783495.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/pictures/pets/60e6bf15b1cbb821387122.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/pictures/pets/60e6d4d28699f417461655.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/pictures/pets/60e6ea8c66584080200292.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/pictures/pets/60e6ea8c67ac1027733863.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/pictures/pets/60e6eb096da0a904543032.JPG" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/pictures/pets/60e6eb096eee2693379154.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/pictures/pets/60e6eb09701af400505269.JPG" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/pictures/pets/60e6eff36459d740524545.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/pictures/pets/60e71bd3ae861884729690.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/pictures/pets/60e71bd3afce9210570418.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/pictures/pets/60e7243dd4f3a601933658.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/pictures/pets/60e7243dd63e2332341259.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/pictures/pets/60e724f6d3562410028073.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/pictures/pets/60e724f6d4ae6513561783.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/pictures/pets/60e72a1962604447374077.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/pictures/pets/60e72a19638a2139128512.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/pictures/pets/60e72a57eb569345105053.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/pictures/pets/60e72a57eca59203926142.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/pictures/pets/60e72bb8ad7f6312431079.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/pictures/pets/60e72bb8aeb0e979163102.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/pictures/pets/60e74182eb302561860133.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/pictures/pets/60e99dd5d6195191458136.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/pictures/pets/60e99f2f0c56b407331076.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/pictures/pets/60e9a035afb53649788110.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/pictures/pets/60edd4de84e0f829615761.JPG" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/pictures/pets/60edd5154f0ee735995960.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/pictures/pets/60eef281d277d957885461.JPG" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/pictures/pets/60eef379112c5189886204.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/pictures/pets/60eef39922f8e382014598.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/pictures/pets/60eef49b76c94506300944.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/pictures/pets/60eef53216a8e300398014.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/pictures/pets/60eef5ae8764b937242000.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/pictures/pets/60eef61a88e62392781737.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/pictures/pets/60eef63287182700222723.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/pictures/pets/60eef64bde021584798355.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/pictures/pets/60eef666032f5553046833.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/pictures/pets/60eef6a036d60792535679.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/pictures/pets/60eef78f2d02a740463830.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/pictures/pets/60eef79b18236367496947.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/pictures/pets/60eef7d40faa6894179173.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/pictures/pets/60eef91cd172f552283633.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/pictures/pets/60eef9acc9506845420476.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/pictures/pets/60f58a7ca2ca9869607549.JPG" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/pictures/pets/60f58a7ca44d4833186096.JPG" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/pictures/pets/60f58aa45b405106809745.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/pictures/pets/60f58aa45c9a4050389837.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/pictures/pets/60f58aa45dca9190402701.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/pictures/pets/60f5a5bddda35498489283.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/pictures/pets/60f5ac1429de2034804720.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/pictures/pets/60f5b1926c98f272462711.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/pictures/users/60ce0c48415f9455450970.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/PetController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/PetController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/PictureController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/PictureController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/PostController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/PostController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/UserController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Form/ContactType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/ContactType.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Form/ContactUserType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/ContactUserType.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Form/PetType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/PetType.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Form/PostAdoptionType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/PostAdoptionType.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Form/PostFoundType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/PostFoundType.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Form/PostJobType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/PostJobType.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Form/PostMissingType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/PostMissingType.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Form/PostSearchType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/PostSearchType.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Repository/PostRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/PostRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Repository/TagsRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/TagsRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Repository/UserRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/UserRepository.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -194,6 +310,9 @@
     </include_path>
   </component>
   <component name="ProjectId" id="1tzYHXkCsgAn0wVOwH9QE80stDO" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showExcludedFiles" value="false" />
@@ -201,6 +320,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="DatabaseDriversLRU" value="mysql" />
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
@@ -210,7 +330,7 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$/public/build" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="php.override.implement.member.chooser.php.doc" value="DEFAULT" />
-    <property name="settings.editor.selected.configurable" value="preferences.sourceCode.PHP" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
@@ -269,6 +389,16 @@
       <workItem from="1626685504945" duration="20128000" />
       <workItem from="1626953534826" duration="1194000" />
       <workItem from="1627035508919" duration="5482000" />
+      <workItem from="1628586666572" duration="1653000" />
+      <workItem from="1628671389517" duration="861000" />
+      <workItem from="1629794331971" duration="594000" />
+      <workItem from="1629795162851" duration="77000" />
+      <workItem from="1629795258188" duration="381000" />
+      <workItem from="1629795665323" duration="93000" />
+      <workItem from="1629795789732" duration="168000" />
+      <workItem from="1629795976157" duration="414000" />
+      <workItem from="1629796437853" duration="2893000" />
+      <workItem from="1629966788243" duration="6362000" />
     </task>
     <servers />
   </component>

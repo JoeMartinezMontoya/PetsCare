@@ -6,7 +6,6 @@ use App\Entity\Pet;
 use App\Entity\Tags;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
@@ -17,6 +16,13 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class PetType extends AbstractType
 {
+    private PetsCareFormType $pc;
+
+    public function __construct(PetsCareFormType $pc)
+    {
+        $this->pc = $pc;
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
@@ -33,12 +39,12 @@ class PetType extends AbstractType
                 ]
             ])
             ->add('gender', ChoiceType::class, [
-                'choices' => $this->getChoices(Pet::GENDER),
+                'choices' => $this->pc->getChoices(Pet::GENDER),
                 'required' => true,
                 'label' => 'Sexe'
             ])
             ->add('species', ChoiceType::class, [
-                'choices' => $this->getChoices(Pet::SPECIES),
+                'choices' => $this->pc->getChoices(Pet::SPECIES),
                 'required' => true,
                 'label' => 'Espèce'
             ])
@@ -75,15 +81,5 @@ class PetType extends AbstractType
         $resolver->setDefaults([
             'data_class' => Pet::class,
         ]);
-    }
-
-    public function getChoices($const): array
-    {
-        $choices = $const;
-        $output = [];
-        foreach ($choices as $k => $v) {
-            $output[$v] = $k;
-        }
-        return $output;
     }
 }

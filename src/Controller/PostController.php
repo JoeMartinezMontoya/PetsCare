@@ -34,8 +34,8 @@ class PostController extends AbstractController
     }
 
     /**
-     * @Route("/", name="post_index", methods={"GET"})
-     * @Route("/mine", name="my_post_index", methods={"GET"})
+     * @Route("/", name="post_index")
+     * @Route("/mine", name="my_post_index")
      * @param Request $request
      * @return Response
      */
@@ -69,13 +69,14 @@ class PostController extends AbstractController
     }
 
     /**
-     * @Route("/new", name="post_new", methods={"GET","POST"})
+     * @Route("/new", name="post_new")
      * @throws \Exception
      */
     public function new(Request $request, PetRepository $repository): Response
     {
         $post = new Post();
         $choice = null;
+
         if (!empty($_GET) && isset($_GET['choice'])) {
             $choice = (int)$_GET['choice'];
             $selection = $this->crossRoad($choice, $post);
@@ -95,14 +96,16 @@ class PostController extends AbstractController
                 // PETSITTING
                 if ($choice === 0) {
                     $post->setPetsToBeWatched($data->getPetsToBeWatched());
-                    // PRENDRE LA PHOTO CORRESPONDANTE ET PAS TOUTE LES PHOTOS
+
                     $userPets = $this->getUser()->getPets()->toArray();
                     $petsWatched = array_intersect_key($userPets, array_flip($data->getPetsToBeWatched()));
+
                     foreach ($petsWatched as $pet) {
                         if ($pet->getPictures()->first() !== false) {
                             $post->addPicture($pet->getPictures()->first());
                         }
                     }
+
                 }
 
                 // MISSING
@@ -110,6 +113,7 @@ class PostController extends AbstractController
                     // Looking for the corresponding entity
                     $missingPet = $this->getUser()->getPets()[$data->getMissingPet()];
                     $missingPet->setIsMissing(true);
+
                     $post->addPicture($missingPet->getPictures()->first());
                     $post->setMissingPet($missingPet->getId());
                 }
@@ -181,7 +185,7 @@ class PostController extends AbstractController
     }
 
     /**
-     * @Route("/show/{id}", name="post_show", methods={"GET"})
+     * @Route("/show/{id}", name="post_show")
      * @param Post $post
      * @param Security $security
      * @param int $id
@@ -216,7 +220,7 @@ class PostController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/edit", name="post_edit", methods={"GET","POST"})
+     * @Route("/{id}/edit", name="post_edit")
      */
     public function edit(Request $request, Post $post): Response
     {

@@ -16,10 +16,12 @@ class PostMissingType extends AbstractType
 {
 
     private Security $security;
+    private PetsCareFormType $pc;
 
-    public function __construct(Security $security)
+    public function __construct(Security $security, PetsCareFormType $pc)
     {
         $this->security = $security;
+        $this->pc = $pc;
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
@@ -27,7 +29,7 @@ class PostMissingType extends AbstractType
         $builder
             ->add('missingPet', ChoiceType::class, [
                 'label' => 'Qui à disparu ?',
-                'choices' => $this->getUserPetList($this->security->getUser()),
+                'choices' => $this->pc->getUserPetList($this->security->getUser()),
                 'attr' => [
                     'class' => 'pc-select pc-input-normalize'
                 ]

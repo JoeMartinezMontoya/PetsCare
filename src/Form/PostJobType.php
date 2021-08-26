@@ -17,10 +17,12 @@ class PostJobType extends AbstractType
 {
 
     private Security $security;
+    private PetsCareFormType $pc;
 
-    public function __construct(Security $security)
+    public function __construct(Security $security, PetsCareFormType $pc)
     {
         $this->security = $security;
+        $this->pc = $pc;
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options)
@@ -36,7 +38,7 @@ class PostJobType extends AbstractType
             ->add('petsToBeWatched', ChoiceType::class, [
                 'label' => 'Pour qui ?',
                 'required' => true,
-                'choices' => $this->getUserPetList($this->security->getUser()),
+                'choices' => $this->pc->getUserPetList($this->security->getUser()),
                 'multiple' => true,
                 'attr' => [
                     'class' => 'pc-select'
@@ -58,7 +60,7 @@ class PostJobType extends AbstractType
             ->add('durationType', ChoiceType::class, [
                 'label' => 'de temps ?',
                 'required' => true,
-                'choices' => $this->getChoices(Post::DURATION),
+                'choices' => $this->pc->getChoices(Post::DURATION),
                 'attr' => [
                     'class' => 'pc-select'
                 ]

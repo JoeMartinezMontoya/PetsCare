@@ -12,12 +12,19 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class PostSearchType extends AbstractType
 {
+    private PetsCareFormType $pc;
+
+    public function __construct(PetsCareFormType $pc)
+    {
+        $this->pc = $pc;
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
             ->add('category', ChoiceType::class, [
                 'required' => true,
-                'choices' => $this->getChoices(Post::CATEGORY),
+                'choices' => $this->pc->getChoices(Post::CATEGORY),
                 'label' => "Type d'annonce ?",
                 'label_attr' => [
                     'class' => 'text-light'
@@ -40,16 +47,6 @@ class PostSearchType extends AbstractType
             'method' => 'get',
             'csrf_protection' => false
         ]);
-    }
-
-    public function getChoices($const): array
-    {
-        $choices = $const;
-        $output = [];
-        foreach ($choices as $k => $v) {
-            $output[$v] = $k;
-        }
-        return $output;
     }
 
     public function getBlockPrefix(): string

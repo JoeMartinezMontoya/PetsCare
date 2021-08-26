@@ -19,7 +19,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class PetController extends AbstractController
 {
     /**
-     * @Route("/new", name="pet_new", methods={"GET","POST"})
+     * @Route("/new", name="pet_new")
      */
     public function new(Request $request): Response
     {
@@ -47,12 +47,14 @@ class PetController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="pet_show", methods={"GET|POST"})
+     * @Route("/{id}", name="pet_show")
      */
     public function show(Pet $pet, Request $request, PostRepository $postRepository, PictureRepository $pictureRepository): Response
     {
         $form = $this->createForm(PetIsFoundType::class);
         $form->handleRequest($request);
+
+        #TODO: Rework this
         if ($form->isSubmitted() && $form->isValid()) {
             $posts = $postRepository->findBy([
                 'missingPet' => $pet->getId(),
@@ -90,7 +92,7 @@ class PetController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/edit", name="pet_edit", methods={"GET","POST"})
+     * @Route("/{id}/edit", name="pet_edit")
      */
     public function edit(Request $request, Pet $pet): Response
     {
